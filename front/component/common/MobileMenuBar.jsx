@@ -39,9 +39,16 @@ export default MobileMenuBar
 
 const useStyles = makeStyles((theme) => ({
     root: {
+        '&' : {
+            display : 'flex'
+        },
+        '& > a' : {
+            display : 'inline-block',
+            width : '19vw',
+            textAlign: 'center',
+            paddingTop: '2%'
+        },
         '& > a > svg': {
-            //margin: theme.spacing(2),
-            margin : '16px',
             color : 'black',
         },
     },
