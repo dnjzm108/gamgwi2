@@ -11,7 +11,6 @@ const WebLayout = ({ children }) => {
                         {children}
                     </WebHeight>
                     <MobileMenuBar />
-
                 </WebInnerWrap>
             </WebWrap>
         </>
