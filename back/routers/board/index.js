@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const controller = require('./controller')
 
-
+router.post('/list',controller.post_list)
 
 
 router.post('/modify',controller.modify_succece)
