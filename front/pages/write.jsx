@@ -16,7 +16,7 @@ const Write = () => {
             <WebLayout>
                 <WebTitle>오늘의 글귀</WebTitle>
                 <div>
-                    <TodayWeather />
+                    {/* <TodayWeather /> */}
                     <TextArea />
                 </div>
             </WebLayout>

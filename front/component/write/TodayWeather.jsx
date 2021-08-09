@@ -1,31 +1,39 @@
 import Styled from 'styled-components';
-import { makeStyles } from '@material-ui/core/styles';
 import WbSunnyRoundedIcon from '@material-ui/icons/WbSunnyRounded';
 import FilterDramaRoundedIcon from '@material-ui/icons/FilterDramaRounded';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
+import { useState } from 'react';
+
+
+
 
 const TodayWeather = () => {
+    const [todayWeather, setTodayWeather] = useState('')
 
+    const weatherChange = (e) =>{
+        console.log(e.target.value);
+        setTodayWeather(e.target.value)
+    }
+    
     return (
         <>
             <TodayWeatherWrap>
-
-                <p>오늘, 내 마음의 날씨</p>
+                <TodayMyWeather>오늘, 내 마음의 날씨</TodayMyWeather>
                 <TodayWeatherUl>
                     <li>
-                        <TodayWeatherCheckBox type="checkbox" id="sun" />
+                        <TodayWeatherCheckBox type="radio" id="sun" name="weather" value="sun" onChange={weatherChange}/>
                         <label htmlFor="sun">
                             <WbSunnyRoundedIcon style={FontSize} />
                         </label>
                     </li>
                     <li>
-                        <TodayWeatherCheckBox type="checkbox" id="cloud" />
+                        <TodayWeatherCheckBox type="radio" id="cloud" name="weather" value="cloud" onChange={weatherChange}/>
                         <label htmlFor="cloud">
                             <FilterDramaRoundedIcon style={FontSize} />
                         </label>
                     </li>
                     <li>
-                        <TodayWeatherCheckBox type="checkbox" id="snow" />
+                        <TodayWeatherCheckBox type="radio" id="snow" name="weather" value="snow" onChange={weatherChange}/>
                         <label htmlFor="snow">
                             <AcUnitIcon style={FontSize} />
                         </label>
@@ -38,6 +46,11 @@ const TodayWeather = () => {
 
 export default TodayWeather
 
+const TodayMyWeather = Styled.div`
+    width: 100%;
+    height: 30px;
+    font-size: 15px;
+`
 
 const TodayWeatherWrap = Styled.div`
     height: 100%;
@@ -59,7 +72,15 @@ const TodayWeatherUl = Styled.ul`
 
 const TodayWeatherCheckBox = Styled.input`
     display : none;
+    & + label {
+        color : #b8b8b8;
+    }
+    &:checked + label {
+        color : black;
+    }
 `
+
+
 
 const FontSize = {
     'fontSize': '30',

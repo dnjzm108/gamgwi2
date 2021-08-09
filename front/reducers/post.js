@@ -16,6 +16,7 @@ const POST_DELETE_ERROR = "POST_DELETE_ERROR"
 
 /* 입력 */
 export const PostInsert_REQUEST = data => {
+    console.log("insert === ",data);
     return{
         type : POST_INSERT_REQUEST,      
         data,                          
@@ -32,7 +33,7 @@ export const PostInsert_ERROR = () => {
     }
 }
 
-/* 수정 */
+/* 수정 
 export const PostModify_REQUEST = data => {
     return{
         type : POST_MODIFY_REQUEST,      
@@ -50,7 +51,7 @@ export const PostModify_ERROR = () => {
     }
 }
 
-/* 삭제 */
+/* 삭제 
 export const PostDelete_REQUEST = () => {
     return{
         type : POST_DELETE_REQUEST,
@@ -68,6 +69,7 @@ export const PostDelete_ERROR = () => {
         type : POST_DELETE_ERROR,
     }
 }
+*/
 
 
 const reducer = (state = initalState, action) => {
@@ -75,18 +77,14 @@ const reducer = (state = initalState, action) => {
         case POST_INSERT_REQUEST:
             return{
                 ...state,
-                loading : true,
             }
         case POST_INSERT_SUCCESS:
             return{
                 ...state,
-                IsLogin : true,
-                loading : false,
             }
         case POST_INSERT_ERROR:
             return{
                 ...state,
-                loading : false,
             }
         default:
             return state

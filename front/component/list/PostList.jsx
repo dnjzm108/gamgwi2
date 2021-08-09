@@ -30,6 +30,6 @@ export default PostList
 
 const ListWrap = Styled.div`
     width : 100%;
-    height : 80vh;
+    height : 75vh;
     background : #e2b0b0;
 `

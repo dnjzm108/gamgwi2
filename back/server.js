@@ -1,11 +1,14 @@
 const express = require('express')
 const app = express()
 const router = require('./routers/index')
-const bodyparser = require('body-parser')
+const bodyParser = require('body-parser')
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
 const {sequelize} = require('./models')
+const cors = require('cors')
 
+app.use(bodyParser.json())
+app.use(cors())
 app.use(cookieParser())
 sequelize.sync({force:true})
 .then(()=>{
@@ -15,7 +18,7 @@ sequelize.sync({force:true})
     console.log('db fail',err)
 })
 
-app.use(bodyparser.urlencoded({extended:false}))
+app.use(bodyParser.urlencoded({extended:false}))
 
 
 app.use('/',router)
