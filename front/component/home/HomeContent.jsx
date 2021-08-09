@@ -8,7 +8,6 @@ const HomeContent = () => {
                 <Logo />
                 <HomeMent>
                     <p>오늘은 어떤 글귀를 발견하셨나요 </p>
-                    <div>광고</div>
                 </HomeMent>
             </HomeWrap>
         </>

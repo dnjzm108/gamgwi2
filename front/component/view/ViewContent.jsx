@@ -1,4 +1,7 @@
 import Styled from "styled-components"
+import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded'
+import CreateRoundedIcon from '@material-ui/icons/CreateRounded'
+import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded'
 
 const ViewContent = () => {
     return (
@@ -13,14 +16,13 @@ const ViewContent = () => {
                <ContentWrap>
                    content
                </ContentWrap>
-               <div>
+               <VeiwIcon>
                    <ul>
-                       <li>likes</li>
-                       <li>comments</li>
-                       <li>modify</li>
-                       <li>delete</li>
+                       <li><FavoriteRoundedIcon/></li>
+                       <li><CreateRoundedIcon/></li>
+                       <li><DeleteRoundedIcon/></li>
                    </ul>
-               </div>
+               </VeiwIcon>
             </ViewContentWrap>
         </>
     )
@@ -30,7 +32,7 @@ export default ViewContent
 const ViewContentWrap = Styled.div`
     width : 100%;
     height : 100%;
-    background : red;
+    background : #e9a9a9;
 `
 
 const TitleWrap = Styled.div`
@@ -47,4 +49,22 @@ const DateWrap = Styled.div`
     width : 100%;
     height : 10%;
     background : #dfdfab;
+`
+
+const VeiwIcon = Styled.div`
+    & > ul, & > ul > li {
+        list-style : none;
+    }
+
+    & > ul {
+        display : flex
+    }
+
+    & > ul > li {
+        width : 50px;
+    }
+
+    & > ul > li > svg {
+        font-size : 30px;
+    }
 `

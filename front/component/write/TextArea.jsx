@@ -1,7 +1,13 @@
-import Styled from 'styled-components';
-import useInput from '../../hooks/useInput';
+import Styled from 'styled-components'
+import useInput from '../../hooks/useInput'
+import { useDispatch, useSelector } from 'react-redux'
+import { PostInsert_REQUEST } from '../../reducers/post'
+import { useEffect } from 'react'
 
 const TextArea = () => {
+    const dispatch = useDispatch()
+    const { loading } = useSelector((state) => state.user)
+
     const writeTitle = useInput('')
     const writeContent = useInput('')
 
@@ -11,11 +17,17 @@ const TextArea = () => {
         console.log(writeContent.value);
 
         const data = {
-            writeTitle : writeTitle.value,
-            writeContent : writeContent.value
+            writeTitle: writeTitle.value,
+            writeContent: writeContent.value
         }
-        
+
+        dispatch(PostInsert_REQUEST(data))
     }
+
+    useEffect(()=>{
+
+    },[])
+
     return (
         <>
             <WriteWrap>
@@ -27,7 +39,7 @@ const TextArea = () => {
 
                     <ButtonBox>
                         <button>취소</button>
-                        <button type = 'submit'>저장</button>
+                        <button type='submit'>저장</button>
                     </ButtonBox>
                 </form>
             </WriteWrap>

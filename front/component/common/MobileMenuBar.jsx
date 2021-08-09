@@ -15,20 +15,20 @@ const MobileMenuBar = () => {
             <MenuBarWrap>
                 <div className={classes.root}>
                     <Link href="/list">
-                        <a ><FormatListBulletedRoundedIcon style={MenuFontSize} /></a> 
+                        <a ><FormatListBulletedRoundedIcon /></a>
                     </Link>
                     <Link href="/likes">
-                        <a ><FavoriteRoundedIcon style={MenuFontSize} /></a> 
+                        <a ><FavoriteRoundedIcon /></a>
                     </Link>
                     <Link href="/home">
-                        <a ><HomeRoundedIcon style={MenuFontSize} /></a> 
+                        <a ><HomeRoundedIcon /></a>
                     </Link>
                     <Link href="/write">
-                        <a ><CreateRoundedIcon style={MenuFontSize} /></a> 
+                        <a ><CreateRoundedIcon /></a>
                     </Link>
                     <Link href="/info">
-                        <a ><PermIdentityRoundedIcon style={MenuFontSize} /></a> 
-                    </Link>  
+                        <a ><PermIdentityRoundedIcon /></a>
+                    </Link>
                 </div>
             </MenuBarWrap>
         </>
@@ -39,17 +39,16 @@ export default MobileMenuBar
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        '&' : {
-            display : 'flex'
+        '&': {
+            display: 'flex'
         },
-        '& > a' : {
-            display : 'inline-block',
-            width : '19vw',
-            textAlign: 'center',
-            paddingTop: '2%'
+        '& > a': {
+            display: 'inline-block',
+            width: '19vw',
+            textAlign: 'center'
         },
         '& > a > svg': {
-            color : 'black',
+            color: 'black',
         },
     },
 }));
@@ -61,6 +60,11 @@ const MenuBarWrap = Styled.div`
     height : 70px;
     border-top: 1px solid #e4e4e4;
     margin-top: 30px;
+
+    & > div > a >svg {
+        font-size : 39px;
+        padding-top : 16%;
+    }
     
     @media only screen and (min-width:768px){
         position : relative;
@@ -70,10 +74,9 @@ const MenuBarWrap = Styled.div`
             text-align : center;
         }
         & > div > a > svg {
+            font-size : 45px;
+            padding-top : 5%;
             margin : 20px 100px;
         }
     }
 `
-const MenuFontSize = {
-    'fontSize' : '39'
-}
