@@ -7,11 +7,9 @@ const WebLayout = ({ children }) => {
             <WebWrap>
                 <WebInnerWrap>
                     <WebHeight>
-                        aaa
                         {children}
                     </WebHeight>
                     <MobileMenuBar />
-
                 </WebInnerWrap>
             </WebWrap>
         </>
@@ -51,7 +49,7 @@ const WebInnerWrap = Styled.div`
 const WebHeight = Styled.div`
     width: 100%;
     height: 85vh;
-    background : #bbb4b4;
+    //background : #bbb4b4;
 `
 
 /* web ver 1200 margin 0 auto */

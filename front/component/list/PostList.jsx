@@ -1,5 +1,21 @@
 import Styled from "styled-components"
 
+const ListContent = ()=>{
+    return(
+        <ul>
+            <li>
+                {
+                    /*
+                        list.map((v,k)=>{
+                            <li key = {k}> {v} </li>
+                        })
+                    */
+                }
+            </li>
+        </ul>
+    )
+}
+
 const PostList = ()=>{
     return(
         <>
@@ -14,5 +30,6 @@ export default PostList
 
 const ListWrap = Styled.div`
     width : 100%;
-    height : auto;
+    height : 80vh;
+    background : #e2b0b0;
 `

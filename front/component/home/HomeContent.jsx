@@ -8,7 +8,6 @@ const HomeContent = () => {
                 <Logo />
                 <HomeMent>
                     <p>오늘은 어떤 글귀를 발견하셨나요 </p>
-                    <div>광고</div>
                 </HomeMent>
             </HomeWrap>
         </>
@@ -22,4 +21,21 @@ const HomeWrap = Styled.div`
 `
 const HomeMent = Styled.div`
     text-align : center;
+
+    & > p {
+        width: 100%;
+        height: 32vh;
+        font-size: 20px;
+        padding: 26% 0;
+        box-sizing: border-box;
+    }
+
+    @media only screen and (min-width:768px){
+        & > p{
+            font-size: 32px;
+            height: 130px;
+            padding: 3.5% 0;
+            box-sizing: border-box;
+        }
+    }
 `

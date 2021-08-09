@@ -1,7 +1,6 @@
 const {Board,User} = require('../../models')
 
 let admin = (req,res) =>{
-
     res.send('admin')
 }
 
@@ -27,9 +26,9 @@ let report_detail = async (req,res) =>{
     res.json(reportView)
 }
 
-let user_list = async (req,res) =>{
+let user_list_get = async (req,res) =>{
     let userList = await User.findAll({})
-    res.json(userList)
+    res.json({return:'안녕하세요'})
 }
 
 let user_detail = async (req,res) =>{
@@ -37,12 +36,17 @@ let user_detail = async (req,res) =>{
     let userDetail = await User.findAll({where:{id:idx}})
 }
 
+//post====================================================================
+let user_list_post = (req,res) => {
+    res.send('user_list_post')
+}
 module.exports={
     admin,
     board_list,
     board_view,
     report_list,
     report_detail,
-    user_list,
+    user_list_get,
+    user_list_post,
     user_detail
 }

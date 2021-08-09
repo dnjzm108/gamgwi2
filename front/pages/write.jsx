@@ -3,7 +3,8 @@ import WebLayout from "../component/layout/webLayout";
 import TodayWeather from "../component/write/TodayWeather";
 import Styled from "styled-components";
 import TextArea from "../component/write/TextArea";
-
+import { useEffect } from "react"
+import { useDispatch, useSelector } from 'react-redux'
 
 const Write = () => {
     
