@@ -1,12 +1,13 @@
 import {useState} from 'react'
 
-const useInput = (defaultValue)=>{
-    const [value, setValue] = useState(defaultValue)
-    const onChange = e =>{
+const useInput = (defaultValue) => {
+    const [value,setValue] = useState(defaultValue)
+    const onChange = e => {
         const {value} = {...e.target}
         setValue(value)
     }
-    return{
+
+    return {
         value,
         onChange
     }

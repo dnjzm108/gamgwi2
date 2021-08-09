@@ -23,7 +23,7 @@ module.exports = (req, res, next) => {
             res.redirect('/?msg=토큰만료');
             return 0;
         }
-        req.userpw =userpw;
+        req.userpw = userpw;
         next();
     } else {
        res.redirect('/?msg=부적절한 토큰')

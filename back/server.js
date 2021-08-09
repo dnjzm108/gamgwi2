@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser')
 const {sequelize} = require('./models')
 
 app.use(cookieParser())
+
 sequelize.sync({force:true})
 .then(()=>{
     console.log('db success')
