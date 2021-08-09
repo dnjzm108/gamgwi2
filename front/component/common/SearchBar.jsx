@@ -1,6 +1,6 @@
 import Styled from "styled-components"
 
-const searchSubmit = (e)=>{
+const searchSubmit = (e) => {
     e.preventDefault()
 
 }
@@ -33,7 +33,6 @@ const SearchBarWrap = Styled.div`
     width : 100%;
     height: 9.5%;
     text-align : center;
-    /* background : green; */
     padding : 10px 0;
     box-sizing : border-box;
 
@@ -53,11 +52,21 @@ const SearchBarWrap = Styled.div`
         height : 5vh;
         border : 1px solid lightgray;
         margin-left : 5px;
-
-        
     }
 
     @media only screen and (min-width:768px){
         text-align : right;
+        background : green;
+
+        & > form > select{
+            
+        }
+        & > form > input{
+            
+        }
+        & > form > button{
+            
+        }
+
     }
 `
