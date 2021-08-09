@@ -7,4 +7,6 @@ router.get('/logined',controller.main)
 router.get('/',controller.first_main)
 
 
+
+
 module.exports = router;
