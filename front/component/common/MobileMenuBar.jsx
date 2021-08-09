@@ -13,7 +13,7 @@ const MobileMenuBar = () => {
     return (
         <>
             <MenuBarWrap>
-                <div className={classes.root}>
+                <MenubarBox>
                     <Link href="/list">
                         <a ><FormatListBulletedRoundedIcon /></a>
                     </Link>
@@ -29,7 +29,7 @@ const MobileMenuBar = () => {
                     <Link href="/info">
                         <a ><PermIdentityRoundedIcon /></a>
                     </Link>
-                </div>
+                </MenubarBox>
             </MenuBarWrap>
         </>
     )
@@ -62,6 +62,7 @@ const MenuBarWrap = Styled.div`
     margin-top: 30px;
 
     & > div > a >svg {
+        color: black;
         font-size : 39px;
         padding-top : 16%;
     }
@@ -79,4 +80,13 @@ const MenuBarWrap = Styled.div`
             margin : 20px 100px;
         }
     }
+`
+
+const MenubarBox = Styled.div`
+    display : flex;
+    & > a {
+        display : inline-block;
+        width : 20vw;
+        text-align : center;
+    } 
 `
