@@ -25,6 +25,10 @@ let view_reply = async (req,res) =>{
 }
 
 let write = async(req,res) =>{
+    // 임시 체크 프론트 -> 글 작성 -> 백 쪽으로 오는지 확인 - 혜준
+    console.log(req.body);
+
+    
     await Board.create({title:'tt',nickName:'al',watch:0,report:0,content:'d',category:'고민',commentIdx:1})
     res.send('write')
 }
