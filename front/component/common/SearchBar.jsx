@@ -16,7 +16,7 @@ const SearchBar = () => {
                         <option value="content">내용</option>
                         <option value="title">제목</option>
                     </select>
-                    <input type="text" name="searchedValue"/>
+                    <input type="text" name="searchedValue" />
                     <button type="submit" onSubmit={searchSubmit}>Search</button>
                 </form>
             </SearchBarWrap>
@@ -56,16 +56,19 @@ const SearchBarWrap = Styled.div`
 
     @media only screen and (min-width:768px){
         text-align : right;
-        background : green;
+        
+        padding : 20px 0;
 
         & > form > select{
-            
+            height : 3.1vh; 
+        
         }
         & > form > input{
-            
+            width : 250px;
+            height : 2.5vh; 
         }
         & > form > button{
-            
+            height : 3.2vh; 
         }
 
     }
