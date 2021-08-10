@@ -34,10 +34,7 @@ module.exports = class Comment extends Sequelize.Model{
         })
     }
     static associate(db){
-        db.Board.belongsTo(db.Board,{
-            foreignKey:'titleIdx',
-            targetKey:'id',
-            onDelete:'Cascade'
-        })
+        db.Comment.belongsTo(db.Board,{foreignKey:'titleIdx',targetKey:'id',onDelete:'Cascade'}        
+        )
     }
 }

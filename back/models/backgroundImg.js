@@ -4,6 +4,12 @@ const moment = require('moment')
 module.exports = class BackgroundImg extends Sequelize.Model{
     static init(sequelize){
         return super.init({
+            id:{
+                type:Sequelize.INTEGER,
+                allowNull:true,
+                unique:true,
+                primaryKey:true,
+            },
             img:{
                 type:Sequelize.TEXT,
                 allowNull:true
@@ -12,18 +18,10 @@ module.exports = class BackgroundImg extends Sequelize.Model{
                 type:Sequelize.STRING(50),
                 allowNull:true
             },
-            img2:{
-                type:Sequelize.TEXT,
-                allowNull:true
-            },
-            imgTitle2:{
-                type:Sequelize.STRING(50),
-                allowNull:true
-            },
         },{
             sequelize,
             timestamps:false,
-            modelName:'BackgroundImg',
+            modelName:'',
             tableName:'backgroundImgs',
             paranoid:false,
             charset:'utf8',
@@ -31,6 +29,6 @@ module.exports = class BackgroundImg extends Sequelize.Model{
         })
     }
     static associate (db){
-        db.BackgroundImg.hasMany(db.Board,{foreignKey:'backgroundImgIdx'})
+        db.BackgroundImg.hasMany(db.Board,{foreignKey:'backgroundImgIdx',sourceKey:'id'})
     }
 }

@@ -3,23 +3,22 @@ const Sequelize = require('sequelize')
 module.exports = class Weather extends Sequelize.Model{
     static init(sequelize){
         return super.init({
-            emo:{
+            id:{
+                type:Sequelize.INTEGER,
+                allowNull:true,
+                unique:true,
+                primaryKey:true,
+            },
+            emoTitle:{
                 type:Sequelize.TEXT,
                 allowNull:true
             },
-            text:{
+            emoView:{
                 type:Sequelize.STRING(100),
                 unique:true,
                 allowNull:false,
                 comment:'이모티콘저장'
-            },
-            emo_idx:{
-                type:Sequelize.INTEGER,
-                unique:true,
-                allowNull:false,
-                comment:'날씨이모티콘id구분'
-            }
-
+            },        
         },{
             sequelize,
             timestamps:false,
@@ -29,5 +28,8 @@ module.exports = class Weather extends Sequelize.Model{
             charset:'utf8',
             collate:'utf8_general_ci'
         })
+    }
+    static associate(db){
+        db.Weather.hasMany(db.Board,{foreignKey:'weatherIdx',sourcekey:'id'})
     }
 }

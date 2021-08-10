@@ -10,7 +10,7 @@ let view_reply = async (req,res) =>{
 }
 
 let write = async (req,res) =>{
-    const {writeTitle, writeContent} = req.body                 // 이걸로 db에 insert 하면 됩니다.
+    const {todayWeather, writeTitle, writeContent} = req.body                 // 이걸로 db에 insert 하면 됩니다.
     console.log("req.body ==== ",req.body);
     // await Board.create({title:'tt',nickName:'al',watch:1,report:0,content:'d',category:'고민',commentIdx:1,emo_idx:1})
     // res.send('write')
@@ -94,14 +94,15 @@ let post_list = async(req,res) => {
     let {search,searchedValue} = req.body
     let list
     switch(search){
-        case '작성자':
+        case 'writer':
             list = await Board.findAll({where:{nickName:searchedValue},attributes:['title','like','nickName','content']})
+            console.log(search,searchedValue,'=====================================')
             return res.json(list)
-        case '내용':
+        case 'content':
             list = await Board.findAll({where:{content:searchedValue},attributes:['title','like','nickName','content']})
             // 내용의 일부 입력시 해당되는 data를 가져오도록 수정필요============================
             return res.json(list)
-        case '제목':
+        case 'title':
             list = await Board.findAll({where:{title:searchedValue},attributes:['title','like','nickName','content']})
             return res.json(list)
     }
