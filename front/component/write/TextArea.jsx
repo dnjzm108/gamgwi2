@@ -3,35 +3,43 @@ import useInput from '../../hooks/useInput'
 import { useDispatch, useSelector } from 'react-redux'
 import { PostInsert_REQUEST } from '../../reducers/post'
 import { useEffect } from 'react'
+import TodayWeather from './TodayWeather'
+
 
 const TextArea = () => {
     const dispatch = useDispatch()
-    const { loading } = useSelector((state) => state.user)
-
+    //const { loading } = useSelector((state) => state.user)
     const writeTitle = useInput('')
     const writeContent = useInput('')
+    
 
     const hadleSubmit = (e) => {
         e.preventDefault()
         console.log(writeTitle.value);
         console.log(writeContent.value);
+        
 
-        const data = {
+        /*const data = {
             writeTitle: writeTitle.value,
             writeContent: writeContent.value
         }
 
-        dispatch(PostInsert_REQUEST(data))
+        dispatch(PostInsert_REQUEST(data))*/
     }
 
-    useEffect(()=>{
+    useEffect(() => {
 
-    },[])
+    }, [])
+
+    const handleCreate = (data) => {
+        console.log(data);
+    }
 
     return (
         <>
-            <WriteWrap>
-                <form onSubmit={hadleSubmit}>
+            <form onSubmit={hadleSubmit}>
+                <TodayWeather onCreate={handleCreate}/>
+                <WriteWrap>
                     <div>
                         <InputTitle type="text" {...writeTitle} />
                         <InputContent {...writeContent} />
@@ -41,8 +49,8 @@ const TextArea = () => {
                         <button>취소</button>
                         <button type='submit'>저장</button>
                     </ButtonBox>
-                </form>
-            </WriteWrap>
+                </WriteWrap>
+            </form>
         </>
     )
 }
@@ -57,7 +65,7 @@ const WriteWrap = Styled.div`
 
 
 const InputTitle = Styled.input`
-    width : 98%;
+    width : 100%;
     height : 35px;
     border : 1px solid lightgray;
     border-radius: 5px;
@@ -73,7 +81,7 @@ const InputTitle = Styled.input`
 `
 const InputContent = Styled.textarea`
     //margin: 0px;
-    width: 98%;
+    width: 100%;
     height: 340px;
     margin-top: 30px;
     border : 1px solid lightgray;

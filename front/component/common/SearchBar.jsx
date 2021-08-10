@@ -36,19 +36,19 @@ const SearchBarWrap = Styled.div`
     padding : 10px 0;
     box-sizing : border-box;
 
-
     & > form > select{
-        width : auto;
-        height : 5vh; 
-        text-align : center;
+        width: 20%;
+        height: 5vh;
+        text-align: center;
+        font-size: 12px;
     }
     & > form > input{
-        width : 189px;
+        width : 50vw;
         height : 4vh;
         margin-left : 5px; 
     }
     & > form > button{
-        width : 70px;
+        width: 60px;
         height : 5vh;
         border : 1px solid lightgray;
         margin-left : 5px;
