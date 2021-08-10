@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import WebLayout from "../component/layout/webLayout";
-import Join_form from "../component/join/join_form"
+import WebLayout from "../../component/layout/webLayout";
+import Join_form from "../../component/join/join_form"
 import Styled from "styled-components";
 
 

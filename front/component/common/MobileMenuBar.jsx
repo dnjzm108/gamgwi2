@@ -14,19 +14,19 @@ const MobileMenuBar = () => {
         <>
             <MenuBarWrap>
                 <MenubarBox>
-                    <Link href="/list">
+                    <Link href="/board/list">
                         <a ><FormatListBulletedRoundedIcon /></a>
                     </Link>
-                    <Link href="/likes">
+                    <Link href="/board/likes">
                         <a ><FavoriteRoundedIcon /></a>
                     </Link>
                     <Link href="/home">
                         <a ><HomeRoundedIcon /></a>
                     </Link>
-                    <Link href="/write">
+                    <Link href="/board/write">
                         <a ><CreateRoundedIcon /></a>
                     </Link>
-                    <Link href="/info">
+                    <Link href="/board/info">
                         <a ><PermIdentityRoundedIcon /></a>
                     </Link>
                 </MenubarBox>

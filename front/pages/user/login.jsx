@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import WebLayout from "../component/layout/webLayout";
-import Login_form from "../component/login/login_form"
+import WebLayout from "../../component/layout/webLayout";
+import Login_form from "../../component/login/login_form"
 import Styled from "styled-components";
 
 
