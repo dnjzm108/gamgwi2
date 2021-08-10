@@ -41,6 +41,7 @@ const SearchBarWrap = Styled.div`
         height: 5vh;
         text-align: center;
         font-size: 12px;
+        font-family: 'IM_Hyemin-Bold';
     }
     & > form > input{
         width : 50vw;
@@ -52,6 +53,10 @@ const SearchBarWrap = Styled.div`
         height : 5vh;
         border : 1px solid lightgray;
         margin-left : 5px;
+        font-weight: bold;
+        font-size: 13px;
+        font-family: 'IM_Hyemin-Bold';
+
     }
 
     @media only screen and (min-width:768px){
@@ -60,6 +65,7 @@ const SearchBarWrap = Styled.div`
         padding : 20px 0;
 
         & > form > select{
+            width: 9%;
             height : 3.1vh; 
         
         }
@@ -68,6 +74,7 @@ const SearchBarWrap = Styled.div`
             height : 2.5vh; 
         }
         & > form > button{
+            width: 85px;
             height : 3.2vh; 
         }
 
