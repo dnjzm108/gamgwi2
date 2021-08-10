@@ -3,12 +3,12 @@ const Sequelize = require('sequelize')
 module.exports = class Like extends Sequelize.Model{
     static init(sequelize){
         return super.init({
-            title_idx:{
+            likeBoardIdx:{
                 type:Sequelize.INTEGER,
                 allowNull:false,
-                comment:'좋아요누른글귀or고민'
+                comment:'좋아요누른게시판id'
             },
-            like:{
+            likeCount:{
                 type:Sequelize.INTEGER,
                 allowNull:false,
                 defaultValue:0,
@@ -20,8 +20,11 @@ module.exports = class Like extends Sequelize.Model{
             modelName:'Like',
             tableName:'likes',
             paranoid:false,
-            charset:'utf8',
+            charset:'utf8', 
             collate:'utf8_general_ci'
         })
+    }
+    static associate(db){
+        db.Like.belongsTo(db.Board,{foreignKey:'likeBoardIdx',targetKey:'id',onDelete:'Cascade'})
     }
 }

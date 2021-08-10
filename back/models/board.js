@@ -31,7 +31,7 @@ module.exports = class Board extends Sequelize.Model{
                 allowNull:false,
                 defaultValue:0
             },
-            like:{
+            likeCount:{
                 type:Sequelize.INTEGER,
                 allowNull:false,
                 defaultValue:0,
@@ -74,6 +74,10 @@ module.exports = class Board extends Sequelize.Model{
                 type:Sequelize.STRING(50),
                 allowNull:true,
             },
+            weatherIdx:{
+                type:Sequelize.INTEGER,
+                allowNull:true,
+            }
             
         },{
             sequelize,
@@ -86,10 +90,9 @@ module.exports = class Board extends Sequelize.Model{
         })
     }
    static associate(db){
-       db.Board.hasMany(db.Comment,{
-           foreignKey:'titleIdx',
-           sourceKey:'id'
-
-       })
+       db.Board.hasMany(db.Comment,{foreignKey:'titleIdx',sourceKey:'id'}),
+       db.Board.belongsTo(db.BackgroundImg,{foreignKey:'backgroundImgIdx',targetKey:'id'})
+       db.Board.belongsTo(db.Weather,{foreignKey:'weatherIdx',targetKey:'id'}),
+       db.Board.hasMany(db.Like,{foreignKey:'likeBoardIdx',sourceKey:'id'})
    }
 }

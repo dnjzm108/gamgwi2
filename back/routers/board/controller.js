@@ -94,14 +94,15 @@ let post_list = async(req,res) => {
     let {search,searchedValue} = req.body
     let list
     switch(search){
-        case '작성자':
+        case 'writer':
             list = await Board.findAll({where:{nickName:searchedValue},attributes:['title','like','nickName','content']})
+            console.log(search,searchedValue,'=====================================')
             return res.json(list)
-        case '내용':
+        case 'content':
             list = await Board.findAll({where:{content:searchedValue},attributes:['title','like','nickName','content']})
             // 내용의 일부 입력시 해당되는 data를 가져오도록 수정필요============================
             return res.json(list)
-        case '제목':
+        case 'title':
             list = await Board.findAll({where:{title:searchedValue},attributes:['title','like','nickName','content']})
             return res.json(list)
     }
