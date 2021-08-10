@@ -67,11 +67,14 @@ const SearchBarWrap = Styled.div`
         & > form > select{
             width: 9%;
             height : 3.1vh; 
-        
         }
         & > form > input{
             width : 250px;
             height : 2.5vh; 
+        }
+        & > form > select:focus,
+        & > form > input:focus{
+            outline : none;
         }
         & > form > button{
             width: 85px;
