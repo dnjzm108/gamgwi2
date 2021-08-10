@@ -23,7 +23,6 @@ const TextArea = () => {
         e.preventDefault()
         console.log(writeTitle.value);
         console.log(writeContent.value);
-        
 
         const data = {
             todayWeather : todayWeather,

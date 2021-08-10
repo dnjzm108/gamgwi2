@@ -1,10 +1,7 @@
 import Head from 'next/head'
-import WebLayout from "../component/layout/webLayout";
-import TodayWeather from "../component/write/TodayWeather";
+import WebLayout from "../../component/layout/webLayout";
 import Styled from "styled-components";
-import TextArea from "../component/write/TextArea";
-import { useEffect } from "react"
-import { useDispatch, useSelector } from 'react-redux'
+import TextArea from '../../component/write/TextArea';
 
 const Write = () => {
     
@@ -16,7 +13,6 @@ const Write = () => {
             <WebLayout>
                 <WebTitle>오늘의 글귀</WebTitle>
                 <div>
-                    {/* <TodayWeather /> */}
                     <TextArea />
                 </div>
             </WebLayout>

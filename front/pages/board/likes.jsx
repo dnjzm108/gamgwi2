@@ -1,7 +1,7 @@
 import Head from 'next/head'
-import SearchBar from '../component/common/SearchBar'
-import WebLayout from "../component/layout/webLayout"
-import LikesList from '../component/list/LikesList'
+import SearchBar from '../../component/common/SearchBar'
+import WebLayout from "../../component/layout/webLayout"
+import LikesList from '../../component/list/LikesList'
 
 
 const Likes = () => {
