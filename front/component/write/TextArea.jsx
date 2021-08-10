@@ -19,12 +19,12 @@ const TextArea = () => {
         console.log(writeContent.value);
         
 
-        /*const data = {
+        const data = {
             writeTitle: writeTitle.value,
             writeContent: writeContent.value
         }
 
-        dispatch(PostInsert_REQUEST(data))*/
+        dispatch(PostInsert_REQUEST(data))
     }
 
     useEffect(() => {
