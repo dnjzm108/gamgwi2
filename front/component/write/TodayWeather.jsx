@@ -42,8 +42,9 @@ const TodayMyWeather = Styled.div`
 `
 
 const TodayWeatherWrap = Styled.div`
-    height: 100%;
+    /* height: 100%; */
     width: 100%;
+    height: 80px;
     text-align : right;
 `
 
