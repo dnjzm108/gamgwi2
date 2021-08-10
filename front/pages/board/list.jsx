@@ -1,7 +1,7 @@
 import Head from 'next/head'
-import PostList from '../component/list/PostList'
-import WebLayout from "../component/layout/webLayout"
-import SearchBar from '../component/common/SearchBar'
+import PostList from '../../component/list/PostList'
+import WebLayout from "../../component/layout/webLayout"
+import SearchBar from '../../component/common/SearchBar'
 
 const List = () => {
     return (
