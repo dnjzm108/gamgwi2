@@ -6,6 +6,7 @@ module.exports = class Board extends Sequelize.Model{
         return super.init({
             id:{
                 type:Sequelize.INTEGER,
+                autoIncrement:true,
                 primaryKey:true,
                 unique:true,
                 comment:'고유번호'
