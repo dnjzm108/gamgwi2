@@ -12,7 +12,7 @@ let view_reply = async (req,res) =>{
 let write = async (req,res) =>{
     const {todayWeather, writeTitle, writeContent} = req.body                 // 이걸로 db에 insert 하면 됩니다.
     console.log("req.body ==== ",req.body);
-    // await Board.create({title:'tt',nickName:'al',watch:1,report:0,content:'d',category:'고민',commentIdx:1,emo_idx:1})
+    await Board.create({title:writeTitle,nickName:'al',watch:1,report:0,content:writeContent,category:'글귀'})
     // res.send('write')
     // res.render('작성된페이지')
 }
@@ -52,7 +52,6 @@ let get_list = async (req,res) =>{
     //         // return res.render('리스트가 선택된 특정 글귀의 페이지',{list})
     //         return res.json(list)
     // } 
-    
 }
 let get_likes = async(req,res) => {
     let list = await Board.findAll({where:{like:1,category:'글귀'},attributes:['title','like','nickName','content']})
