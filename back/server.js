@@ -10,6 +10,7 @@ const cors = require('cors')
 app.use(bodyParser.json())
 app.use(cors())
 app.use(cookieParser())
+
 sequelize.sync({force:true})
 .then(()=>{
     console.log('db success')
