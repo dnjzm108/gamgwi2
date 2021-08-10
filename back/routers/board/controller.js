@@ -11,8 +11,9 @@ let view_reply = async (req,res) =>{
 
 let write = async (req,res) =>{
     const {writeTitle, writeContent} = req.body                 // 이걸로 db에 insert 하면 됩니다.
-    await Board.create({title:'tt',nickName:'al',watch:1,report:0,content:'d',category:'고민',commentIdx:1,emo_idx:1})
-    res.send('write')
+    console.log("req.body ==== ",req.body);
+    // await Board.create({title:'tt',nickName:'al',watch:1,report:0,content:'d',category:'고민',commentIdx:1,emo_idx:1})
+    // res.send('write')
     // res.render('작성된페이지')
 }
 
