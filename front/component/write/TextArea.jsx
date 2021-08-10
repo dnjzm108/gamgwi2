@@ -2,7 +2,7 @@ import Styled from 'styled-components'
 import useInput from '../../hooks/useInput'
 import { useDispatch, useSelector } from 'react-redux'
 import { PostInsert_REQUEST } from '../../reducers/post'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import TodayWeather from './TodayWeather'
 
 
@@ -11,7 +11,13 @@ const TextArea = () => {
     //const { loading } = useSelector((state) => state.user)
     const writeTitle = useInput('')
     const writeContent = useInput('')
-    
+
+    const [todayWeather, setTodayWeather] = useState('')
+
+    const weatherChange = (e) =>{
+        console.log(e.target.value);
+        setTodayWeather(e.target.value)
+    }
 
     const hadleSubmit = (e) => {
         e.preventDefault()
@@ -20,6 +26,7 @@ const TextArea = () => {
         
 
         const data = {
+            todayWeather : todayWeather,
             writeTitle: writeTitle.value,
             writeContent: writeContent.value
         }
@@ -31,14 +38,10 @@ const TextArea = () => {
 
     }, [])
 
-    const handleCreate = (data) => {
-        console.log(data);
-    }
-
     return (
         <>
             <form onSubmit={hadleSubmit}>
-                <TodayWeather onCreate={handleCreate}/>
+                <TodayWeather weatherChange={weatherChange}/>
                 <WriteWrap>
                     <div>
                         <InputTitle type="text" {...writeTitle} />
