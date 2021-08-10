@@ -26,7 +26,7 @@ const MobileMenuBar = () => {
                     <Link href="/board/write">
                         <a ><CreateRoundedIcon /></a>
                     </Link>
-                    <Link href="/board/info">
+                    <Link href="/user/info">
                         <a ><PermIdentityRoundedIcon /></a>
                     </Link>
                 </MenubarBox>
