@@ -12,9 +12,22 @@ let view_reply = async (req,res) =>{
 let write = async (req,res) =>{
     const {todayWeather, writeTitle, writeContent} = req.body                 // 이걸로 db에 insert 하면 됩니다.
     console.log("req.body ==== ",req.body);
-    await Board.create({title:writeTitle,nickName:'al',watch:1,report:0,content:writeContent,category:'글귀'})
-    // res.send('write')
-    // res.render('작성된페이지')
+    //await Board.create({title:writeTitle,nickName:'al',watch:1,report:0,content:writeContent,category:'글귀'})
+    
+    let result = {};
+    try {
+        await Board.create({title:writeTitle,nickName:'al',watch:1,report:0,content:writeContent,category:'글귀'})
+        result = {
+            result : 'OK',
+            msg : '글 작성 성공'
+        }
+    } catch (error) {
+        result = {
+            result: 'Fail',
+            msg: '글 작성 실패'
+        }
+    }
+    res.json(result)
 }
 
 let get_list = async (req,res) =>{
