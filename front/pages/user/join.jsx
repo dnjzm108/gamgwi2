@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import WebLayout from "../component/layout/webLayout";
-import Join_form from "../component/join/join_form"
+import BasicLayout from '../../component/layout/BasicLayout'
+import Join_form from "../../component/user/join_form"
 import Styled from "styled-components";
 
 
@@ -12,10 +12,10 @@ const Join = () => {
             <Head>
                 <title>Gamgwi | join</title>
             </Head>
-            <WebLayout>
+            <BasicLayout>
                 <Join_form>
                 </Join_form>
-            </WebLayout>
+            </BasicLayout>
         </>
     )
 }

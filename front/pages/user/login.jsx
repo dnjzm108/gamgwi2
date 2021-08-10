@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import WebLayout from "../component/layout/webLayout";
-import Login_form from "../component/login/login_form"
+import BasicLayout from '../../component/layout/BasicLayout'
+import Login_form from "../../component/user/login_form"
 import Styled from "styled-components";
 
 
@@ -12,10 +12,10 @@ const Login = () => {
             <Head>
                 <title>Gamgwi | login</title>
             </Head>
-            <WebLayout>
+            <BasicLayout>
                 <Login_form>
                 </Login_form>
-            </WebLayout>
+            </BasicLayout>
         </>
     )
 }
