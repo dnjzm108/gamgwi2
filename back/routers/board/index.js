@@ -6,6 +6,7 @@ router.post('/list',controller.post_list)
 
 router.get('/list',controller.get_list)
 router.get('/likes',controller.get_likes)
+
 router.get('/write',controller.get_write)
 
 
