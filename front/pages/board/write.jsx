@@ -13,10 +13,10 @@ const Write = () => {
     useEffect(() => {
         if (data !== undefined) {
             alert(data)
+            if (data === '글 작성 성공') {
+                Router.push('/board/view')
+            }
             dispatch({type:'POST_INSERT_RESET'})
-            // if (data === '글 작성 성공') {
-            //     Router.push('/board/view')
-            // }
         }
     }, [data])
 
