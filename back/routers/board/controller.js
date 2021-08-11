@@ -35,7 +35,8 @@ let get_list = async (req,res) =>{
     //res.send(list)
     let result = {};
     try {
-        let list = await Board.findAll({where:{watch:1,category:'글귀'},attributes:['title','like','nickName','content']})
+        //let list = await Board.findAll({where:{watch:1,category:'글귀'},attributes:['title','like','nickName','content']})
+        let list = await Board.findAll({})
         console.log("db list 조회 ======== ",list);
         result = {
             list,
