@@ -32,10 +32,11 @@ let write = async (req,res) =>{
 
 let get_list = async (req,res) =>{
     //let list = await Board.findAll({where:{watch:1,category:'글귀'},attributes:['title','like','nickName','content']})
-    
+    //res.send(list)
     let result = {};
     try {
         let list = await Board.findAll({where:{watch:1,category:'글귀'},attributes:['title','like','nickName','content']})
+        console.log("db list 조회 ======== ",list);
         result = {
             list,
             result : 'OK',

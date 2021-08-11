@@ -14,7 +14,7 @@ const data = [
 const List = () => {
     const dispatch = useDispatch()
     useEffect(()=>{
-        dispatch(PostGet_REQUEST)
+        dispatch(PostGet_REQUEST())
     },[])
 
     const router = useRouter()
@@ -39,7 +39,6 @@ const List = () => {
             </Head>
             <WebLayout>
                 <PostList list={list}/>
-                <PostList />
                 <SearchBar />
             </WebLayout>
         </>
