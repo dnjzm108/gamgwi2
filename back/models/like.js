@@ -24,7 +24,7 @@ module.exports = class Like extends Sequelize.Model{
             collate:'utf8_general_ci'
         })
     }
-    static associate(db){
-        db.Like.belongsTo(db.Board,{foreignKey:'likeBoardIdx',targetKey:'id',onDelete:'Cascade'})
-    }
+    // static associate(db){
+    //     db.Like.belongsTo(db.Board,{foreignKey:'likeBoardIdx',targetKey:'id',onDelete:'Cascade'})
+    // }
 }

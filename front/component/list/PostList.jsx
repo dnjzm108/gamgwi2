@@ -1,5 +1,6 @@
 import Styled from "styled-components"
 
+
 const ListContent = ()=>{
     return(
         <ul>
@@ -16,15 +17,31 @@ const ListContent = ()=>{
     )
 }
 
-const PostList = ()=>{
+export async function getStaticProps() {
+    const res = await fetch('http://localhost:3500/board/list')
+    const posts = await res.json()
+    console.log(posts)
+    // By returning { props: posts }, the Blog component
+    // will receive `posts` as a prop at build time
+    return {
+      props: {
+        posts,
+      },
+    }
+  }
+
+const PostList = ({datas})=>{
+    //console.log(datas)
+
     return(
         <>
             <ListWrap>
-                글 리스트 들어갈 공간
             </ListWrap>
         </>
     )
 }
+
+
 
 export default PostList
 

@@ -6,6 +6,7 @@ const searchSubmit = (e) => {
 }
 
 const SearchBar = () => {
+  
     return (
         <>
             <SearchBarWrap>
