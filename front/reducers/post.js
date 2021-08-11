@@ -5,6 +5,7 @@ const initalState = {
 const POST_INSERT_REQUEST = "POST_INSERT_REQUEST"
 const POST_INSERT_SUCCESS = "POST_INSERT_SUCCESS"
 const POST_INSERT_ERROR = "POST_INSERT_ERROR"
+const POST_INSERT_RESET = "POST_INSERT_RESET"
 
 const POST_MODIFY_REQUEST = "POST_MODIFY_REQUEST"
 const POST_MODIFY_SUCCESS = "POST_MODIFY_SUCCESS"
@@ -18,18 +19,20 @@ const POST_DELETE_ERROR = "POST_DELETE_ERROR"
 export const PostInsert_REQUEST = data => {
     // console.log("insert === ",data);
     return{
-        type : POST_INSERT_REQUEST,      
-        data,                          
+        type : POST_INSERT_REQUEST,  
+        data                           
     }
 }
 export const PostInsert_SUCCESS = () => {
     return{
         type : POST_INSERT_SUCCESS,
+        data
     }
 }
 export const PostInsert_ERROR = () => {
     return{
         type : POST_INSERT_ERROR,
+        data
     }
 }
 
@@ -78,17 +81,27 @@ const reducer = (state = initalState, action) => {
             console.log('reducer 작동함')
             return{
                 ...state,
-                lodding:true,
+                loading : true,
             }
         case POST_INSERT_SUCCESS:
+            console.log('insert 성공');
             return{
                 ...state,
-                loadding:false,
+                data:action.data,
+                loading : false,
             }
         case POST_INSERT_ERROR:
+            console.log('insert 실패');
             return{
                 ...state,
-                loadding:false,
+                data:action.data,
+                loading : false,
+            }
+        case POST_INSERT_RESET:
+            return{
+                ...state,
+                data:undefined,
+                loading:false,
             }
         default:
             return state

@@ -34,8 +34,8 @@ const LogoImg = Styled.img`
     height : auto;
     @media only screen and (min-width:768px){
         // PC 버전
-        width : 70%;
-        min-height : 500px;
-        
+        width: 57%;
+        min-height: 500px;
+        height: 50%;
     }
 `

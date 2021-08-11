@@ -42,6 +42,9 @@ const TitleWrap = Styled.div`
 `
 
 const ContentWrap = Styled.div`
+    width: 100%;
+    background: cadetblue;
+    height: 69%;
 
 `
 
@@ -52,19 +55,32 @@ const DateWrap = Styled.div`
 `
 
 const VeiwIcon = Styled.div`
+    width : 100%;
+    height : auto;
+
     & > ul, & > ul > li {
         list-style : none;
     }
 
     & > ul {
-        display : flex
+        width: 210px;
+        display : flex;
+        height: auto;
+        float: right;
+        text-align: right;
     }
 
     & > ul > li {
-        width : 50px;
+        width : 70px;
     }
 
     & > ul > li > svg {
-        font-size : 30px;
+        font-size : 35px;
+    }
+
+    @media only screen and (min-width:768px){
+        & > ul > li > svg {
+            font-size : 40px;
+        }
     }
 `
