@@ -41,11 +41,9 @@ export const PostInsert_ERROR = () => {
 }
 
 /* 가져오기 */
-export const PostGet_REQUEST = data => {
-    console.log("list get === ", data);
+export const PostGet_REQUEST = () => {
     return {
         type: POST_GET_REQUEST,
-        data
     }
 }
 export const PostGet_SUCCESS = () => {

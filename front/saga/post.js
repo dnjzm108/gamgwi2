@@ -8,11 +8,11 @@ function writeAPI(data) {
 }
 
 function* write(action) {
-    console.log("action = ", action);
+    //console.log("action = ", action);
     const result = yield call(writeAPI, action.data)
-    console.log("result = ", result);
+    //console.log("result = ", result);
     const { data } = result
-    console.log("data = ", data);
+    //console.log("data = ", data);
     // 성공하면 data.msg 를 보내서 alert 띄우고 글 view 로 가기
 
     if (data.result === 'OK') {
@@ -35,18 +35,19 @@ function* reqWrite() {
 
 /* 글 목록 가져옴 */
 function* getList() {
-    const result = yield call(axios.get,'http://localhost:3500/board/get_list')
+    const result = yield call(axios.get,'http://localhost:3500/board/list')
+    console.log('get 요청 result ====',result);
     const { data } = result
-    console.log(data);
-    // if (data.result === 'OK') {
-    //     yield put({
-    //         type: 'POST_GET_SUCCESS',
-    //     })
-    // } else {
-    //     yield put({
-    //         type: 'POST_GET_ERROR',
-    //     })
-    // }
+    console.log("get data =======",data);
+    if (data.result === 'OK') {
+        yield put({
+            type: 'POST_GET_SUCCESS',
+        })
+    } else {
+        yield put({
+            type: 'POST_GET_ERROR',
+        })
+    }
 }
 
 function* reqGetList() {
