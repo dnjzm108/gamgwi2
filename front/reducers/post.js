@@ -19,6 +19,8 @@ const POST_DELETE_REQUEST = "POST_DELETE_REQUEST"
 const POST_DELETE_SUCCESS = "POST_DELETE_SUCCESS"
 const POST_DELETE_ERROR = "POST_DELETE_ERROR"
 
+const GET_LIKES_SUCCESS = "GET_LIKES_SUCCESS"
+
 /* 입력 */
 export const PostInsert_REQUEST = data => {
     console.log("insert === ", data);
@@ -59,6 +61,8 @@ export const PostGet_ERROR = () => {
         type: POST_GET_ERROR,
     }
 }
+
+
 
 /* 수정 
 export const PostModify_REQUEST = data => {

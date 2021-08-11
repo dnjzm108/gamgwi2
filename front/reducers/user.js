@@ -9,7 +9,8 @@ const USER_LOGIN_ERROR = "USER_LOGIN_ERROR"
 // const USER_LOGOUT = "USER_LOGOUT"
 
 const USER_JOIN_REQUEST = "USER_JOIN_REQUEST"
-
+const USER_JOIN_SUCCESS = "USER_JOIN_SUCCESS"
+const USER_JOIN_ERROR = "USER_JOIN_ERROR"
 export const UserLogin_REQUEST = data => {
     console.log("reduser+++++++", data);
     return {

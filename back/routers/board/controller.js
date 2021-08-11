@@ -33,13 +33,11 @@ let write = async (req,res) =>{
 let get_list = async (req,res) =>{
     let result = {};
     try {
-<<<<<<< HEAD
+
         //let list = await Board.findAll({where:{watch:1,category:'글귀'},attributes:['title','likeCount','nickName','content']})
-        let list = await Board.findAll({})
-=======
-        let list = await Board.findAll({where:{watch:1,category:'글귀'},attributes:['title','likeIdx','nickName','content','date','hit']})
         //let list = await Board.findAll({})
->>>>>>> 2ab197f1f56a805dad5095c8e81d871d112cead6
+        let list = await Board.findAll({where:{watch:1,category:'글귀'},attributes:['title','likeIdx','nickName','content','date','hit','id']})
+        //let list = await Board.findAll({})
         result = {
             list,
             result : 'OK',
@@ -87,7 +85,7 @@ let get_list = async (req,res) =>{
 }
 let get_likes = async(req,res) => {
     let result ={}
-    //await Like.create({likeBoardIdx:1,likeCount:0,likeStatus:1})
+    await Like.create({likeBoardIdx:1,likeCount:0,likeStatus:1})
     //let list = await Board.findAll({where:{like:1,category:'글귀'},attributes:['title','like','nickName','content']})
     let list = await Board.findAll({
         include:[{
@@ -100,7 +98,8 @@ let get_likes = async(req,res) => {
         result : 'OK',
         msg : '좋아요 가져오기 성공'
     }
-    res.json(list)
+    console.log(list)
+    res.json(result)
 }
 let get_write = (req,res) => {
     res.send('get_write')
@@ -137,25 +136,7 @@ let modify_succece = async (req,res)=>{
 let post_list = async(req,res) => {
     let {search,searchedValue} = req.body
     let list
-<<<<<<< HEAD
-    try{
-        switch(search){
-            case 'writer':
-                list = await Board.findAll({where:{nickName:searchedValue},attributes:['title','likeCount','nickName','content']})
-                console.log(search,searchedValue,'=====================================')
-                console.log(list)
-                return res.json(list)
-            case 'content':
-                list = await Board.findAll({where:{content:searchedValue},attributes:['title','likeCount','nickName','content']})
-                // 내용의 일부 입력시 해당되는 data를 가져오도록 수정필요============================
-                return res.json(list)
-            case 'title':
-                list = await Board.findAll({where:{title:searchedValue},attributes:['title','likeCount','nickName','content']})
-                return res.json(list)
-        }
-    }catch(err){
-        console.log('해당 정보가 존재하지 않습니다.')
-=======
+
     switch(search){
         case 'writer':
             list = await Board.findAll({where:{
@@ -175,7 +156,6 @@ let post_list = async(req,res) => {
                     [Op.like]:"%"+searchedValue+"%"
             }},attributes:['title','likeIdx','nickName','content']})
             return res.json(list)
->>>>>>> 2ab197f1f56a805dad5095c8e81d871d112cead6
     }
     
 }
