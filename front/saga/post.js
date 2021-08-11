@@ -42,7 +42,7 @@ function* getList() {
     if (data.result === 'OK') {
         yield put({
             type: 'POST_GET_SUCCESS',
-            data : data.list
+            list : data.list
         })
     } else {
         yield put({
