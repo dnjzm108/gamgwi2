@@ -24,7 +24,7 @@ let write = async (req,res) =>{
     } catch (error) {
         result = {
             result: 'Fail',
-            msg: '글 작성 실패'
+            msg: '글 작성 실패..'
         }
     }
     res.json(result)
