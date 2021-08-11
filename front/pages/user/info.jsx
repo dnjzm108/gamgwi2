@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import {useMemo} from 'react'
 import WebLayout from "../../component/layout/webLayout"
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Styled from 'styled-components';
@@ -27,7 +28,8 @@ const AccountCircleWrap = Styled.div`
 
 `
 
-const AccountCircle = {
+const AccountCircle = useMemo({
     'width': '10vw',
     'height': 'auto',
-}
+},[])
+

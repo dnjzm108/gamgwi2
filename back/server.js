@@ -11,7 +11,7 @@ app.use(bodyParser.json())
 app.use(cors())
 app.use(cookieParser())
 
-sequelize.sync({force:true})
+sequelize.sync({force:false})
 .then(()=>{
     console.log('db success')
 })
