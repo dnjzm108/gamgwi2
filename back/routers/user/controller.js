@@ -19,8 +19,9 @@ let login_success = async(req,res) =>{
     let result = await User.findOne({
         where: { userid, userpw }
     });
-
-    res.cookie('AccessToken', ctoken, { httpOnly: true, secure: true, })
+    let test = {result,ctoken}
+    res.json(test)
+    //res.cookie('AccessToken', ctoken, { httpOnly: true, secure: true, })
     console.log(req.cookies);
 }
 

@@ -4,6 +4,7 @@ import Logo from "../component/common/Logo"
 import BasicLayout from '../component/layout/BasicLayout'
 
 const Index = () => {
+
     return (
         <>
             <Head>

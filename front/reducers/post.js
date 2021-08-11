@@ -16,7 +16,7 @@ const POST_DELETE_ERROR = "POST_DELETE_ERROR"
 
 /* 입력 */
 export const PostInsert_REQUEST = data => {
-    console.log("insert === ",data);
+    // console.log("insert === ",data);
     return{
         type : POST_INSERT_REQUEST,      
         data,                          
@@ -75,16 +75,20 @@ export const PostDelete_ERROR = () => {
 const reducer = (state = initalState, action) => {
     switch (action.type) {
         case POST_INSERT_REQUEST:
+            console.log('reducer 작동함')
             return{
                 ...state,
+                lodding:true,
             }
         case POST_INSERT_SUCCESS:
             return{
                 ...state,
+                loadding:false,
             }
         case POST_INSERT_ERROR:
             return{
                 ...state,
+                loadding:false,
             }
         default:
             return state

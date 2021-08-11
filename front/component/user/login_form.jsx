@@ -3,7 +3,6 @@ import Router from 'next/router'
 import useInput from '../../hooks/useInput'
 import {useDispatch,useSelector} from 'react-redux'
 import { UserLogin_REQUEST } from "../../reducers/user"
-import {useEffect} from "react"
 
 const Login_form = () =>{
   const dispatch = useDispatch();
