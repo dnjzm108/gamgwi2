@@ -29,10 +29,10 @@ let join_success = async(req,res) =>{
     let userid = req.body.userid
     let userpw = req.body.userpw
     console.log(userid,userpw);
-    await User.create({
+   let result = await User.create({
         userid,userpw
     })
-    res.send('join')
+    res.json(result)
 }
 
 let join = (req,res) =>{

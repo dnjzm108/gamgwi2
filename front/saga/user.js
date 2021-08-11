@@ -8,14 +8,29 @@ function loginAPI(data){
 
 function* login(action){
     console.log(action);
-    const result = yield call(loginAPI,action.data)
+    let result = yield call(loginAPI,action.data)
     console.log("++++++++++++result",result);
-    const {data} = result
+    let {data} = result
     console.log(data);
+    
+}
+
+function joinAPI(data){
+    console.log(data);
+    return axios.post('http://localhost:3500/user/join',data)
+}
+function* join(action){
+    console.log(action);
+    let result = yield call(joinAPI,action.data)
+    console.log("++++++++++++result",result);
+    let {data} = result
+    console.log(data);
+
 }
 
 function* watchUser(){
     yield takeLatest('USER_LOGIN_REQUEST',login)
+    yield takeLatest('USER_JOIN_REQUEST',join)
 }
 
 export default function* userSaga(){
