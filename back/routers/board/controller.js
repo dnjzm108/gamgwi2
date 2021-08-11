@@ -1,6 +1,9 @@
-const {Board,User,Comment} = require('../../models')
+const {Board,User,Comment, Like} = require('../../models')
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 
 const path = require('path')
+const { create } = require('../../models/weather')
 
 let view_reply = async (req,res) =>{
     //let {url} = req.query(
@@ -30,8 +33,8 @@ let write = async (req,res) =>{
 let get_list = async (req,res) =>{
     let result = {};
     try {
-        //let list = await Board.findAll({where:{watch:1,category:'글귀'},attributes:['title','like','nickName','content']})
-        let list = await Board.findAll({})
+        let list = await Board.findAll({where:{watch:1,category:'글귀'},attributes:['title','likeIdx','nickName','content','date','hit']})
+        //let list = await Board.findAll({})
         result = {
             list,
             result : 'OK',
@@ -78,7 +81,14 @@ let get_list = async (req,res) =>{
     // } 
 }
 let get_likes = async(req,res) => {
-    let list = await Board.findAll({where:{like:1,category:'글귀'},attributes:['title','like','nickName','content']})
+    await Like.create({likeBoardIdx:1,likeCount:0,likeStatus:1})
+    //let list = await Board.findAll({where:{like:1,category:'글귀'},attributes:['title','like','nickName','content']})
+    let list = await Board.findAll({
+        include:[{
+            model:Like,
+            where:{id:Sequelize.col('likeBoardIdx')}
+        }]
+    })
     res.json(list)
 }
 let get_write = (req,res) => {
@@ -118,15 +128,22 @@ let post_list = async(req,res) => {
     let list
     switch(search){
         case 'writer':
-            list = await Board.findAll({where:{nickName:searchedValue},attributes:['title','like','nickName','content']})
-            console.log(search,searchedValue,'=====================================')
+            list = await Board.findAll({where:{
+                nickName:{
+                    [Op.like]:"%"+searchedValue+"%"
+            }},attributes:['title','likeIdx','nickName','content']})
             return res.json(list)
         case 'content':
-            list = await Board.findAll({where:{content:searchedValue},attributes:['title','like','nickName','content']})
-            // 내용의 일부 입력시 해당되는 data를 가져오도록 수정필요============================
+            list = await Board.findAll({where:{
+                content:{
+                    [Op.like]:"%"+searchedValue+"%"
+            }},attributes:['title','likeIdx','nickName','content']})
             return res.json(list)
         case 'title':
-            list = await Board.findAll({where:{title:searchedValue},attributes:['title','like','nickName','content']})
+            list = await Board.findAll({where:{
+                title:{
+                    [Op.like]:"%"+searchedValue+"%"
+            }},attributes:['title','likeIdx','nickName','content']})
             return res.json(list)
     }
 }
