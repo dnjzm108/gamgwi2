@@ -3,19 +3,21 @@ import { useRouter } from 'next/router'
 import PostList from '../../component/list/PostList'
 import WebLayout from "../../component/layout/webLayout"
 import SearchBar from '../../component/common/SearchBar'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { PostGet_REQUEST } from '../../reducers/post'
 import { useEffect } from 'react'
-
-const data = [
-    
-]
 
 const List = () => {
     const dispatch = useDispatch()
     useEffect(()=>{
         dispatch(PostGet_REQUEST())
     },[])
+
+    // list 값 가져오기
+    const data = useSelector(state => state.post.data)
+    useEffect(()=>{
+
+    },[data])
 
     const router = useRouter()
     const { post } = router.query
@@ -24,8 +26,8 @@ const List = () => {
         return(
             <>
                 <tr key={v.id}>
-                    <td>{v.subject}</td>
-                    <td>{v.writer}</td>
+                    <td>{v.title}</td>
+                    <td>{v.nickName}</td>
                     <td>{v.hit}</td>
                     <td>{v.date}</td>
                 </tr>
