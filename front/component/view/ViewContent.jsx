@@ -3,12 +3,13 @@ import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded'
 import CreateRoundedIcon from '@material-ui/icons/CreateRounded'
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded'
 
-const ViewContent = () => {
+const ViewContent = (props) => {
     return (
         <>
             <ViewContentWrap>
                <TitleWrap>
-                   title
+                   title <br />
+                   {props.post} 번째 글
                </TitleWrap>
                <DateWrap>
                    date and time

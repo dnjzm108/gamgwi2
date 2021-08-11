@@ -118,11 +118,13 @@ const ButtonBox = Styled.div`
     & > a
     {
         width: 70px;
-        height: 29px;
+        height: 32px;
         background: black;
         border: none;
         color: white;
         border-radius: 12px;
+        padding-top: 3px;
+        box-sizing: border-box;
     }
     & > a{
         display : inline-block;
@@ -151,8 +153,6 @@ const ButtonBox = Styled.div`
             height: 40px;
             margin-left: 10px;
             line-height: 20px;
-            padding-top: 3px;
-            box-sizing: border-box;
         }
 
         & > button > svg {
