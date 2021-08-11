@@ -41,16 +41,15 @@ export const PostInsert_ERROR = () => {
 }
 
 /* 가져오기 */
-export const PostGet_REQUEST = data => {
-    console.log("list get === ", data);
+export const PostGet_REQUEST = () => {
     return {
         type: POST_GET_REQUEST,
-        data
     }
 }
-export const PostGet_SUCCESS = () => {
+export const PostGet_SUCCESS = (list) => {
     return {
         type: POST_GET_SUCCESS,
+        list
     }
 }
 export const PostGet_ERROR = () => {
@@ -132,8 +131,10 @@ const reducer = (state = initalState, action) => {
             }
         case POST_GET_SUCCESS:
             console.log('get 성공');
+            console.log('action =======',action);
             return {
                 ...state,
+                list: action.list,
                 loading: false,
             }
         case POST_GET_ERROR:
