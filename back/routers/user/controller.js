@@ -20,21 +20,38 @@ let login_success = async(req,res) =>{
         where: { userid, userpw }
     });
     let result = {}
-    try{
-        result = {
-            result : 'OK',
-            msg : '글 작성 성공'
-        }
-        let test = {login_info,ctoken,result}
-    res.json(test)
 
-    }catch{
+    if(login_info !== undefined){
         result = {
-            result: 'Fail',
-            msg: '글 작성 실패'
-        }
-        res.json(result)
+                    result : 'OK',
+                    msg : '글 작성 성공'
+                }
+                let test = {login_info,ctoken,result}
+            res.json(test)
+    }else{
+        result = {
+                    result: 'Fail',
+                    msg: '글 작성 실패'
+                }
+                let test ={result}
+                res.json(test)
     }
+
+    // try{
+    //     result = {
+    //         result : 'OK',
+    //         msg : '글 작성 성공'
+    //     }
+    //     let test = {login_info,ctoken,result}
+    // res.json(test)
+
+    // }catch{
+    //     result = {
+    //         result: 'Fail',
+    //         msg: '글 작성 실패'
+    //     }
+    //     res.json(result)
+    // }
     
     //res.cookie('AccessToken', ctoken, { httpOnly: true, secure: true, })
     console.log(req.cookies);
