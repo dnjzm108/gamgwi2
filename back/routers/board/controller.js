@@ -81,7 +81,8 @@ let get_list = async (req,res) =>{
     // } 
 }
 let get_likes = async(req,res) => {
-    await Like.create({likeBoardIdx:1,likeCount:0,likeStatus:1})
+    let result ={}
+    //await Like.create({likeBoardIdx:1,likeCount:0,likeStatus:1})
     //let list = await Board.findAll({where:{like:1,category:'글귀'},attributes:['title','like','nickName','content']})
     let list = await Board.findAll({
         include:[{
@@ -89,6 +90,11 @@ let get_likes = async(req,res) => {
             where:{id:Sequelize.col('likeBoardIdx')}
         }]
     })
+    result = {
+        list,
+        result : 'OK',
+        msg : '좋아요 가져오기 성공'
+    }
     res.json(list)
 }
 let get_write = (req,res) => {
