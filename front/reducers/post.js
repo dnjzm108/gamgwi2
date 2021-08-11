@@ -46,11 +46,10 @@ export const PostGet_REQUEST = () => {
         type: POST_GET_REQUEST,
     }
 }
-export const PostGet_SUCCESS = (data) => {
-    console.log("data =======$$$$$ ",data);
+export const PostGet_SUCCESS = (list) => {
     return {
         type: POST_GET_SUCCESS,
-        data
+        list
     }
 }
 export const PostGet_ERROR = () => {
@@ -132,10 +131,10 @@ const reducer = (state = initalState, action) => {
             }
         case POST_GET_SUCCESS:
             console.log('get 성공');
-            console.log('action =======',action.data);
+            console.log('action =======',action);
             return {
                 ...state,
-                data: action.data,
+                list: action.list,
                 loading: false,
             }
         case POST_GET_ERROR:

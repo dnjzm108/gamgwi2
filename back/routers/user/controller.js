@@ -16,11 +16,27 @@ let login_success = async(req,res) =>{
     console.log(userid,userpw);
     let hash = chash(userpw);
     let ctoken = token(userpw,userid);
-    let result = await User.findOne({
+    let login_info = await User.findOne({
         where: { userid, userpw }
     });
+    let result = {}
+    try{
+        result = {
+            result : 'OK',
+            msg : '글 작성 성공'
+        }
+        let test = {login_info,ctoken,result}
+    res.json(test)
 
-    res.cookie('AccessToken', ctoken, { httpOnly: true, secure: true, })
+    }catch{
+        result = {
+            result: 'Fail',
+            msg: '글 작성 실패'
+        }
+        res.json(result)
+    }
+    
+    //res.cookie('AccessToken', ctoken, { httpOnly: true, secure: true, })
     console.log(req.cookies);
 }
 
@@ -28,10 +44,10 @@ let join_success = async(req,res) =>{
     let userid = req.body.userid
     let userpw = req.body.userpw
     console.log(userid,userpw);
-    await User.create({
+   let result = await User.create({
         userid,userpw
     })
-    res.send('join')
+    res.json(result)
 }
 
 let join = (req,res) =>{

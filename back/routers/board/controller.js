@@ -11,9 +11,6 @@ let view_reply = async (req,res) =>{
 
 let write = async (req,res) =>{
     const {todayWeather, writeTitle, writeContent} = req.body                 // 이걸로 db에 insert 하면 됩니다.
-    console.log("req.body ==== ",req.body);
-    //await Board.create({title:writeTitle,nickName:'al',watch:1,report:0,content:writeContent,category:'글귀'})
-    
     let result = {};
     try {
         await Board.create({title:writeTitle,nickName:'al',watch:1,report:0,content:writeContent,category:'글귀'})
@@ -24,20 +21,17 @@ let write = async (req,res) =>{
     } catch (error) {
         result = {
             result: 'Fail',
-            msg: '글 작성 실패'
+            msg: '글 작성 실패..'
         }
     }
     res.json(result)
 }
 
 let get_list = async (req,res) =>{
-    //let list = await Board.findAll({where:{watch:1,category:'글귀'},attributes:['title','like','nickName','content']})
-    //res.send(list)
     let result = {};
     try {
         //let list = await Board.findAll({where:{watch:1,category:'글귀'},attributes:['title','likeCount','nickName','content']})
         let list = await Board.findAll({})
-        console.log("db list 조회 ======== ",list);
         result = {
             list,
             result : 'OK',

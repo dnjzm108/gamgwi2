@@ -9,21 +9,23 @@ import { useEffect } from 'react'
 
 const List = () => {
     const dispatch = useDispatch()
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(PostGet_REQUEST())
-    },[])
+    }, [])
 
     // list 값 가져오기
-    const data = useSelector(state => state.post.data)
-    useEffect(()=>{
+    const data = useSelector(state => state.post.list)
+    console.log("data ===========",data);
+    useEffect(() => {
 
-    },[data])
+    }, [data])
 
     const router = useRouter()
     const { post } = router.query
 
-    const list = data.map((v)=>{
-        return(
+    
+    const list = data.map((v) => {
+        return (
             <>
                 <tr key={v.id}>
                     <td>{v.title}</td>
@@ -34,13 +36,15 @@ const List = () => {
             </>
         )
     })
+
+
     return (
         <>
             <Head>
                 <title>Gamgwi | 글 목록</title>
             </Head>
             <WebLayout>
-                <PostList list={list}/>
+                <PostList list={list} />
                 <SearchBar />
             </WebLayout>
         </>
