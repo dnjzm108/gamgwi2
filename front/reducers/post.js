@@ -1,11 +1,15 @@
 const initalState = {
-    loading : false,
+    loading: false,
 }
 
 const POST_INSERT_REQUEST = "POST_INSERT_REQUEST"
 const POST_INSERT_SUCCESS = "POST_INSERT_SUCCESS"
 const POST_INSERT_ERROR = "POST_INSERT_ERROR"
 const POST_INSERT_RESET = "POST_INSERT_RESET"
+
+const POST_GET_REQUEST = "POST_GET_REQUEST"
+const POST_GET_SUCCESS = "POST_GET_SUCCESS"
+const POST_GET_ERROR = "POST_GET_ERROR"
 
 const POST_MODIFY_REQUEST = "POST_MODIFY_REQUEST"
 const POST_MODIFY_SUCCESS = "POST_MODIFY_SUCCESS"
@@ -17,22 +21,41 @@ const POST_DELETE_ERROR = "POST_DELETE_ERROR"
 
 /* 입력 */
 export const PostInsert_REQUEST = data => {
-    // console.log("insert === ",data);
-    return{
-        type : POST_INSERT_REQUEST,  
-        data                           
+    console.log("insert === ", data);
+    return {
+        type: POST_INSERT_REQUEST,
+        data
     }
 }
 export const PostInsert_SUCCESS = () => {
-    return{
-        type : POST_INSERT_SUCCESS,
+    return {
+        type: POST_INSERT_SUCCESS,
         data
     }
 }
 export const PostInsert_ERROR = () => {
-    return{
-        type : POST_INSERT_ERROR,
+    return {
+        type: POST_INSERT_ERROR,
         data
+    }
+}
+
+/* 가져오기 */
+export const PostGet_REQUEST = data => {
+    console.log("list get === ", data);
+    return {
+        type: POST_GET_REQUEST,
+        data
+    }
+}
+export const PostGet_SUCCESS = () => {
+    return {
+        type: POST_GET_SUCCESS,
+    }
+}
+export const PostGet_ERROR = () => {
+    return {
+        type: POST_GET_ERROR,
     }
 }
 
@@ -78,30 +101,46 @@ export const PostDelete_ERROR = () => {
 const reducer = (state = initalState, action) => {
     switch (action.type) {
         case POST_INSERT_REQUEST:
-            console.log('reducer 작동함')
-            return{
+            return {
                 ...state,
-                loading : true,
+                loading: true,
             }
         case POST_INSERT_SUCCESS:
             console.log('insert 성공');
-            return{
+            return {
                 ...state,
-                data:action.data,
-                loading : false,
+                data: action.data,
+                loading: false,
             }
         case POST_INSERT_ERROR:
             console.log('insert 실패');
-            return{
+            return {
                 ...state,
-                data:action.data,
-                loading : false,
+                data: action.data,
+                loading: false,
             }
         case POST_INSERT_RESET:
-            return{
+            return {
                 ...state,
-                data:undefined,
-                loading:false,
+                data: undefined,
+                loading: false,
+            }
+        case POST_GET_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case POST_GET_SUCCESS:
+            console.log('get 성공');
+            return {
+                ...state,
+                loading: false,
+            }
+        case POST_GET_ERROR:
+            console.log('get 실패');
+            return {
+                ...state,
+                loading: false,
             }
         default:
             return state

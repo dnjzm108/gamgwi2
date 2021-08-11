@@ -1,6 +1,7 @@
 import { all, fork, put, takeLatest, call } from 'redux-saga/effects'
 import axios from 'axios'
 
+/* 글 작성 */
 function writeAPI(data) {
     console.log("write api = ", data);
     return axios.post('http://localhost:3500/board/write', data)   //6번
@@ -32,8 +33,30 @@ function* reqWrite() {
     yield takeLatest('POST_INSERT_REQUEST', write)
 }
 
+/* 글 목록 가져옴 */
+function* getList() {
+    const result = yield call(axios.get,'http://localhost:3500/board/list')
+    const { data } = result
+    console.log(data);
+    // if (data.result === 'OK') {
+    //     yield put({
+    //         type: 'POST_GET_SUCCESS',
+    //     })
+    // } else {
+    //     yield put({
+    //         type: 'POST_GET_ERROR',
+    //     })
+    // }
+}
+
+function* reqGetList() {
+    yield takeLatest('POST_GET_REQUEST', getList)
+}
+
+
 export default function* writeSaga() {
     yield all([
-        fork(reqWrite)
+        fork(reqWrite),
+        fork(reqGetList)
     ])
 }

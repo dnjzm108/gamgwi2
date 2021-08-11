@@ -7,11 +7,23 @@ function loginAPI(data){
 }
 
 function* login(action){
-    console.log(action);
+    //console.log(action);
     let result = yield call(loginAPI,action.data)
-    console.log("++++++++++++result",result);
+    //console.log("++++++++++++result",result);
     let {data} = result
-    console.log(data);
+    console.log('saga_data++++++++++',data);
+
+    if (data.result === 'OK') {
+        yield put({
+            type: 'USER_LOGIN_SUCCESS',
+            data: data.msg
+        })
+    } else {
+        yield put({
+            type: 'USER_LOGIN_ERROR',
+            data: data.msg
+        })
+    }
     
 }
 

@@ -1,12 +1,12 @@
 import Styled from 'styled-components'
 import useInput from '../../hooks/useInput'
-import DoneOutlineRoundedIcon from '@material-ui/icons/DoneOutlineRounded';
-import ClearRoundedIcon from '@material-ui/icons/ClearRounded';
-import DeleteForeverRoundedIcon from '@material-ui/icons/DeleteForeverRounded';
+import DoneOutlineRoundedIcon from '@material-ui/icons/DoneOutlineRounded'
+import DeleteForeverRoundedIcon from '@material-ui/icons/DeleteForeverRounded'
 import { useDispatch, useSelector } from 'react-redux'
 import { PostInsert_REQUEST } from '../../reducers/post'
 import { useEffect, useState } from 'react'
 import TodayWeather from './TodayWeather'
+import Link from 'next/link'
 
 
 const TextArea = () => {
@@ -51,9 +51,9 @@ const TextArea = () => {
                     </div>
 
                     <ButtonBox>
-                        <button>
-                            <DeleteForeverRoundedIcon/>
-                        </button>
+                        <Link href="/board/list">
+                           <a><DeleteForeverRoundedIcon/></a>
+                        </Link>
                         <button type='submit'>
                             <DoneOutlineRoundedIcon/>
                         </button>
@@ -79,6 +79,7 @@ const InputTitle = Styled.input`
     border : 1px solid lightgray;
     border-radius: 5px;
     font-size : 20px;
+    font-family: 'IM_Hyemin-Bold';
     
     :focus {
         outline:none;
@@ -95,6 +96,7 @@ const InputContent = Styled.textarea`
     border : 1px solid lightgray;
     border-radius: 5px;
     font-size : 20px;
+    font-family: 'IM_Hyemin-Bold';
 
     :focus {
         outline:none;
@@ -111,25 +113,31 @@ const ButtonBox = Styled.div`
     padding-top: 20px;
     box-sizing: border-box;
 
-    & > button{
-        width: 75px;
-        height: 36px;
+    & > button,
+    & > a
+    {
+        width: 70px;
+        height: 32px;
         background: black;
         border: none;
         color: white;
         border-radius: 12px;
-        line-height: 10px;
-
+        padding-top: 3px;
+        box-sizing: border-box;
     }
-    & > button:nth-child(1){
-
+    & > a{
+        display : inline-block;
+        text-align: center;
     }
 
-    & > button:nth-child(2){
+    & > button{
         margin-left : 10px;
     }
 
     & > button > svg {
+        font-size : 25px;
+    }
+    & > a > svg {
         font-size : 25px;
     }
 
@@ -138,20 +146,19 @@ const ButtonBox = Styled.div`
         padding: 100px 0 0 0;
 
 
-        & > button{
+        & > button,
+        & > a{
             width: 100px;
-            height: 50px;
-        }
-        & > button:nth-child(1){
-
-        }
-
-        & > button:nth-child(2){
-            margin-left : 10px;
+            height: 40px;
+            margin-left: 10px;
+            line-height: 20px;
         }
 
         & > button > svg {
             font-size: 33px;
+        }
+        & > a > svg {
+            font-size : 33px;
         }
     }
 

@@ -16,11 +16,26 @@ let login_success = async(req,res) =>{
     console.log(userid,userpw);
     let hash = chash(userpw);
     let ctoken = token(userpw,userid);
-    let result = await User.findOne({
+    let login_info = await User.findOne({
         where: { userid, userpw }
     });
-    let test = {result,ctoken}
+    let result = {}
+    try{
+        result = {
+            result : 'OK',
+            msg : '글 작성 성공'
+        }
+        let test = {login_info,ctoken,result}
     res.json(test)
+
+    }catch{
+        result = {
+            result: 'Fail',
+            msg: '글 작성 실패'
+        }
+        res.json(result)
+    }
+    
     //res.cookie('AccessToken', ctoken, { httpOnly: true, secure: true, })
     console.log(req.cookies);
 }
