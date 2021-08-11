@@ -31,8 +31,23 @@ let write = async (req,res) =>{
 }
 
 let get_list = async (req,res) =>{
-    let list = await Board.findAll({where:{watch:1,category:'글귀'},attributes:['title','like','nickName','content']})
-    res.json(list)
+    //let list = await Board.findAll({where:{watch:1,category:'글귀'},attributes:['title','like','nickName','content']})
+    
+    let result = {};
+    try {
+        let list = await Board.findAll({where:{watch:1,category:'글귀'},attributes:['title','like','nickName','content']})
+        result = {
+            list,
+            result : 'OK',
+            msg : '리스트 가져오기 성공'
+        }
+    } catch (error) {
+        result = {
+            result: 'Fail',
+            msg: '리스트 가져오기 실패'
+        }
+    }
+    res.json(result)
     // switch (url){
     //     case undefined :
     //         list = await Board.findAll({where:{watch:1,category:'글귀'},attributes:['title','like','nickName','content']})

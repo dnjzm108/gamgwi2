@@ -8,6 +8,7 @@ const PostContent = (props)=>{
                     <tr>
                         <th>TITLE</th>
                         <th>WRITER</th>
+                        <th>HIT</th>
                         <th>DATE</th>
                     </tr>
                     {props.list}
@@ -63,40 +64,64 @@ const ListTable = Styled.table`
     & > tr:nth-child(1){
         width: 100%;
         height : auto;
-        font-size : 20px;
+        font-size : 17px;
         background : #e0a6a6;
     }
     & > tr:nth-child(1) > th:nth-child(1) {
-        width: 45%;
+        width: 50%;
     }
     & > tr:nth-child(1) > th:nth-child(2) {
-        width: 20%;
+        width: 15%;
     }
     & > tr:nth-child(1) > th:nth-child(3){
-        width: 35%;
-        
+        width: 5%;
+    }
+    & > tr:nth-child(1) > th:nth-child(4){
+        width: 30%;
     }
     & > tr {
         height: 70px;
         text-align : center;
         font-size : 16px;
     }
-    & > tr > td:nth-child(2),
+    & > tr > td:nth-child(1){
+        cursor : pointer;
+    }
+    & > tr > td:nth-child(2){
+        font-size : 14px;
+        cursor : pointer;
+    }
     & > tr > td:nth-child(3){
         font-size : 14px;
+    }
+    & > tr > td:nth-child(4){
+        font-size : 12px;
     }
 
     @media only screen and (min-width:768px){
 
         & > tr:nth-child(1){
-            font-size : 30px;
+            font-size : 35px;
         }
         & > tr {
             height: 140px;
             font-size : 25px;
         }
+        & > tr:nth-child(1) > th:nth-child(1) {
+            width: 60%;
+        }
+        & > tr:nth-child(1) > th:nth-child(2) {
+            width: 15%;
+        }
+        & > tr:nth-child(1) > th:nth-child(3){
+            width: 10%;
+        }
+        & > tr:nth-child(1) > th:nth-child(4){
+            width : 15%;
+        }
         & > tr > td:nth-child(2),
-        & > tr > td:nth-child(3){
+        & > tr > td:nth-child(3),
+        & > tr > td:nth-child(4){
             font-size : 20px;
         }
     }

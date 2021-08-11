@@ -9,7 +9,7 @@ import TextArea from '../../component/write/TextArea';
 const Write = () => {
     const dispatch = useDispatch()
     const data = useSelector(state => state.post.data)
-    console.log(data,': 왜나오니진짜..')
+
     useEffect(() => {
         if (data !== undefined) {
             alert(data)

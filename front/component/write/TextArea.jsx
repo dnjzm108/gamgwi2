@@ -1,8 +1,7 @@
 import Styled from 'styled-components'
 import useInput from '../../hooks/useInput'
-import DoneOutlineRoundedIcon from '@material-ui/icons/DoneOutlineRounded';
-import ClearRoundedIcon from '@material-ui/icons/ClearRounded';
-import DeleteForeverRoundedIcon from '@material-ui/icons/DeleteForeverRounded';
+import DoneOutlineRoundedIcon from '@material-ui/icons/DoneOutlineRounded'
+import DeleteForeverRoundedIcon from '@material-ui/icons/DeleteForeverRounded'
 import { useDispatch, useSelector } from 'react-redux'
 import { PostInsert_REQUEST } from '../../reducers/post'
 import { useEffect, useState } from 'react'

@@ -43,10 +43,16 @@ const SearchBarWrap = Styled.div`
         font-size: 12px;
         font-family: 'IM_Hyemin-Bold';
     }
+    & > form > select:focus{
+        outline : none;
+    }
     & > form > input{
         width : 50vw;
         height : 4vh;
         margin-left : 5px; 
+    }
+    & > form > input:focus{
+        outline : none;
     }
     & > form > button{
         width: 60px;
@@ -56,7 +62,6 @@ const SearchBarWrap = Styled.div`
         font-weight: bold;
         font-size: 13px;
         font-family: 'IM_Hyemin-Bold';
-
     }
 
     @media only screen and (min-width:768px){
