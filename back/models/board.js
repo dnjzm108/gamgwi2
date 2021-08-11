@@ -32,11 +32,11 @@ module.exports = class Board extends Sequelize.Model{
                 allowNull:false,
                 defaultValue:0
             },
-            likeCount:{
+            likeIdx:{
                 type:Sequelize.INTEGER,
                 allowNull:false,
                 defaultValue:0,
-                comment:'좋아요수'
+                comment:'좋아요'
             },
             content:{
                 type:Sequelize.STRING(300),

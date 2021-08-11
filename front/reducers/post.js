@@ -146,6 +146,15 @@ const reducer = (state = initalState, action) => {
                 ...state,
                 loading: false,
             }
+        case GET_LIKES_SUCCESS:
+            console.log('likes 성공')
+            console.log(action,'likes action')
+            console.log(action.list,'action=================likeslist')
+            return{
+                ...state,
+                list:action.list,
+                loading:false
+            }
         default:
             return state
     }
