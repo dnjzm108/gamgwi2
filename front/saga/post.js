@@ -36,9 +36,11 @@ function* reqWrite() {
 /* 글 목록 가져옴 */
 function* getList() {
     const result = yield call(axios.get,'http://localhost:3500/board/list')
-    console.log('get 요청 result ====',result);
+    //console.log('get 요청 result ====',result);
     const { data } = result
-    console.log("get data =======",data);
+    //console.log("get data =======",data);
+    //console.log("get data list =======",data.list);
+
     if (data.result === 'OK') {
         yield put({
             type: 'POST_GET_SUCCESS',
@@ -55,10 +57,29 @@ function* reqGetList() {
     yield takeLatest('POST_GET_REQUEST', getList)
 }
 
+function* getLikes() {
+    const result = yield call(axios.get('http://localhost:3500/board/likes'))
+    const {data} = result
+    if(data.result=='OK'){
+        yield put({
+            type:'GET_LIKES_SUCCESS',
+            list:data.list
+        })
+    }else {
+        yield put({
+            type:'GET_LIKES_ERROR'
+        })
+    }
+}
+
+function reqGetLikes(){
+    yield takeLatest('POST_GET_REQUEST',getLikes)
+}
 
 export default function* writeSaga() {
     yield all([
         fork(reqWrite),
-        fork(reqGetList)
+        fork(reqGetList),
+        fork(reqGetLikes)
     ])
 }

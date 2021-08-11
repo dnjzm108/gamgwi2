@@ -42,11 +42,13 @@ export const PostInsert_ERROR = () => {
 
 /* 가져오기 */
 export const PostGet_REQUEST = () => {
+    console.log('postget request');
     return {
         type: POST_GET_REQUEST,
     }
 }
 export const PostGet_SUCCESS = (list) => {
+    console.log('post get list',list);
     return {
         type: POST_GET_SUCCESS,
         list
@@ -132,6 +134,7 @@ const reducer = (state = initalState, action) => {
         case POST_GET_SUCCESS:
             console.log('get 성공');
             console.log('action =======',action);
+            console.log('action.list =======',action.list);
             return {
                 ...state,
                 list: action.list,
@@ -142,6 +145,15 @@ const reducer = (state = initalState, action) => {
             return {
                 ...state,
                 loading: false,
+            }
+        case GET_LIKES_SUCCESS:
+            console.log('likes 성공')
+            console.log(action,'likes action')
+            console.log(action.list,'action=================likeslist')
+            return{
+                ...state,
+                list:action.list,
+                loading:false
             }
         default:
             return state

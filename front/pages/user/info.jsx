@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import {useMemo} from 'react'
 import WebLayout from "../../component/layout/webLayout"
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Styled from 'styled-components';
@@ -12,7 +11,7 @@ const Info = () => {
             </Head>
             <WebLayout>
                 <AccountCircleWrap>
-                    <AccountCircleIcon style={AccountCircle} />
+                    <AccountCircleIcon/>
                 </AccountCircleWrap>
             </WebLayout>
         </>
@@ -26,10 +25,12 @@ const AccountCircleWrap = Styled.div`
     height : auto;
     text-align : center;
 
+    & > svg {
+        width : 10vw;
+        height : auto;
+    }
+
 `
 
-const AccountCircle = useMemo({
-    'width': '10vw',
-    'height': 'auto',
-},[])
+
 

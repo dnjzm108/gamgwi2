@@ -1,5 +1,5 @@
 import axios from "axios";
-import { all, call, takeLatest,fork } from "redux-saga/effects";
+import { all, call, takeLatest,fork,put} from "redux-saga/effects";
 
 function loginAPI(data){
     console.log(data);
@@ -11,9 +11,9 @@ function* login(action){
     let result = yield call(loginAPI,action.data)
     //console.log("++++++++++++result",result);
     let {data} = result
-    console.log('saga_data++++++++++',data);
+    console.log('saga_data++++++++++',data.login_info);
 
-    if (data.result === 'OK') {
+    if (data.login_info !== null) {
         yield put({
             type: 'USER_LOGIN_SUCCESS',
             data: data.msg

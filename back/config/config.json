@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "0000",
+    "password": "midas3356",
     "database": "gamgwi",
     "host": "127.0.0.1",
     "dialect": "mysql"

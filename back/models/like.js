@@ -14,6 +14,12 @@ module.exports = class Like extends Sequelize.Model{
                 defaultValue:0,
                 comment:'좋아요개수'
             },
+            likeStatus:{
+                type:Sequelize.BOOLEAN,
+                allowNull:false,
+                defaultValue:false,
+                comment:'true,1=>하트 false,0=>노하트'
+            }
         },{
             sequelize,
             timestamps:false,

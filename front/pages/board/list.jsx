@@ -15,28 +15,29 @@ const List = () => {
 
     // list 값 가져오기
     const data = useSelector(state => state.post.list)
-    console.log("data ===========",data);
+    console.log("data ===========", data);
     useEffect(() => {
 
     }, [data])
 
-    const router = useRouter()
-    const { post } = router.query
+    let list = []
+    if (data !== undefined) {
+        list = data.map((v) => {
+            return (
+                <>
+                    <tr key={v.id}>
+                        <td>{v.title}</td>
+                        <td>{v.nickName}</td>
+                        <td>{v.hit}</td>
+                        <td>{v.date}</td>
+                    </tr>
+                </>
+            )
+        })
+    }
 
-    
-    const list = data.map((v) => {
-        return (
-            <>
-                <tr key={v.id}>
-                    <td>{v.title}</td>
-                    <td>{v.nickName}</td>
-                    <td>{v.hit}</td>
-                    <td>{v.date}</td>
-                </tr>
-            </>
-        )
-    })
-
+    // const router = useRouter()
+    // const { post } = router.query
 
     return (
         <>

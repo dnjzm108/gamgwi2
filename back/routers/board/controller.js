@@ -1,6 +1,9 @@
-const {Board,User,Comment} = require('../../models')
+const {Board,User,Comment, Like} = require('../../models')
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 
 const path = require('path')
+const { create } = require('../../models/weather')
 
 let view_reply = async (req,res) =>{
     //let {url} = req.query(
@@ -30,8 +33,13 @@ let write = async (req,res) =>{
 let get_list = async (req,res) =>{
     let result = {};
     try {
+<<<<<<< HEAD
         //let list = await Board.findAll({where:{watch:1,category:'글귀'},attributes:['title','likeCount','nickName','content']})
         let list = await Board.findAll({})
+=======
+        let list = await Board.findAll({where:{watch:1,category:'글귀'},attributes:['title','likeIdx','nickName','content','date','hit']})
+        //let list = await Board.findAll({})
+>>>>>>> 2ab197f1f56a805dad5095c8e81d871d112cead6
         result = {
             list,
             result : 'OK',
@@ -78,7 +86,20 @@ let get_list = async (req,res) =>{
     // } 
 }
 let get_likes = async(req,res) => {
-    let list = await Board.findAll({where:{like:1,category:'글귀'},attributes:['title','like','nickName','content']})
+    let result ={}
+    //await Like.create({likeBoardIdx:1,likeCount:0,likeStatus:1})
+    //let list = await Board.findAll({where:{like:1,category:'글귀'},attributes:['title','like','nickName','content']})
+    let list = await Board.findAll({
+        include:[{
+            model:Like,
+            where:{id:Sequelize.col('likeBoardIdx')}
+        }]
+    })
+    result = {
+        list,
+        result : 'OK',
+        msg : '좋아요 가져오기 성공'
+    }
     res.json(list)
 }
 let get_write = (req,res) => {
@@ -116,6 +137,7 @@ let modify_succece = async (req,res)=>{
 let post_list = async(req,res) => {
     let {search,searchedValue} = req.body
     let list
+<<<<<<< HEAD
     try{
         switch(search){
             case 'writer':
@@ -133,6 +155,27 @@ let post_list = async(req,res) => {
         }
     }catch(err){
         console.log('해당 정보가 존재하지 않습니다.')
+=======
+    switch(search){
+        case 'writer':
+            list = await Board.findAll({where:{
+                nickName:{
+                    [Op.like]:"%"+searchedValue+"%"
+            }},attributes:['title','likeIdx','nickName','content']})
+            return res.json(list)
+        case 'content':
+            list = await Board.findAll({where:{
+                content:{
+                    [Op.like]:"%"+searchedValue+"%"
+            }},attributes:['title','likeIdx','nickName','content']})
+            return res.json(list)
+        case 'title':
+            list = await Board.findAll({where:{
+                title:{
+                    [Op.like]:"%"+searchedValue+"%"
+            }},attributes:['title','likeIdx','nickName','content']})
+            return res.json(list)
+>>>>>>> 2ab197f1f56a805dad5095c8e81d871d112cead6
     }
     
 }
