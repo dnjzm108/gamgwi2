@@ -39,6 +39,8 @@ function* getList() {
     console.log('get 요청 result ====',result);
     const { data } = result
     console.log("get data =======",data);
+    console.log("get data list =======",data.list);
+
     if (data.result === 'OK') {
         yield put({
             type: 'POST_GET_SUCCESS',
