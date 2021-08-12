@@ -80,6 +80,10 @@ function* reqGetLikes(){
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> df197e4ea4c2715dfaafc392c1b07f8e4d7406cf
 function postSearch(data){
     console.log(data)
     return axios.post('http://localhost:3500/board/list',{search:data.search,searchedValue:data.searchedValue})
@@ -95,7 +99,11 @@ function* postGetSearch(action){
     }else{
         yield put({
             type:'POST_SEARCH_ERROR'
+<<<<<<< HEAD
 =======
+=======
+
+>>>>>>> df197e4ea4c2715dfaafc392c1b07f8e4d7406cf
 
 /* 글 view 가져옴 */
 function* getView(action) {
@@ -115,32 +123,55 @@ function* getView(action) {
         yield put({
             type: 'POST_VIEW_ERROR',
             msg : data.msg
+<<<<<<< HEAD
 >>>>>>> 642eec80d0f633e345776b59b8456b7c848be73b
+=======
+>>>>>>> df197e4ea4c2715dfaafc392c1b07f8e4d7406cf
         })
     }
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> df197e4ea4c2715dfaafc392c1b07f8e4d7406cf
 function* reqPost() {
     yield takeLatest('POST_INSERT_REQUEST', postGetSearch)
 }
 
 
+<<<<<<< HEAD
 =======
+=======
+
+>>>>>>> df197e4ea4c2715dfaafc392c1b07f8e4d7406cf
 function* reqViewList() {
     yield takeLatest('POST_VIEW_REQUEST', getView)
 }
 
+<<<<<<< HEAD
 >>>>>>> 642eec80d0f633e345776b59b8456b7c848be73b
+=======
+
+>>>>>>> df197e4ea4c2715dfaafc392c1b07f8e4d7406cf
 export default function* writeSaga() {
     yield all([
         fork(reqWrite),
         fork(reqGetList),
         fork(reqGetLikes),
 <<<<<<< HEAD
+<<<<<<< HEAD
         fork(reqPost)
 =======
         fork(reqViewList),
 >>>>>>> 642eec80d0f633e345776b59b8456b7c848be73b
+=======
+
+        fork(reqPost)
+
+        fork(reqViewList),
+
+>>>>>>> df197e4ea4c2715dfaafc392c1b07f8e4d7406cf
     ])
 }
