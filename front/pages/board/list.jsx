@@ -23,13 +23,20 @@ const List = () => {
 
     let list = []
     if (data !== undefined) {
+        const handleClick = (idx) => {
+            //console.log(idx);
 
+            dispatch(PostView_REQUEST(idx))
+
+            //Router.push(`/board/view?idx=${idx}`)
+            Router.push(`/board/view`)
+        }
         
         list = data.map((v) => {
             return (
                 <>
                     <tr key={v.id}>
-                        <td>{v.title}</td>
+                        <td onClick={()=>{handleClick(v.id)}}>{v.title}</td>
                         <td>{v.nickName}</td>
                         <td>{v.hit}</td>
                         <td>{v.date}</td>
