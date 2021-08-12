@@ -180,7 +180,7 @@ function* addLikes(action) {
     // }
 }
 
-function* reqViewList() {
+function* reqAddLikes() {
     yield takeLatest('ADD_LIKES_REQUEST', addLikes)
 }
 
@@ -193,5 +193,6 @@ export default function* writeSaga() {
         fork(reqPost),
         fork(reqViewList),
         fork(reqViewDelete),
+        fork(reqAddLikes),
     ])
 }
