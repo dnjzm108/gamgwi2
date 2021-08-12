@@ -35,6 +35,7 @@ const List = () => {
             Router.push(`/board/view`)
         }
 
+
         list = data.map((v) => {
             return (
                 <>

@@ -12,7 +12,7 @@ const SearchBar = () => {
                 <form method="POST" action="http://localhost:3500/board/list">
                     <select name="search">
                         <option value="none" disabled>==선택==</option>
-                        <option value="writer" selected>작성자</option>
+                        <option value="nickName" selected>작성자</option>
                         <option value="content">내용</option>
                         <option value="title">제목</option>
                     </select>

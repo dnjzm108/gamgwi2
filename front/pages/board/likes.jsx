@@ -4,13 +4,13 @@ import SearchBar from '../../component/common/SearchBar'
 import WebLayout from "../../component/layout/webLayout"
 import PostList from '../../component/list/PostList'
 import { useDispatch,useSelector } from 'react-redux'
-import { GetLikes_SUCCESS } from '../../reducers/post'
+import { GetLikes_REQUEST } from '../../reducers/post'
 
 
 const Likes = () => {
     const dispatch = useDispatch()
     useEffect(()=>{
-        dispatch(GetLikes_SUCCESS())
+        dispatch(GetLikes_REQUEST())
     },[])
 
     const data = useSelector(state=>state.post.list)
