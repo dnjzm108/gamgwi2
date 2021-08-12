@@ -27,6 +27,13 @@ const GET_LIKES_REQUEST = "GET_LIKES_REQUEST"
 const GET_LIKES_SUCCESS = "GET_LIKES_SUCCESS"
 const GET_LIKES_ERROR = "GET_LIKES_ERROR"
 
+const ADD_LIKES_REQUEST = "ADD_LIKES_REQUEST"
+const ADD_LIKES_SUCCESS = "ADD_LIKES_SUCCESS"
+const ADD_LIKES_ERROR = "ADD_LIKES_ERROR"
+
+const POST_SEARCH_REQUEST = "POST_SEARCH_REQUEST"
+const POST_SEARCH_SUCCESS = "POST_SEARCH_SUCCESS"
+const POST_SEARCH_ERROR = "POST_SEARCH_ERROR"
 
 /* 입력 */
 export const PostInsert_REQUEST = data => {
@@ -68,11 +75,67 @@ export const PostGet_ERROR = () => {
         type: POST_GET_ERROR,
     }
 }
-export const GetLikes_SUCCESS = () => {
+
+
+
+//검색 가져오기
+export const PostSearch_REQUEST = (data) => {
     return {
-        type: GET_LIKES_SUCCESS,
+        type: POST_SEARCH_REQUEST,
+        data
     }
 }
+export const PostSearch_SUCCESS = () => {
+    return {
+        type: POST_SEARCH_SUCCESS,
+        data
+    }
+}
+export const PostSearch_ERROR = () => {
+    return {
+        type: POST_SEARCH_ERROR,
+        data
+    }
+}
+
+/* 좋아요 누른 list 가져오기 */
+export const GetLikes_REQUEST = () => {
+    return {
+        type: GET_LIKES_REQUEST
+    }
+}
+export const GetLikes_SUCCESS = (list) => {
+    return {
+        type: GET_LIKES_SUCCESS,
+        list
+    }
+}
+export const GetLikes_ERROR = () => {
+    return {
+        type: GET_LIKES_ERROR
+    }
+}
+
+/* 좋아요 누르기 */
+export const AddLikes_REQUEST = (idx) => {
+    return {
+        type: ADD_LIKES_REQUEST,
+        idx
+    }
+}
+export const AddLikes_SUCCESS = () => {
+
+    return {
+        type: ADD_LIKES_SUCCESS,
+    }
+}
+export const AddLikes_ERROR = () => {
+    return {
+        type: ADD_LIKES_ERROR
+    }
+}
+
+
 
 /* 글 view 보기 */
 export const PostView_REQUEST = (idx) => {
@@ -90,6 +153,7 @@ export const PostView_SUCCESS = () => {
 export const PostView_ERROR = () => {
     return {
         type: POST_VIEW_ERROR,
+
     }
 }
 
@@ -120,9 +184,11 @@ export const PostDelete_REQUEST = (idx) => {
     }
 }
 
-export const PostDelete_SUCCESS = () => {
+export const PostDelete_SUCCESS = (deletedList) => {
+    console.log(deletedList);
     return {
         type: POST_DELETE_SUCCESS,
+        deletedList,
     }
 }
 
@@ -183,6 +249,7 @@ const reducer = (state = initalState, action) => {
                 ...state,
                 loading: false,
             }
+        /* 좋아요 된 List 가져오기 */
         case GET_LIKES_REQUEST:
             return {
                 ...state,
@@ -197,28 +264,27 @@ const reducer = (state = initalState, action) => {
                 list: action.list,
                 loading: false
             }
-        case POST_VIEW_REQUEST:
-            //console.log('view request action========',action);
+
+        /* 좋아요 추가하기 */
+        case ADD_LIKES_REQUEST:
             return {
                 ...state,
-                idx: action.idx,
-                loading: true,
+                loading: true
             }
-        case POST_VIEW_SUCCESS:
-            //console.log('view 성공 action =====', action);
+        case ADD_LIKES_SUCCESS:
             return {
                 ...state,
-                view: action.view,
-                loading: false,
+
+                loading: false
             }
-        case POST_VIEW_ERROR:
-            console.log('view 실패');
+        case ADD_LIKES_ERROR:
             return {
                 ...state,
-                msg: action.msg,
-                loading: false,
+
+                loading: false
             }
 
+        /* 글 보기 */
         case POST_VIEW_REQUEST:
             //console.log('view request action========',action);
             return {
@@ -238,6 +304,29 @@ const reducer = (state = initalState, action) => {
             return {
                 ...state,
                 msg: action.msg,
+                loading: false,
+            }
+        /* 글 삭제 */
+        case POST_DELETE_REQUEST:
+            console.log('DELETE request action========', action);
+            return {
+                ...state,
+                idx: action.idx,
+                loading: true,
+            }
+        case POST_DELETE_SUCCESS:
+            console.log('delete 성공 action =====', action);
+            let { deletedList, msg } = action
+            return {
+                ...state,
+                deleteMsg: msg,
+                deletedList,
+                loading: false,
+            }
+        case POST_DELETE_ERROR:
+            console.log('delete 실패');
+            return {
+                ...state,
                 loading: false,
             }
         default:

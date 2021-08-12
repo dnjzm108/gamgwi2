@@ -104,11 +104,12 @@ let get_list = async (req,res) =>{
 let get_likes = async(req,res) => {
     let result ={}
     await Like.create({likeBoardIdx:1,likeCount:0,likeStatus:1})
+
     //let list = await Board.findAll({where:{like:1,category:'글귀'},attributes:['title','like','nickName','content']})
     let list = await Board.findAll({
         include:[{
             model:Like,
-            where:{id:Sequelize.col('likeBoardIdx')}
+            where:{likeStatus:1}
         }]
     })
     result = {
@@ -119,6 +120,7 @@ let get_likes = async(req,res) => {
     console.log(result)
     res.json(result)
 }
+
 let get_write = (req,res) => {
     res.send('get_write')
 }
@@ -130,11 +132,22 @@ let modify = async (req,res) =>{
 }
 
 let Delete = async(req,res) =>{
-    //let {idx} = req.body or req.query
-    //await Board.destroy({where:{id:idx}})
-    let deletedRes = await Board.findAll({})
-    // "해당 글이 삭제되었습니다." 알림창이 뜬 후에 다시 글리스트를 보여주게끔 -> 알림창 뜬후 다른 페이지 어떻게 렌더링????????????????????????????????? 
-    res.json(deletedRes)
+    let {idx} = req.body
+    try {
+        await Board.destroy({where:{id:idx}})
+        let deletedRes = await Board.findAll({})
+        result = {
+            deletedRes,
+            result : 'OK',
+            msg : '삭제 성공'
+        }
+    } catch (error) {
+        result = {
+            result: 'Fail',
+            msg: '삭제 실패'
+        }
+    }
+    res.json(result)
 }
 
 let write_succece = async (req,res) =>{
@@ -154,27 +167,43 @@ let modify_succece = async (req,res)=>{
 let post_list = async(req,res) => {
     let {search,searchedValue} = req.body
     let list
+    let result = {}
 
-    switch(search){
-        case 'writer':
-            list = await Board.findAll({where:{
-                nickName:{
-                    [Op.like]:"%"+searchedValue+"%"
-            }},attributes:['title','likeIdx','nickName','content','id']})
-            return res.json(list)
-        case 'content':
-            list = await Board.findAll({where:{
-                content:{
-                    [Op.like]:"%"+searchedValue+"%"
-            }},attributes:['title','likeIdx','nickName','content','id']})
-            return res.json(list)
-        case 'title':
-            list = await Board.findAll({where:{
-                title:{
-                    [Op.like]:"%"+searchedValue+"%"
-            }},attributes:['title','likeIdx','nickName','content','id']})
-            return res.json(list)
+    
+    try{
+        switch(search){
+            case 'nickName':
+                list = await Board.findAll({where:{
+                    nickName:{
+                        [Op.like]:"%"+searchedValue+"%"
+                }},attributes:['title','likeIdx','nickName','content','id']})                
+            case 'content':   
+                list = await Board.findAll({where:{
+                    content:{
+                        [Op.like]:"%"+searchedValue+"%"
+                }},attributes:['title','likeIdx','nickName','content','id']})
+            case 'title':
+                list = await Board.findAll({where:{
+                    title:{
+                        [Op.like]:"%"+searchedValue+"%"
+                }},attributes:['title','likeIdx','nickName','content','id']})
+                
+                result = {
+                    list,
+                    result:'OK',
+                    msg:'search list 가져오기 성공'
+                }
+                res.json(result)
+        }
+    }catch(err){
+        console.log(err)
+        result = {
+            result:'Fail',
+            msg:'리스트 가져오기 실패'
+        }
+
     }
+    
 }
 
 module.exports={

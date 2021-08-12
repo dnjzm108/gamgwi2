@@ -1,23 +1,48 @@
 import Styled from "styled-components"
+import useInput from '../../hooks/useInput'
+import {useDispatch} from 'react-redux'
+import {PostSearch_REQUEST} from '../../reducers/post'
+import { useEffect,useState } from "react"
+import Link from 'next/link'
 
-const searchSubmit = (e) => {
-    e.preventDefault()
-
-}
 
 const SearchBar = () => {
+    const dispatch = useDispatch()
+    //const search = useInput('')
+    const searchedValue = useInput('')
+    const [search,setSearch] = useState('')
+
+    const handleChange = e => {
+        setSearch(e.target.value)    
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(search,searchedValue.value)
+        const data = {
+            search:search,
+            searchedValue:searchedValue.value
+        }
+        dispatch(PostSearch_REQUEST(data))
+    }
+
+    useEffect(()=>{
+
+    },[])
+ 
     return (
         <>
             <SearchBarWrap>
-                <form method="POST" action="http://localhost:3500/board/list">
-                    <select name="search">
-                        <option value="none" disabled>==선택==</option>
-                        <option value="writer" selected>작성자</option>
+                {/* <form method="POST" action="http://localhost:3500/board/list"> */}
+                <form onSubmit={handleSubmit}>
+                    <select name="search" onChange={handleChange}>
+                        <option value="none" selected>==선택==</option>
+                        <option value="nickName"  >작성자</option>
                         <option value="content">내용</option>
                         <option value="title">제목</option>
                     </select>
-                    <input type="text" name="searchedValue" />
-                    <button type="submit" onSubmit={searchSubmit}>Search</button>
+                    <input type="text" name="searchedValue" {...searchedValue} />
+                    <button type="submit">Search</button>
                 </form>
             </SearchBarWrap>
         </>

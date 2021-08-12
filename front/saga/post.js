@@ -79,16 +79,40 @@ function* reqGetLikes(){
     yield takeLatest('GET_LIKES_REQUEST',getLikes)
 }
 
+/* 검색 기능 */
+function postSearch(data){
+    console.log(data)
+    return axios.post('http://localhost:3500/board/list',{search:data.search,searchedValue:data.searchedValue})
+}
+
+
+function* postGetSearch(action){
+    const result = yield call(postSearch,action.data)
+    const {data} = result
+    if(data.result==="OK"){
+        yield put({
+            type:'POST_SEARCH_SUCCESS'
+        })
+    }else{
+        yield put({
+            type:'POST_SEARCH_ERROR'
+        })
+    }
+}
+function* reqPost() {
+    yield takeLatest('POST_INSERT_REQUEST', postGetSearch)
+}
+
+
+function* reqPost() {
+    yield takeLatest('POST_SEARCH_REQUEST', postGetSearch)
+}
 
 /* 글 view 가져옴 */
 function* getView(action) {
-    //console.log("getView ===== ",action);
-    //console.log("action.idx ===== ",action.idx);
     const result = yield call(axios.post,'http://localhost:3500/board/view',{idx:action.idx})
-    //console.log('view 백단 요청 result ====',result);
     const { data } = result
-    //console.log("view data =======",data);
-   
+    
     if (data.result === 'OK') {
         yield put({
             type: 'POST_VIEW_SUCCESS',
@@ -106,11 +130,69 @@ function* reqViewList() {
     yield takeLatest('POST_VIEW_REQUEST', getView)
 }
 
+
+
+
+/* 글 삭제 */
+function* deleteView(action) {
+    console.log("getDELETE ===== ",action);
+    console.log("action.idx ===== ",action.idx);
+    const result = yield call(axios.post,'http://localhost:3500/board/delete',{idx:action.idx})
+    console.log('view 백단 요청 result ====',result);
+    const { msg, deletedRes } = result.data
+    console.log("view data =======",deletedRes);
+   
+    if (result.data.result === 'OK') {
+        yield put({
+            type: 'POST_DELETE_SUCCESS',
+            deletedList : deletedRes,
+            msg
+        })
+    } else {
+        yield put({
+            type: 'POST_DELETE_ERROR',
+            msg
+        })
+    }
+}
+
+
+function* reqViewDelete() {
+    yield takeLatest('POST_DELETE_REQUEST', deleteView)
+}
+
+/* 좋아요 추가할 때 */
+function* addLikes(action) {
+    console.log(action);
+    const result = yield call(axios.post,'http://localhost:3500/board/view',{idx:action.idx})
+    //const { data } = result
+    
+    // if (data.result === 'OK') {
+    //     yield put({
+    //         type: 'ADD_LIKES_SUCCESS',
+            
+    //     })
+    // } else {
+    //     yield put({
+    //         type: 'ADD_LIKES_ERROR',
+            
+    //     })
+    // }
+}
+
+function* reqAddLikes() {
+    yield takeLatest('ADD_LIKES_REQUEST', addLikes)
+}
+
+
 export default function* writeSaga() {
     yield all([
         fork(reqWrite),
         fork(reqGetList),
         fork(reqGetLikes),
+        fork(reqPost),
         fork(reqViewList),
+        fork(reqViewDelete),
+        fork(reqAddLikes),
     ])
 }
