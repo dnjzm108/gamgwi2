@@ -4,7 +4,7 @@ import PostList from '../../component/list/PostList'
 import WebLayout from "../../component/layout/webLayout"
 import SearchBar from '../../component/common/SearchBar'
 import { useDispatch, useSelector } from 'react-redux'
-import { PostGet_REQUEST } from '../../reducers/post'
+import { PostGet_REQUEST, PostView_REQUEST } from '../../reducers/post'
 import { useEffect } from 'react'
 
 const List = () => {
@@ -16,7 +16,7 @@ const List = () => {
 
     // list 값 가져오기
     const data = useSelector(state => state.post.list)
-    console.log("data ===========", data);
+    // console.log("data ===========", data);
     useEffect(() => {
 
     }, [data])
@@ -24,15 +24,20 @@ const List = () => {
     let list = []
     if (data !== undefined) {
 
-        const handleClick = () => {
+        const handleClick = (idx) => {
+            console.log(idx);
+            // useEffect(()=>{
+            //     dispatch(PostView_REQUEST(idx))
+            // },[idx])
 
+            dispatch(PostView_REQUEST(idx))
         }
 
         list = data.map((v) => {
             return (
                 <>
                     <tr key={v.id}>
-                        <td>{v.title}</td>
+                        <td onClick={()=>{handleClick(v.id)}}>{v.title}</td>
                         <td>{v.nickName}</td>
                         <td>{v.hit}</td>
                         <td>{v.date}</td>

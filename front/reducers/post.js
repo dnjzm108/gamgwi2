@@ -11,6 +11,10 @@ const POST_GET_REQUEST = "POST_GET_REQUEST"
 const POST_GET_SUCCESS = "POST_GET_SUCCESS"
 const POST_GET_ERROR = "POST_GET_ERROR"
 
+const POST_VIEW_REQUEST = "POST_VIEW_REQUEST"
+const POST_VIEW_SUCCESS = "POST_VIEW_SUCCESS"
+const POST_VIEW_ERROR = "POST_VIEW_ERROR"
+
 const POST_MODIFY_REQUEST = "POST_MODIFY_REQUEST"
 const POST_MODIFY_SUCCESS = "POST_MODIFY_SUCCESS"
 const POST_MODIFY_ERROR = "POST_MODIFY_ERROR"
@@ -44,13 +48,13 @@ export const PostInsert_ERROR = () => {
 
 /* 가져오기 */
 export const PostGet_REQUEST = () => {
-    console.log('postget request');
+    //console.log('postget request');
     return {
         type: POST_GET_REQUEST,
     }
 }
 export const PostGet_SUCCESS = (list) => {
-    console.log('post get list',list);
+    //console.log('post get list', list);
     return {
         type: POST_GET_SUCCESS,
         list
@@ -62,6 +66,24 @@ export const PostGet_ERROR = () => {
     }
 }
 
+/* 글 view 보기 */
+export const PostView_REQUEST = (idx) => {
+    console.log('post view request idx ====', idx);
+    return {
+        type: POST_VIEW_REQUEST,
+        idx,
+    }
+}
+export const PostView_SUCCESS = () => {
+    return {
+        type: POST_VIEW_SUCCESS,
+    }
+}
+export const PostView_ERROR = () => {
+    return {
+        type: POST_VIEW_ERROR,
+    }
+}
 
 
 /* 수정 
@@ -136,9 +158,9 @@ const reducer = (state = initalState, action) => {
                 loading: true,
             }
         case POST_GET_SUCCESS:
-            console.log('get 성공');
-            console.log('action =======',action);
-            console.log('action.list =======',action.list);
+            /*console.log('get 성공');
+            console.log('action =======', action);
+            console.log('action.list =======', action.list);*/
             return {
                 ...state,
                 list: action.list,
@@ -152,12 +174,33 @@ const reducer = (state = initalState, action) => {
             }
         case GET_LIKES_SUCCESS:
             console.log('likes 성공')
-            console.log(action,'likes action')
-            console.log(action.list,'action=================likeslist')
-            return{
+            console.log(action, 'likes action')
+            console.log(action.list, 'action=================likeslist')
+            return {
                 ...state,
-                list:action.list,
-                loading:false
+                list: action.list,
+                loading: false
+            }
+        case POST_VIEW_REQUEST:
+            console.log('view request action========',action);
+            return {
+                ...state,
+                idx : action.idx,
+                loading: true,
+            }
+        case POST_VIEW_SUCCESS:
+            console.log('view 성공');
+            return {
+                ...state,
+
+                loading: false,
+            }
+        case POST_VIEW_ERROR:
+            console.log('view 실패');
+            return {
+                ...state,
+
+                loading: false,
             }
         default:
             return state
