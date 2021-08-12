@@ -73,6 +73,7 @@ export const PostGet_ERROR = () => {
 }
 
 
+
 //검색 가져오기
 export const PostSearch_REQUEST = (data) => {
     return{
@@ -109,6 +110,12 @@ export const GetLikes_SUCCESS = (list) => {
 export const GetLikes_ERROR = () => {
     return{
         type:GET_LIKES_ERROR
+    }
+}
+
+
+
+
 
 
 
@@ -128,6 +135,7 @@ export const PostView_SUCCESS = () => {
 export const PostView_ERROR = () => {
     return {
         type: POST_VIEW_ERROR,
+
     }
 }
 

@@ -26,6 +26,7 @@ const List = () => {
     let list = []
     if (data !== undefined) {
 
+
         const handleClick = (idx) => {
             //console.log(idx);
 
@@ -34,7 +35,6 @@ const List = () => {
             //Router.push(`/board/view?idx=${idx}`)
             Router.push(`/board/view`)
         }
-
 
         list = data.map((v) => {
             return (

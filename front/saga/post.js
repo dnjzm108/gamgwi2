@@ -95,6 +95,9 @@ function* postGetSearch(action){
     }else{
         yield put({
             type:'POST_SEARCH_ERROR'
+        })
+    }
+}
 
 
 /* 글 view 가져옴 */
@@ -136,9 +139,7 @@ export default function* writeSaga() {
         fork(reqWrite),
         fork(reqGetList),
         fork(reqGetLikes),
-
-        fork(reqPost)
-
+        fork(reqPost),
         fork(reqViewList),
 
     ])

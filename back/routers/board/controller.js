@@ -184,6 +184,7 @@ let post_list = async(req,res) => {
                     result:'OK',
                     msg:'search list 가져오기 성공'
                 }
+                res.json(result)
         }
     }catch(err){
         console.log(err)
