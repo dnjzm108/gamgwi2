@@ -2,28 +2,41 @@ import Styled from "styled-components"
 import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded'
 import CreateRoundedIcon from '@material-ui/icons/CreateRounded'
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded'
+import { useDispatch } from "react-redux"
+import { PostDelete_REQUEST } from "../../reducers/post"
 
 const ViewContent = (props) => {
+    //console.log(props.data);
+    let { title, content, nickName, hit, id, likeIdx } = props.data
+
+    const dispatch = useDispatch()
+    const handleModify = (idx) => {
+        
+    }
+
+    const handleDelete = (idx) => {
+        dispatch(PostDelete_REQUEST(idx))
+    }
+
     return (
         <>
             <ViewContentWrap>
-               <TitleWrap>
-                   title <br />
-                   {props.post} 번째 글
-               </TitleWrap>
-               <DateWrap>
-                   date and time
-               </DateWrap>
-               <ContentWrap>
-                   content
-               </ContentWrap>
-               <VeiwIcon>
-                   <ul>
-                       <li><FavoriteRoundedIcon/></li>
-                       <li><CreateRoundedIcon/></li>
-                       <li><DeleteRoundedIcon/></li>
-                   </ul>
-               </VeiwIcon>
+                <TitleWrap>
+                    {title}
+                </TitleWrap>
+                <DateWrap>
+                    date and time
+                </DateWrap>
+                <ContentWrap>
+                    {content}
+                </ContentWrap>
+                <VeiwIcon>
+                    <ul>
+                        <li><FavoriteRoundedIcon /></li>
+                        <li onClick={()=>{handleModify(id)}}><CreateRoundedIcon /></li>
+                        <li onClick={()=>{handleDelete(id)}}><DeleteRoundedIcon /></li>
+                    </ul>
+                </VeiwIcon>
             </ViewContentWrap>
         </>
     )

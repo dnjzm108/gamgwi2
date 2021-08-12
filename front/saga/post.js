@@ -3,7 +3,7 @@ import axios from 'axios'
 
 /* 글 작성 */
 function writeAPI(data) {
-    console.log("write api = ", data);
+    //console.log("write api = ", data);
     return axios.post('http://localhost:3500/board/write', data)   //6번
 }
 
@@ -58,8 +58,9 @@ function* reqGetList() {
     yield takeLatest('POST_GET_REQUEST', getList)
 }
 
+/* Likes 가져옴 */
 function* getLikes() {
-    const result = yield call(axios.get('http://localhost:3500/board/likes'))
+    const result = yield call(axios.get,'http://localhost:3500/board/likes')
     const {data} = result
     console.log(data,'likessssssssssssssssssssss__post.jsx')
     if(data.result=='OK'){
@@ -78,10 +79,38 @@ function* reqGetLikes(){
     yield takeLatest('GET_LIKES_REQUEST',getLikes)
 }
 
+
+/* 글 view 가져옴 */
+function* getView(action) {
+    //console.log("getView ===== ",action);
+    //console.log("action.idx ===== ",action.idx);
+    const result = yield call(axios.post,'http://localhost:3500/board/view',{idx:action.idx})
+    //console.log('view 백단 요청 result ====',result);
+    const { data } = result
+    //console.log("view data =======",data);
+   
+    if (data.result === 'OK') {
+        yield put({
+            type: 'POST_VIEW_SUCCESS',
+            view : data.view
+        })
+    } else {
+        yield put({
+            type: 'POST_VIEW_ERROR',
+            msg : data.msg
+        })
+    }
+}
+
+function* reqViewList() {
+    yield takeLatest('POST_VIEW_REQUEST', getView)
+}
+
 export default function* writeSaga() {
     yield all([
         fork(reqWrite),
         fork(reqGetList),
-        fork(reqGetLikes)
+        fork(reqGetLikes),
+        fork(reqViewList),
     ])
 }
