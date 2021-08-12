@@ -79,7 +79,6 @@ module.exports = class Board extends Sequelize.Model{
                 type:Sequelize.INTEGER,
                 allowNull:true,
             }
-            
         },{
             sequelize,
             timestamps:true,

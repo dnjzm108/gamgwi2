@@ -85,6 +85,7 @@ function postSearch(data){
     return axios.post('http://localhost:3500/board/list',{search:data.search,searchedValue:data.searchedValue})
 }
 
+
 function* postGetSearch(action){
     const result = yield call(postSearch,action.data)
     const {data} = result
@@ -98,6 +99,10 @@ function* postGetSearch(action){
         })
     }
 }
+function* reqPost() {
+    yield takeLatest('POST_INSERT_REQUEST', postGetSearch)
+}
+
 
 function* reqPost() {
     yield takeLatest('POST_SEARCH_REQUEST', postGetSearch)
@@ -125,6 +130,9 @@ function* reqViewList() {
     yield takeLatest('POST_VIEW_REQUEST', getView)
 }
 
+
+
+
 /* 글 삭제 */
 function* deleteView(action) {
     console.log("getDELETE ===== ",action);
@@ -147,6 +155,7 @@ function* deleteView(action) {
         })
     }
 }
+
 
 function* reqViewDelete() {
     yield takeLatest('POST_DELETE_REQUEST', deleteView)
