@@ -166,9 +166,11 @@ export const PostDelete_REQUEST = (idx) => {
     }
 }
 
-export const PostDelete_SUCCESS = () => {
+export const PostDelete_SUCCESS = (deletedList) => {
+    console.log(deletedList);
     return {
         type: POST_DELETE_SUCCESS,
+        deletedList,
     }
 }
 
@@ -286,27 +288,28 @@ const reducer = (state = initalState, action) => {
                 msg: action.msg,
                 loading: false,
             }
-        case GET_LIKES_ERROR:
-            return{
+        /* 글 삭제 */
+        case POST_DELETE_REQUEST:
+            console.log('DELETE request action========',action);
+            return {
                 ...state,
-                loading:false
+                idx : action.idx,
+                loading: true,
             }
-        case POST_SEARCH_REQUEST:
-            return{
+        case POST_DELETE_SUCCESS:
+            console.log('delete 성공 action =====', action);
+            let {deletedList, msg} = action
+            return {
                 ...state,
-                loading:true,
+                deleteMsg : msg,
+                deletedList,
+                loading: false,
             }
-        case POST_SEARCH_SUCCESS:
-            return{
+        case POST_DELETE_ERROR:
+            console.log('delete 실패');
+            return {
                 ...state,
-                data:action.data,
-                loadimg:false
-            }
-        case POST_SEARCH_ERROR:
-            return{
-                ...state,
-                data:action.data,
-                loading:false
+                loading: false,
             }
         default:
             return state
