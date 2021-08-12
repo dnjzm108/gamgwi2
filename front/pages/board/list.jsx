@@ -6,6 +6,8 @@ import SearchBar from '../../component/common/SearchBar'
 import { useDispatch, useSelector } from 'react-redux'
 import { PostGet_REQUEST, PostView_REQUEST } from '../../reducers/post'
 import { useEffect } from 'react'
+import Router from "next/router"
+
 
 const List = () => {
     const dispatch = useDispatch()
@@ -25,12 +27,12 @@ const List = () => {
     if (data !== undefined) {
 
         const handleClick = (idx) => {
-            console.log(idx);
-            // useEffect(()=>{
-            //     dispatch(PostView_REQUEST(idx))
-            // },[idx])
+            //console.log(idx);
 
             dispatch(PostView_REQUEST(idx))
+
+            //Router.push(`/board/view?idx=${idx}`)
+            Router.push(`/board/view`)
         }
 
         list = data.map((v) => {

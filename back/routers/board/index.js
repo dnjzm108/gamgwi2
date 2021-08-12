@@ -8,7 +8,7 @@ router.get('/list',controller.get_list)
 router.get('/likes',controller.get_likes)
 
 router.get('/write',controller.get_write)
-router.get('/view',controller.get_view)
+router.post('/view',controller.post_view)
 
 
 

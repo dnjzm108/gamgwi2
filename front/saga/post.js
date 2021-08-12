@@ -3,7 +3,7 @@ import axios from 'axios'
 
 /* 글 작성 */
 function writeAPI(data) {
-    console.log("write api = ", data);
+    //console.log("write api = ", data);
     return axios.post('http://localhost:3500/board/write', data)   //6번
 }
 
@@ -60,7 +60,7 @@ function* reqGetList() {
 
 /* Likes 가져옴 */
 function* getLikes() {
-    const result = yield call(axios.get('http://localhost:3500/board/likes'))
+    const result = yield call(axios.get,'http://localhost:3500/board/likes')
     const {data} = result
     console.log(data,'likessssssssssssssssssssss__post.jsx')
     if(data.result=='OK'){
@@ -82,22 +82,24 @@ function* reqGetLikes(){
 
 /* 글 view 가져옴 */
 function* getView(action) {
-    console.log("getView ===== ",action);
-    const result = yield call(axios.post,'http://localhost:3500/board/view',idx)
-    console.log('view 백단 요청 result ====',result);
+    //console.log("getView ===== ",action);
+    //console.log("action.idx ===== ",action.idx);
+    const result = yield call(axios.post,'http://localhost:3500/board/view',{idx:action.idx})
+    //console.log('view 백단 요청 result ====',result);
     const { data } = result
-    console.log("view data =======",data);
+    //console.log("view data =======",data);
    
-    /*if (data.result === 'OK') {
+    if (data.result === 'OK') {
         yield put({
-            type: 'POST_GET_SUCCESS',
-            list : data.list
+            type: 'POST_VIEW_SUCCESS',
+            view : data.view
         })
     } else {
         yield put({
-            type: 'POST_GET_ERROR',
+            type: 'POST_VIEW_ERROR',
+            msg : data.msg
         })
-    }*/
+    }
 }
 
 function* reqViewList() {

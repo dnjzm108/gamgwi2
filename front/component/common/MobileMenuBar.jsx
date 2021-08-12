@@ -1,4 +1,3 @@
-import { makeStyles } from '@material-ui/core/styles';
 import Styled from 'styled-components';
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
 import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded';
@@ -9,7 +8,6 @@ import Link from 'next/link'
 
 
 const MobileMenuBar = () => {
-    const classes = useStyles();
     return (
         <>
             <MenuBarWrap>
@@ -36,22 +34,6 @@ const MobileMenuBar = () => {
 }
 
 export default MobileMenuBar
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        '&': {
-            display: 'flex'
-        },
-        '& > a': {
-            display: 'inline-block',
-            width: '19vw',
-            textAlign: 'center'
-        },
-        '& > a > svg': {
-            color: 'black',
-        },
-    },
-}));
 
 const MenuBarWrap = Styled.div`
     position : absolute;

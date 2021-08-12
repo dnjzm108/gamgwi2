@@ -76,7 +76,7 @@ export const GetLikes_SUCCESS = () => {
 
 /* 글 view 보기 */
 export const PostView_REQUEST = (idx) => {
-    console.log('post view request idx ====', idx);
+    // console.log('post view request idx ====', idx);
     return {
         type: POST_VIEW_REQUEST,
         idx,
@@ -141,14 +141,14 @@ const reducer = (state = initalState, action) => {
                 loading: true,
             }
         case POST_INSERT_SUCCESS:
-            console.log('insert 성공');
+            //console.log('insert 성공');
             return {
                 ...state,
                 data: action.data,
                 loading: false,
             }
         case POST_INSERT_ERROR:
-            console.log('insert 실패');
+            //console.log('insert 실패');
             return {
                 ...state,
                 data: action.data,
@@ -175,7 +175,7 @@ const reducer = (state = initalState, action) => {
                 loading: false,
             }
         case POST_GET_ERROR:
-            console.log('get 실패');
+            // console.log('get 실패');
             return {
                 ...state,
                 loading: false,
@@ -186,33 +186,33 @@ const reducer = (state = initalState, action) => {
                 loading:true
             }
         case GET_LIKES_SUCCESS:
-            console.log('likes 성공')
+            /*console.log('likes 성공')
             console.log(action, 'likes action')
-            console.log(action.list, 'action=================likeslist')
+            console.log(action.list, 'action=================likeslist')*/
             return {
                 ...state,
                 list: action.list,
                 loading: false
             }
         case POST_VIEW_REQUEST:
-            console.log('view request action========',action);
+            //console.log('view request action========',action);
             return {
                 ...state,
                 idx : action.idx,
                 loading: true,
             }
         case POST_VIEW_SUCCESS:
-            console.log('view 성공');
+            //console.log('view 성공 action =====', action);
             return {
                 ...state,
-
+                view : action.view,
                 loading: false,
             }
         case POST_VIEW_ERROR:
             console.log('view 실패');
             return {
                 ...state,
-
+                msg : action.msg,
                 loading: false,
             }
         default:

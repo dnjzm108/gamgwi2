@@ -12,11 +12,22 @@ let view_reply = async (req,res) =>{
     res.send(comment)
 }
 
-let get_view = async (req,res)=>{
+let post_view = async (req,res)=>{
     let {idx} = req.body
-    let view = await Board.findOne({where:{id:1},attributes:['title','content','nickName','hit','id','likeIdx']})
-    console.log(view)
-    res.json(view)
+    let result = {};
+    try {
+        let view = await Board.findOne({where:{id:idx},attributes:['title','content','nickName','hit','id','likeIdx']})
+        result = {
+            result : 'OK',
+            view : view.dataValues
+        }
+    } catch (error) {
+        result = {
+            result: 'Fail',
+            msg : '해당 페이지가 없어요'
+        }
+    }
+    res.json(result)
 }
 
 let write = async (req,res) =>{
@@ -177,5 +188,5 @@ module.exports={
     write_succece,
     modify_succece,
     post_list,
-    get_view
+    post_view
 }
