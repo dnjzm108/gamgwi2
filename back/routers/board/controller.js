@@ -14,7 +14,8 @@ let view_reply = async (req,res) =>{
 
 let get_view = async (req,res)=>{
     let {idx} = req.body
-    let view = await Board.findOne({where:{id:idx},attributes:['title','content','nickName','hit','id','likeIdx']})
+    let view = await Board.findOne({where:{id:1},attributes:['title','content','nickName','hit','id','likeIdx']})
+    console.log(view)
     res.json(view)
 }
 
@@ -175,5 +176,6 @@ module.exports={
     Delete,
     write_succece,
     modify_succece,
-    post_list
+    post_list,
+    get_view
 }
