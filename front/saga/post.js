@@ -36,7 +36,7 @@ function* reqWrite() {
 /* 글 목록 가져옴 */
 function* getList() {
     const result = yield call(axios.get,'http://localhost:3500/board/list')
-    console.log('get 요청 result ====',result);
+    //console.log('get 요청 result ====',result);
     const { data } = result
     //console.log("get data =======",data);
     //console.log("get data list =======",data.list);
@@ -61,6 +61,7 @@ function* reqGetList() {
 function* getLikes() {
     const result = yield call(axios.get('http://localhost:3500/board/likes'))
     const {data} = result
+    console.log(data,'likessssssssssssssssssssss__post.jsx')
     if(data.result=='OK'){
         yield put({
             type:'GET_LIKES_SUCCESS',

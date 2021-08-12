@@ -12,7 +12,7 @@ const List = () => {
     useEffect(() => {
         dispatch(PostGet_REQUEST())
     }, [])
-    
+
 
     // list 값 가져오기
     const data = useSelector(state => state.post.list)
@@ -24,9 +24,7 @@ const List = () => {
     let list = []
     if (data !== undefined) {
 
-        const handleClick = () => {
-
-        }
+        
 
         list = data.map((v) => {
             return (
