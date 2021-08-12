@@ -13,7 +13,7 @@ router.post('/view',controller.post_view)
 router.post('/modify',controller.modify_succece)
 //router.post('/write',controller.write_succece)
 
-router.get('/delete',controller.Delete)
+router.post('/delete',controller.Delete)
 router.get('/modify',controller.modify)
 // router.get('/list',controller.list) //
 router.post('/write',controller.write)

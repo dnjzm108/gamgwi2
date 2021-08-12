@@ -132,14 +132,22 @@ let modify = async (req,res) =>{
 }
 
 let Delete = async(req,res) =>{
-    //let {idx} = req.body or req.query
-    let idx = 1
-    await Board.destroy({where:{id:1}})
-    await Like.destroy({where:{likeBoardIdx:1}})
-    let deletedRes = await Board.findAll({attributes:['title','likeIdx','nickName','content','date','hit','id']})
-    // "해당 글이 삭제되었습니다." 알림창이 뜬 후에 다시 글리스트를 보여주게끔 -> 알림창 뜬후 다른 페이지 어떻게 렌더링????????????????????????????????? 
-    console.log('delete')
-    res.json(deletedRes)
+    let {idx} = req.body
+    try {
+        await Board.destroy({where:{id:idx}})
+        let deletedRes = await Board.findAll({})
+        result = {
+            deletedRes,
+            result : 'OK',
+            msg : '삭제 성공'
+        }
+    } catch (error) {
+        result = {
+            result: 'Fail',
+            msg: '삭제 실패'
+        }
+    }
+    res.json(result)
 }
 
 let write_succece = async (req,res) =>{
