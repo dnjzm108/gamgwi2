@@ -104,11 +104,12 @@ let get_list = async (req,res) =>{
 let get_likes = async(req,res) => {
     let result ={}
     await Like.create({likeBoardIdx:1,likeCount:0,likeStatus:1})
+
     //let list = await Board.findAll({where:{like:1,category:'글귀'},attributes:['title','like','nickName','content']})
     let list = await Board.findAll({
         include:[{
             model:Like,
-            where:{id:Sequelize.col('likeBoardIdx')}
+            where:{likeStatus:1}
         }]
     })
     result = {
