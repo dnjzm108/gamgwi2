@@ -62,6 +62,7 @@ function* reqGetList() {
 function* getLikes() {
     const result = yield call(axios.get('http://localhost:3500/board/likes'))
     const {data} = result
+    console.log(data,'likessssssssssssssssssssss__post.jsx')
     if(data.result=='OK'){
         yield put({
             type:'GET_LIKES_SUCCESS',

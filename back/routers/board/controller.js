@@ -12,6 +12,13 @@ let view_reply = async (req,res) =>{
     res.send(comment)
 }
 
+let get_view = async (req,res)=>{
+    let {idx} = req.body
+    let view = await Board.findOne({where:{id:1},attributes:['title','content','nickName','hit','id','likeIdx']})
+    console.log(view)
+    res.json(view)
+}
+
 let write = async (req,res) =>{
     const {todayWeather, writeTitle, writeContent} = req.body                 // 이걸로 db에 insert 하면 됩니다.
     let result = {};
@@ -98,7 +105,7 @@ let get_likes = async(req,res) => {
         result : 'OK',
         msg : '좋아요 가져오기 성공'
     }
-    console.log(list)
+    console.log(result)
     res.json(result)
 }
 let get_write = (req,res) => {
@@ -142,22 +149,21 @@ let post_list = async(req,res) => {
             list = await Board.findAll({where:{
                 nickName:{
                     [Op.like]:"%"+searchedValue+"%"
-            }},attributes:['title','likeIdx','nickName','content']})
+            }},attributes:['title','likeIdx','nickName','content','id']})
             return res.json(list)
         case 'content':
             list = await Board.findAll({where:{
                 content:{
                     [Op.like]:"%"+searchedValue+"%"
-            }},attributes:['title','likeIdx','nickName','content']})
+            }},attributes:['title','likeIdx','nickName','content','id']})
             return res.json(list)
         case 'title':
             list = await Board.findAll({where:{
                 title:{
                     [Op.like]:"%"+searchedValue+"%"
-            }},attributes:['title','likeIdx','nickName','content']})
+            }},attributes:['title','likeIdx','nickName','content','id']})
             return res.json(list)
     }
-    
 }
 
 module.exports={
@@ -170,5 +176,6 @@ module.exports={
     Delete,
     write_succece,
     modify_succece,
-    post_list
+    post_list,
+    get_view
 }

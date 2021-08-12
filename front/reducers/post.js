@@ -23,7 +23,10 @@ const POST_DELETE_REQUEST = "POST_DELETE_REQUEST"
 const POST_DELETE_SUCCESS = "POST_DELETE_SUCCESS"
 const POST_DELETE_ERROR = "POST_DELETE_ERROR"
 
+const GET_LIKES_REQUEST = "GET_LIKES_REQUEST"
 const GET_LIKES_SUCCESS = "GET_LIKES_SUCCESS"
+const GET_LIKES_ERROR = "GET_LIKES_ERROR"
+
 
 /* 입력 */
 export const PostInsert_REQUEST = data => {
@@ -63,6 +66,11 @@ export const PostGet_SUCCESS = (list) => {
 export const PostGet_ERROR = () => {
     return {
         type: POST_GET_ERROR,
+    }
+}
+export const GetLikes_SUCCESS = () => {
+    return{
+        type:GET_LIKES_SUCCESS,
     }
 }
 
@@ -171,6 +179,11 @@ const reducer = (state = initalState, action) => {
             return {
                 ...state,
                 loading: false,
+            }
+        case GET_LIKES_REQUEST:
+            return{
+                ...state,
+                loading:true
             }
         case GET_LIKES_SUCCESS:
             console.log('likes 성공')
