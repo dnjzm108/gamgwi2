@@ -23,6 +23,9 @@ const GET_LIKES_REQUEST = "GET_LIKES_REQUEST"
 const GET_LIKES_SUCCESS = "GET_LIKES_SUCCESS"
 const GET_LIKES_ERROR = "GET_LIKES_ERROR"
 
+const POST_SEARCH_REQUEST = "POST_SEARCH_REQUEST"
+const POST_SEARCH_SUCCESS = "POST_SEARCH_SUCCESS"
+const POST_SEARCH_ERROR = "POST_SEARCH_ERROR"
 
 /* 입력 */
 export const PostInsert_REQUEST = data => {
@@ -64,12 +67,45 @@ export const PostGet_ERROR = () => {
         type: POST_GET_ERROR,
     }
 }
-export const GetLikes_SUCCESS = () => {
+
+//검색 가져오기
+export const PostSearch_REQUEST = (data) => {
     return{
-        type:GET_LIKES_SUCCESS,
+        type:POST_SEARCH_REQUEST,
+        data
+    }
+}
+export const PostSearch_SUCCESS = () => {
+    return{
+        type:POST_SEARCH_SUCCESS,
+        data
+    }
+}
+export const PostSearch_ERROR = () => {
+    return{
+        type:POST_SEARCH_ERROR,
+        data
     }
 }
 
+//좋아요 누른 list
+export const GetLikes_REQUEST = () => {
+    return{
+        type: GET_LIKES_REQUEST   
+    }
+}
+export const GetLikes_SUCCESS = (list) => {
+    console.log(list,'listtttttttttttttttttttttttttttttttttttttt')
+    return{
+        type:GET_LIKES_SUCCESS,
+        list
+    }
+}
+export const GetLikes_ERROR = () => {
+    return{
+        type:GET_LIKES_ERROR
+    }
+}
 
 
 /* 수정 
@@ -170,6 +206,28 @@ const reducer = (state = initalState, action) => {
             return{
                 ...state,
                 list:action.list,
+                loading:false
+            }
+        case GET_LIKES_ERROR:
+            return{
+                ...state,
+                loading:false
+            }
+        case POST_SEARCH_REQUEST:
+            return{
+                ...state,
+                loading:true,
+            }
+        case POST_SEARCH_SUCCESS:
+            return{
+                ...state,
+                data:action.data,
+                loadimg:false
+            }
+        case POST_SEARCH_ERROR:
+            return{
+                ...state,
+                data:action.data,
                 loading:false
             }
         default:

@@ -59,7 +59,7 @@ function* reqGetList() {
 }
 
 function* getLikes() {
-    const result = yield call(axios.get('http://localhost:3500/board/likes'))
+    const result = yield call(axios.get,'http://localhost:3500/board/likes')
     const {data} = result
     console.log(data,'likessssssssssssssssssssss__post.jsx')
     if(data.result=='OK'){
@@ -78,10 +78,35 @@ function* reqGetLikes(){
     yield takeLatest('GET_LIKES_REQUEST',getLikes)
 }
 
+function postSearch(data){
+    console.log(data)
+    return axios.post('http://localhost:3500/board/list',{search:data.search,searchedValue:data.searchedValue})
+}
+
+function* postGetSearch(action){
+    const result = yield call(postSearch,action.data)
+    const {data} = result
+    if(data.result==="OK"){
+        yield put({
+            type:'POST_SEARCH_SUCCESS'
+        })
+    }else{
+        yield put({
+            type:'POST_SEARCH_ERROR'
+        })
+    }
+}
+
+function* reqPost() {
+    yield takeLatest('POST_INSERT_REQUEST', postGetSearch)
+}
+
+
 export default function* writeSaga() {
     yield all([
         fork(reqWrite),
         fork(reqGetList),
-        fork(reqGetLikes)
+        fork(reqGetLikes),
+        fork(reqPost)
     ])
 }

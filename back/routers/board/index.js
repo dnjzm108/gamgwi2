@@ -10,12 +10,6 @@ router.get('/likes',controller.get_likes)
 router.get('/write',controller.get_write)
 router.get('/view',controller.get_view)
 
-
-
-
-
-
-
 router.post('/modify',controller.modify_succece)
 //router.post('/write',controller.write_succece)
 

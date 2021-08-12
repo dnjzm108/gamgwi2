@@ -25,7 +25,6 @@ const List = () => {
     if (data !== undefined) {
 
         
-
         list = data.map((v) => {
             return (
                 <>
