@@ -1,12 +1,33 @@
-const {Board,User,Comment} = require('../../models')
+const {Board,User,Comment, Like} = require('../../models')
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 
 const path = require('path')
+const { create } = require('../../models/weather')
 
 let view_reply = async (req,res) =>{
     //let {url} = req.query(
     await Comment.create({commenter_name:'algml',category:'글귀',titleIdx:1})
     let comment = await Comment.findAll({})
     res.send(comment)
+}
+
+let post_view = async (req,res)=>{
+    let {idx} = req.body
+    let result = {};
+    try {
+        let view = await Board.findOne({where:{id:idx},attributes:['title','content','nickName','hit','id','likeIdx']})
+        result = {
+            result : 'OK',
+            view : view.dataValues
+        }
+    } catch (error) {
+        result = {
+            result: 'Fail',
+            msg : '해당 페이지가 없어요'
+        }
+    }
+    res.json(result)
 }
 
 let write = async (req,res) =>{
@@ -30,8 +51,11 @@ let write = async (req,res) =>{
 let get_list = async (req,res) =>{
     let result = {};
     try {
-        //let list = await Board.findAll({where:{watch:1,category:'글귀'},attributes:['title','like','nickName','content']})
-        let list = await Board.findAll({})
+
+        //let list = await Board.findAll({where:{watch:1,category:'글귀'},attributes:['title','likeCount','nickName','content']})
+        //let list = await Board.findAll({})
+        let list = await Board.findAll({where:{watch:1,category:'글귀'},attributes:['title','likeIdx','nickName','content','date','hit','id']})
+        //let list = await Board.findAll({})
         result = {
             list,
             result : 'OK',
@@ -78,8 +102,22 @@ let get_list = async (req,res) =>{
     // } 
 }
 let get_likes = async(req,res) => {
-    let list = await Board.findAll({where:{like:1,category:'글귀'},attributes:['title','like','nickName','content']})
-    res.json(list)
+    let result ={}
+    await Like.create({likeBoardIdx:1,likeCount:0,likeStatus:1})
+    //let list = await Board.findAll({where:{like:1,category:'글귀'},attributes:['title','like','nickName','content']})
+    let list = await Board.findAll({
+        include:[{
+            model:Like,
+            where:{id:Sequelize.col('likeBoardIdx')}
+        }]
+    })
+    result = {
+        list,
+        result : 'OK',
+        msg : '좋아요 가져오기 성공'
+    }
+    console.log(result)
+    res.json(result)
 }
 let get_write = (req,res) => {
     res.send('get_write')
@@ -116,17 +154,25 @@ let modify_succece = async (req,res)=>{
 let post_list = async(req,res) => {
     let {search,searchedValue} = req.body
     let list
+
     switch(search){
         case 'writer':
-            list = await Board.findAll({where:{nickName:searchedValue},attributes:['title','like','nickName','content']})
-            console.log(search,searchedValue,'=====================================')
+            list = await Board.findAll({where:{
+                nickName:{
+                    [Op.like]:"%"+searchedValue+"%"
+            }},attributes:['title','likeIdx','nickName','content','id']})
             return res.json(list)
         case 'content':
-            list = await Board.findAll({where:{content:searchedValue},attributes:['title','like','nickName','content']})
-            // 내용의 일부 입력시 해당되는 data를 가져오도록 수정필요============================
+            list = await Board.findAll({where:{
+                content:{
+                    [Op.like]:"%"+searchedValue+"%"
+            }},attributes:['title','likeIdx','nickName','content','id']})
             return res.json(list)
         case 'title':
-            list = await Board.findAll({where:{title:searchedValue},attributes:['title','like','nickName','content']})
+            list = await Board.findAll({where:{
+                title:{
+                    [Op.like]:"%"+searchedValue+"%"
+            }},attributes:['title','likeIdx','nickName','content','id']})
             return res.json(list)
     }
 }
@@ -141,5 +187,6 @@ module.exports={
     Delete,
     write_succece,
     modify_succece,
-    post_list
+    post_list,
+    post_view
 }
