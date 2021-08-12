@@ -26,12 +26,7 @@ const List = () => {
     let list = []
     if (data !== undefined) {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        
-=======
-=======
->>>>>>> df197e4ea4c2715dfaafc392c1b07f8e4d7406cf
+
         const handleClick = (idx) => {
             //console.log(idx);
 
@@ -41,11 +36,6 @@ const List = () => {
             Router.push(`/board/view`)
         }
 
-<<<<<<< HEAD
->>>>>>> 642eec80d0f633e345776b59b8456b7c848be73b
-=======
-
->>>>>>> df197e4ea4c2715dfaafc392c1b07f8e4d7406cf
         list = data.map((v) => {
             return (
                 <>

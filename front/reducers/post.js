@@ -71,7 +71,7 @@ export const PostGet_ERROR = () => {
         type: POST_GET_ERROR,
     }
 }
-<<<<<<< HEAD
+
 
 
 //검색 가져오기
@@ -110,17 +110,14 @@ export const GetLikes_SUCCESS = (list) => {
 export const GetLikes_ERROR = () => {
     return{
         type:GET_LIKES_ERROR
-<<<<<<< HEAD
-=======
-export const GetLikes_SUCCESS = () => {
-    return {
-        type: GET_LIKES_SUCCESS,
     }
 }
-=======
 
 
->>>>>>> df197e4ea4c2715dfaafc392c1b07f8e4d7406cf
+
+
+
+
 
 /* 글 view 보기 */
 export const PostView_REQUEST = (idx) => {
@@ -138,10 +135,7 @@ export const PostView_SUCCESS = () => {
 export const PostView_ERROR = () => {
     return {
         type: POST_VIEW_ERROR,
-<<<<<<< HEAD
->>>>>>> 642eec80d0f633e345776b59b8456b7c848be73b
-=======
->>>>>>> df197e4ea4c2715dfaafc392c1b07f8e4d7406cf
+
     }
 }
 
