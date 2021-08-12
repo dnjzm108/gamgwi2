@@ -119,6 +119,7 @@ let get_likes = async(req,res) => {
     console.log(result)
     res.json(result)
 }
+
 let get_write = (req,res) => {
     res.send('get_write')
 }
@@ -165,27 +166,43 @@ let modify_succece = async (req,res)=>{
 let post_list = async(req,res) => {
     let {search,searchedValue} = req.body
     let list
+    let result = {}
 
-    switch(search){
-        case 'writer':
-            list = await Board.findAll({where:{
-                nickName:{
-                    [Op.like]:"%"+searchedValue+"%"
-            }},attributes:['title','likeIdx','nickName','content','id']})
-            return res.json(list)
-        case 'content':
-            list = await Board.findAll({where:{
-                content:{
-                    [Op.like]:"%"+searchedValue+"%"
-            }},attributes:['title','likeIdx','nickName','content','id']})
-            return res.json(list)
-        case 'title':
-            list = await Board.findAll({where:{
-                title:{
-                    [Op.like]:"%"+searchedValue+"%"
-            }},attributes:['title','likeIdx','nickName','content','id']})
-            return res.json(list)
+    
+    try{
+        switch(search){
+            case 'nickName':
+                list = await Board.findAll({where:{
+                    nickName:{
+                        [Op.like]:"%"+searchedValue+"%"
+                }},attributes:['title','likeIdx','nickName','content','id']})                
+            case 'content':   
+                list = await Board.findAll({where:{
+                    content:{
+                        [Op.like]:"%"+searchedValue+"%"
+                }},attributes:['title','likeIdx','nickName','content','id']})
+            case 'title':
+                list = await Board.findAll({where:{
+                    title:{
+                        [Op.like]:"%"+searchedValue+"%"
+                }},attributes:['title','likeIdx','nickName','content','id']})
+                
+                result = {
+                    list,
+                    result:'OK',
+                    msg:'search list 가져오기 성공'
+                }
+                res.json(result)
+        }
+    }catch(err){
+        console.log(err)
+        result = {
+            result:'Fail',
+            msg:'리스트 가져오기 실패'
+        }
+
     }
+    
 }
 
 module.exports={

@@ -26,6 +26,7 @@ const List = () => {
     let list = []
     if (data !== undefined) {
 
+
         const handleClick = (idx) => {
             //console.log(idx);
 

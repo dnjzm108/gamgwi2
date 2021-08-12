@@ -80,6 +80,26 @@ function* reqGetLikes(){
 }
 
 
+function postSearch(data){
+    console.log(data)
+    return axios.post('http://localhost:3500/board/list',{search:data.search,searchedValue:data.searchedValue})
+}
+
+function* postGetSearch(action){
+    const result = yield call(postSearch,action.data)
+    const {data} = result
+    if(data.result==="OK"){
+        yield put({
+            type:'POST_SEARCH_SUCCESS'
+        })
+    }else{
+        yield put({
+            type:'POST_SEARCH_ERROR'
+        })
+    }
+}
+
+
 /* 글 view 가져옴 */
 function* getView(action) {
     //console.log("getView ===== ",action);
@@ -101,6 +121,13 @@ function* getView(action) {
         })
     }
 }
+
+
+function* reqPost() {
+    yield takeLatest('POST_INSERT_REQUEST', postGetSearch)
+}
+
+
 
 function* reqViewList() {
     yield takeLatest('POST_VIEW_REQUEST', getView)
@@ -138,6 +165,7 @@ export default function* writeSaga() {
         fork(reqWrite),
         fork(reqGetList),
         fork(reqGetLikes),
+        fork(reqPost),
         fork(reqViewList),
         fork(reqViewDelete),
     ])
