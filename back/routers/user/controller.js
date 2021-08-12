@@ -15,16 +15,18 @@ let login_success = async (req, res) => {
     let userpw = req.body.userpw
     console.log(userid, userpw);
     let hash = chash(userpw);
-    let ctoken = token(userpw, userid);
     let login_info = await User.findOne({
-        where: { userid, userpw }
+        where: { userid, userpw:hash }
     });
+    let {userIdx}=login_info.dataValues
+
+    let ctoken = token(userpw,userid,userIdx);
     let result = {}
 
     if (login_info !== undefined) {
         result = {
             result: 'OK',
-            msg: '글 작성 성공'
+            msg: '로그인 성공'
         }
         let test = { login_info, ctoken, result }
         //res.clearCookie('SeongjinToken');
@@ -34,38 +36,22 @@ let login_success = async (req, res) => {
     } else {
         result = {
             result: 'Fail',
-            msg: '글 작성 실패'
+            msg: '로그인 실패'
         }
         let test = { result }
         res.json(test)
     }
-
-    // try{
-    //     result = {
-    //         result : 'OK',
-    //         msg : '글 작성 성공'
-    //     }
-    //     let test = {login_info,ctoken,result}
-    // res.json(test)
-
-    // }catch{
-    //     result = {
-    //         result: 'Fail',
-    //         msg: '글 작성 실패'
-    //     }
-    //     res.json(result)
-    // }
-
-
     console.log(req.cookies);
 }
 
 let join_success = async (req, res) => {
     let userid = req.body.userid
     let userpw = req.body.userpw
+    let hash = chash(userpw);
+
     console.log(userid, userpw);
     let result = await User.create({
-        userid, userpw
+        userid, userpw:hash
     })
     res.json(result)
 }
