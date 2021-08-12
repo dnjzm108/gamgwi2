@@ -120,9 +120,11 @@ export const PostDelete_REQUEST = (idx) => {
     }
 }
 
-export const PostDelete_SUCCESS = () => {
+export const PostDelete_SUCCESS = (deletedList) => {
+    console.log(deletedList);
     return {
         type: POST_DELETE_SUCCESS,
+        deletedList,
     }
 }
 
@@ -238,6 +240,29 @@ const reducer = (state = initalState, action) => {
             return {
                 ...state,
                 msg: action.msg,
+                loading: false,
+            }
+        /* 글 삭제 */
+        case POST_DELETE_REQUEST:
+            console.log('DELETE request action========',action);
+            return {
+                ...state,
+                idx : action.idx,
+                loading: true,
+            }
+        case POST_DELETE_SUCCESS:
+            console.log('delete 성공 action =====', action);
+            let {deletedList, msg} = action
+            return {
+                ...state,
+                deleteMsg : msg,
+                deletedList,
+                loading: false,
+            }
+        case POST_DELETE_ERROR:
+            console.log('delete 실패');
+            return {
+                ...state,
                 loading: false,
             }
         default:

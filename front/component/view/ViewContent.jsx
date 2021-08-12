@@ -2,8 +2,9 @@ import Styled from "styled-components"
 import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded'
 import CreateRoundedIcon from '@material-ui/icons/CreateRounded'
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded'
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { PostDelete_REQUEST } from "../../reducers/post"
+import Router from "next/router"
 
 const ViewContent = (props) => {
     //console.log(props.data);
@@ -11,11 +12,18 @@ const ViewContent = (props) => {
 
     const dispatch = useDispatch()
     const handleModify = (idx) => {
-        
+
     }
+
+    const data = useSelector(state => state.post.deleteMsg)
+    // console.log('viewcontent.jsx =====', data);
 
     const handleDelete = (idx) => {
         dispatch(PostDelete_REQUEST(idx))
+
+        if (data === '삭제 성공') {
+            Router.push('/board/list')
+        }
     }
 
     return (
@@ -33,8 +41,8 @@ const ViewContent = (props) => {
                 <VeiwIcon>
                     <ul>
                         <li><FavoriteRoundedIcon /></li>
-                        <li onClick={()=>{handleModify(id)}}><CreateRoundedIcon /></li>
-                        <li onClick={()=>{handleDelete(id)}}><DeleteRoundedIcon /></li>
+                        <li onClick={() => { handleModify(id) }}><CreateRoundedIcon /></li>
+                        <li onClick={() => { handleDelete(id) }}><DeleteRoundedIcon /></li>
                     </ul>
                 </VeiwIcon>
             </ViewContentWrap>

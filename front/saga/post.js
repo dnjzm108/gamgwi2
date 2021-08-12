@@ -106,11 +106,39 @@ function* reqViewList() {
     yield takeLatest('POST_VIEW_REQUEST', getView)
 }
 
+/* 글 삭제 */
+function* deleteView(action) {
+    console.log("getDELETE ===== ",action);
+    console.log("action.idx ===== ",action.idx);
+    const result = yield call(axios.post,'http://localhost:3500/board/delete',{idx:action.idx})
+    console.log('view 백단 요청 result ====',result);
+    const { msg, deletedRes } = result.data
+    console.log("view data =======",deletedRes);
+   
+    if (result.data.result === 'OK') {
+        yield put({
+            type: 'POST_DELETE_SUCCESS',
+            deletedList : deletedRes,
+            msg
+        })
+    } else {
+        yield put({
+            type: 'POST_DELETE_ERROR',
+            msg
+        })
+    }
+}
+
+function* reqViewDelete() {
+    yield takeLatest('POST_DELETE_REQUEST', deleteView)
+}
+
 export default function* writeSaga() {
     yield all([
         fork(reqWrite),
         fork(reqGetList),
         fork(reqGetLikes),
         fork(reqViewList),
+        fork(reqViewDelete),
     ])
 }
