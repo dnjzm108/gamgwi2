@@ -1,6 +1,7 @@
 const initalState = {
     loading: false,
     IsLogin: false,
+    Login_info:{}
 }
 
 const USER_LOGIN_REQUEST = "USER_LOGIN_REQUEST"
@@ -9,7 +10,8 @@ const USER_LOGIN_ERROR = "USER_LOGIN_ERROR"
 // const USER_LOGOUT = "USER_LOGOUT"
 
 const USER_JOIN_REQUEST = "USER_JOIN_REQUEST"
-
+const USER_JOIN_SUCCESS = "USER_JOIN_SUCCESS"
+const USER_JOIN_ERROR = "USER_JOIN_ERROR"
 export const UserLogin_REQUEST = data => {
     console.log("reduser+++++++", data);
     return {
@@ -38,16 +40,20 @@ const reducer = (state = initalState, action) => {
 
         case USER_LOGIN_SUCCESS:
             console.log('로그인 성공2');
+            console.log('_____________data',action);
             return {
                 ...state,
                 IsLogin: true,
                 loadding: false,
+                data:action.data,
             }
         case USER_LOGIN_ERROR:
             console.log('로그인 실패');
+            console.log("++++++++++=+++실패",action);
             return {
                 ...state,
                 loadding: false,
+                data:action.data,
             }
 
         case USER_JOIN_REQUEST:
@@ -56,6 +62,7 @@ const reducer = (state = initalState, action) => {
                 ...state,
                 loadding: true,
             }
+
         case USER_JOIN_SUCCESS:
             console.log('완전 가입 성공');
             return {
