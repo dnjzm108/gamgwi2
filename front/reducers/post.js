@@ -11,6 +11,10 @@ const POST_GET_REQUEST = "POST_GET_REQUEST"
 const POST_GET_SUCCESS = "POST_GET_SUCCESS"
 const POST_GET_ERROR = "POST_GET_ERROR"
 
+const POST_VIEW_REQUEST = "POST_VIEW_REQUEST"
+const POST_VIEW_SUCCESS = "POST_VIEW_SUCCESS"
+const POST_VIEW_ERROR = "POST_VIEW_ERROR"
+
 const POST_MODIFY_REQUEST = "POST_MODIFY_REQUEST"
 const POST_MODIFY_SUCCESS = "POST_MODIFY_SUCCESS"
 const POST_MODIFY_ERROR = "POST_MODIFY_ERROR"
@@ -50,13 +54,13 @@ export const PostInsert_ERROR = () => {
 
 /* 가져오기 */
 export const PostGet_REQUEST = () => {
-    console.log('postget request');
+    //console.log('postget request');
     return {
         type: POST_GET_REQUEST,
     }
 }
 export const PostGet_SUCCESS = (list) => {
-    console.log('post get list',list);
+    //console.log('post get list', list);
     return {
         type: POST_GET_SUCCESS,
         list
@@ -67,6 +71,7 @@ export const PostGet_ERROR = () => {
         type: POST_GET_ERROR,
     }
 }
+<<<<<<< HEAD
 
 //검색 가져오기
 export const PostSearch_REQUEST = (data) => {
@@ -104,6 +109,30 @@ export const GetLikes_SUCCESS = (list) => {
 export const GetLikes_ERROR = () => {
     return{
         type:GET_LIKES_ERROR
+=======
+export const GetLikes_SUCCESS = () => {
+    return {
+        type: GET_LIKES_SUCCESS,
+    }
+}
+
+/* 글 view 보기 */
+export const PostView_REQUEST = (idx) => {
+    // console.log('post view request idx ====', idx);
+    return {
+        type: POST_VIEW_REQUEST,
+        idx,
+    }
+}
+export const PostView_SUCCESS = () => {
+    return {
+        type: POST_VIEW_SUCCESS,
+    }
+}
+export const PostView_ERROR = () => {
+    return {
+        type: POST_VIEW_ERROR,
+>>>>>>> 642eec80d0f633e345776b59b8456b7c848be73b
     }
 }
 
@@ -126,43 +155,45 @@ export const PostModify_ERROR = () => {
     }
 }
 
-/* 삭제 
-export const PostDelete_REQUEST = () => {
-    return{
-        type : POST_DELETE_REQUEST,
+/* 삭제 */
+export const PostDelete_REQUEST = (idx) => {
+    return {
+        type: POST_DELETE_REQUEST,
+        idx
     }
 }
 
 export const PostDelete_SUCCESS = () => {
-    return{
-        type : POST_DELETE_SUCCESS,
+    return {
+        type: POST_DELETE_SUCCESS,
     }
 }
 
 export const PostDelete_ERROR = () => {
-    return{
-        type : POST_DELETE_ERROR,
+    return {
+        type: POST_DELETE_ERROR,
     }
 }
-*/
+
 
 
 const reducer = (state = initalState, action) => {
     switch (action.type) {
+        /* 글 작성 */
         case POST_INSERT_REQUEST:
             return {
                 ...state,
                 loading: true,
             }
         case POST_INSERT_SUCCESS:
-            console.log('insert 성공');
+            //console.log('insert 성공');
             return {
                 ...state,
                 data: action.data,
                 loading: false,
             }
         case POST_INSERT_ERROR:
-            console.log('insert 실패');
+            //console.log('insert 실패');
             return {
                 ...state,
                 data: action.data,
@@ -174,39 +205,83 @@ const reducer = (state = initalState, action) => {
                 data: undefined,
                 loading: false,
             }
+        /* 글 가져오기 */
         case POST_GET_REQUEST:
             return {
                 ...state,
                 loading: true,
             }
         case POST_GET_SUCCESS:
-            console.log('get 성공');
-            console.log('action =======',action);
-            console.log('action.list =======',action.list);
+            /*console.log('get 성공');
+            console.log('action =======', action);
+            console.log('action.list =======', action.list);*/
             return {
                 ...state,
                 list: action.list,
                 loading: false,
             }
         case POST_GET_ERROR:
-            console.log('get 실패');
+            // console.log('get 실패');
             return {
                 ...state,
                 loading: false,
             }
         case GET_LIKES_REQUEST:
-            return{
+            return {
                 ...state,
-                loading:true
+                loading: true
             }
         case GET_LIKES_SUCCESS:
-            console.log('likes 성공')
-            console.log(action,'likes action')
-            console.log(action.list,'action=================likeslist')
-            return{
+            /*console.log('likes 성공')
+            console.log(action, 'likes action')
+            console.log(action.list, 'action=================likeslist')*/
+            return {
                 ...state,
-                list:action.list,
-                loading:false
+                list: action.list,
+                loading: false
+            }
+        case POST_VIEW_REQUEST:
+            //console.log('view request action========',action);
+            return {
+                ...state,
+                idx: action.idx,
+                loading: true,
+            }
+        case POST_VIEW_SUCCESS:
+            //console.log('view 성공 action =====', action);
+            return {
+                ...state,
+                view: action.view,
+                loading: false,
+            }
+        case POST_VIEW_ERROR:
+            console.log('view 실패');
+            return {
+                ...state,
+                msg: action.msg,
+                loading: false,
+            }
+
+        case POST_VIEW_REQUEST:
+            //console.log('view request action========',action);
+            return {
+                ...state,
+                idx: action.idx,
+                loading: true,
+            }
+        case POST_VIEW_SUCCESS:
+            //console.log('view 성공 action =====', action);
+            return {
+                ...state,
+                view: action.view,
+                loading: false,
+            }
+        case POST_VIEW_ERROR:
+            console.log('view 실패');
+            return {
+                ...state,
+                msg: action.msg,
+                loading: false,
             }
         case GET_LIKES_ERROR:
             return{
