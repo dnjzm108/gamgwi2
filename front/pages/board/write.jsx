@@ -13,8 +13,9 @@ const Write = () => {
     useEffect(() => {
         if (data !== undefined) {
             alert(data)
+
             if (data === '글 작성 성공') {
-                Router.push('/board/view')
+                Router.push('/board/list')
             }
             dispatch({type:'POST_INSERT_RESET'})
         }
