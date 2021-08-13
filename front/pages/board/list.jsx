@@ -9,30 +9,21 @@ import { useEffect } from 'react'
 import Router from "next/router"
 
 
+
 const List = () => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(PostGet_REQUEST())
     }, [])
 
-
     // list 값 가져오기
     const data = useSelector(state => state.post.list)
-    // console.log("data ===========", data);
-    useEffect(() => {
-
-    }, [data])
+    useEffect(() => {}, [data])
 
     let list = []
     if (data !== undefined) {
-
-
         const handleClick = (idx) => {
-            //console.log(idx);
-
             dispatch(PostView_REQUEST(idx))
-
-            //Router.push(`/board/view?idx=${idx}`)
             Router.push(`/board/view`)
         }
 
@@ -49,10 +40,6 @@ const List = () => {
             )
         })
     }
-
-    // const router = useRouter()
-    // const { post } = router.query
-
     return (
         <>
             <Head>

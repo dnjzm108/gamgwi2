@@ -8,14 +8,10 @@ import Router from "next/router"
 import { useEffect, useState } from "react"
 
 const ViewContent = (props) => {
-    // if(props.data === undefined){
-    //     Router.push('/board/list')
-    // }
-    //console.log(props.data);
     let { title, content, nickName, hit, id, likeIdx, date } = props.data
-    //console.log(props.data);
     let contentData = { ...props.data };
-    //console.log(contentData);
+    console.log(contentData.date.substring(0,10));
+    let YMD = contentData.date.substring(0,10)
 
 
     const dispatch = useDispatch()
@@ -55,7 +51,8 @@ const ViewContent = (props) => {
                     {title}
                 </TitleWrap>
                 <DateWrap>
-                    {date}
+                    <p>작성자 : {nickName}</p>
+                    <p> {YMD} </p>
                 </DateWrap>
                 <ContentWrap>
                     {content}
@@ -108,12 +105,16 @@ const ContentWrap = Styled.div`
 `
 const DateWrap = Styled.div`
     width: 100%;
-    height: 10%;
+    height: 13%;
     text-align: right;
-    border-top: 1px dotted  #6663;
-    border-bottom: 1px dotted  #6663;
-    padding: 5% 0;
+    border-top: 1px dotted #6663;
+    border-bottom: 1px dotted #6663;
+    padding: 2%;
     box-sizing: border-box;
+
+    & > p {
+        height : 50%;
+    }
 
     @media only screen and (min-width:768px){
         font-size : 20px;

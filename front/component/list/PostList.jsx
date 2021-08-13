@@ -1,4 +1,8 @@
 import Styled from "styled-components"
+import DateRangeIcon from '@material-ui/icons/DateRange';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import FaceIcon from '@material-ui/icons/Face';
+import TitleIcon from '@material-ui/icons/Title';
 
 const PostContent = (props)=>{
     return(
@@ -7,9 +11,9 @@ const PostContent = (props)=>{
                 <ListTable>
                     <tr>
                         <th>TITLE</th>
-                        <th>WRITER</th>
-                        <th>HIT</th>
-                        <th>DATE</th>
+                        <th><FaceIcon/></th>
+                        <th><VisibilityIcon/></th>
+                        <th><DateRangeIcon/></th>
                     </tr>
                     {props.list}
                 </ListTable>
@@ -64,8 +68,9 @@ const ListTable = Styled.table`
     & > tr:nth-child(1){
         width: 100%;
         height : auto;
-        font-size : 17px;
-        background : #e0a6a6;
+    }
+    & > tr:nth-child(1)>th{
+        border-bottom: 4px solid #efefef;
     }
     & > tr:nth-child(1) > th:nth-child(1) {
         width: 50%;
