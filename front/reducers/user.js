@@ -1,7 +1,7 @@
 const initalState = {
     loading: false,
     IsLogin: false,
-    Login_info:{}
+    user_info:{}
 }
 
 const USER_LOGIN_REQUEST = "USER_LOGIN_REQUEST"
@@ -12,6 +12,10 @@ const USER_LOGIN_ERROR = "USER_LOGIN_ERROR"
 const USER_JOIN_REQUEST = "USER_JOIN_REQUEST"
 const USER_JOIN_SUCCESS = "USER_JOIN_SUCCESS"
 const USER_JOIN_ERROR = "USER_JOIN_ERROR"
+
+const USER_COOKIE_CHECK ="USER_COOKIE_CHECK"
+
+
 export const UserLogin_REQUEST = data => {
     console.log("reduser+++++++", data);
     return {
@@ -25,6 +29,13 @@ export const UserJoin_REQUEST = data => {
     return {
         type: USER_JOIN_REQUEST,
         data
+    }
+}
+
+export const UserCookieCheck = data =>{
+
+    return{
+        type : USER_COOKIE_CHECK
     }
 }
 
@@ -46,6 +57,7 @@ const reducer = (state = initalState, action) => {
                 IsLogin: true,
                 loadding: false,
                 data:action.data,
+                user_info:action.user_info,
             }
         case USER_LOGIN_ERROR:
             console.log('로그인 실패');
@@ -81,6 +93,14 @@ const reducer = (state = initalState, action) => {
         //         ...state,
         //         IsLogin:false,
         //     }
+
+        case USER_COOKIE_CHECK:
+
+        return{
+            ...state,
+            lodding : true,
+        }
+
         default:
             return state
     }

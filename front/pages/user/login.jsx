@@ -18,7 +18,6 @@ const Login = () => {
                  
                  alert(data)
              }
-            dispatch({type:'USER_LOGIN_SUCCESS'})
         }
     }, [data])
 

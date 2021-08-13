@@ -1,5 +1,4 @@
 import axios from "axios";
-import cookie from 'react-cookies';
 import { all, call, takeLatest,fork,put} from "redux-saga/effects";
 
 
@@ -27,7 +26,7 @@ import { all, call, takeLatest,fork,put} from "redux-saga/effects";
 
 function loginAPI(data){
     console.log(data);
-    return axios.post('http://localhost:3500/user/login',data,{ withCredentials: true })
+    return axios.post('http://localhost:3500/user/login',data) //,{ withCredentials: true }
 }
 
 function* login(action){
@@ -35,17 +34,18 @@ function* login(action){
     let {data} = result
     console.log('saga_data++++++++++',data.login_info);
 
-    // if (data.login_info !== null) {
-    //     yield put({
-    //         type: 'USER_LOGIN_SUCCESS',
-    //         data: 'OK'
-    //     })
-    // } else {
-    //     yield put({
-    //         type: 'USER_LOGIN_ERROR',
-    //         data: 'FAIL'
-    //     })
-    // }
+    if (data.login_info !== null) {
+        yield put({
+            type: 'USER_LOGIN_SUCCESS',
+            data: 'OK',
+            user_info:data.login_info
+        })
+    } else {
+        yield put({
+            type: 'USER_LOGIN_ERROR',
+            data: '아이디와 비밀번호를 확인해주세요'
+        })
+    }
     
 }
 
@@ -62,9 +62,18 @@ function* join(action){
 
 }
 
+function cookieAPI(data){
+    return axios.get('http://localhost:3500',{ withCredentials: true })
+}
+
+function* cookie_check(action){
+    let result = yield call(cookieAPI,action.data)
+}
+
 function* watchUser(){
     yield takeLatest('USER_LOGIN_REQUEST',login)
     yield takeLatest('USER_JOIN_REQUEST',join)
+    yield takeLatest('USER_COOKIE_CHECK',cookie_check)
 }
 
 export default function* userSaga(){

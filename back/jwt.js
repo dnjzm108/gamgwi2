@@ -1,14 +1,16 @@
 require('dotenv').config();
 const crypto =require('crypto');
 
-function createToken(userpw,userid){
+function createToken(userpw,userid,userIdx){
     let header = {"tpy":"jwt","alg":"HS256"}
     let exp = new Date().getTime()+((60*60*24*30)*1000)
     let payload={
         userid,
         userpw,
+        userIdx,
         exp
     }
+    
     const encodingHeader = Buffer.from(JSON.stringify(header))
                                 .toString('base64')
                                 .replace('==','')
