@@ -360,7 +360,7 @@ const reducer = (state = initalState, action) => {
             return{
                 ...state,
                 loading:false
-
+            }
         /* 수정 */
         case POST_MODIFY_REQUEST:
             console.log('MODIFY request action========', action);
