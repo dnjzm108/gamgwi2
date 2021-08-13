@@ -6,16 +6,13 @@ import { useDispatch, useSelector } from "react-redux"
 import { AddLikes_REQUEST, PostDelete_REQUEST, PostModify_REQUEST } from "../../reducers/post"
 import Router from "next/router"
 import { useEffect, useState } from "react"
+import GoBack from "../common/GoBack"
 
 const ViewContent = (props) => {
-    // if(props.data === undefined){
-    //     Router.push('/board/list')
-    // }
-    //console.log(props.data);
     let { title, content, nickName, hit, id, likeIdx, date } = props.data
-    //console.log(props.data);
     let contentData = { ...props.data };
-    //console.log(contentData);
+
+    let YMD = contentData.date.substring(0,10)
 
 
     const dispatch = useDispatch()
@@ -39,10 +36,6 @@ const ViewContent = (props) => {
     const [likeState, setLikeState] = useState(false)
     const handleLikes = (idx) => {
         setLikeState(!likeState)
-        
-        // useEffect(()=>{
-        //     dispatch(AddLikes_REQUEST(idx))
-        // },[likeState])
         const likeData = {idx, likeState}
         dispatch(AddLikes_REQUEST(likeData))
         
@@ -51,11 +44,13 @@ const ViewContent = (props) => {
     return (
         <>
             <ViewContentWrap>
+                <GoBack />
                 <TitleWrap>
                     {title}
                 </TitleWrap>
                 <DateWrap>
-                    {date}
+                    <p>작성자 : {nickName}</p>
+                    <p> {YMD} </p>
                 </DateWrap>
                 <ContentWrap>
                     {content}
@@ -93,31 +88,39 @@ const TitleWrap = Styled.div`
 
     @media only screen and (min-width:768px){
         font-size : 35px;
+        padding: 3% 5%;
     }
 `
 const ContentWrap = Styled.div`
     width: 100%;
-    height: 69%;
+    height: 64%;
     font-size: 23px;
     padding: 6% 2%;
     box-sizing: border-box;
+    word-break:break-all;
 
     @media only screen and (min-width:768px){
         font-size : 25px;
+        padding: 5% 7%;
+        
     }
 `
 const DateWrap = Styled.div`
     width: 100%;
-    height: 10%;
+    height: 13%;
     text-align: right;
-    border-top: 1px dotted  #6663;
-    border-bottom: 1px dotted  #6663;
-    padding: 5% 0;
+    border-top: 1px dotted #6663;
+    border-bottom: 1px dotted #6663;
+    padding: 2%;
     box-sizing: border-box;
+
+    & > p {
+        height : 50%;
+    }
 
     @media only screen and (min-width:768px){
         font-size : 20px;
-        padding: 2% 0;
+        padding: 2%;
     }
 `
 
@@ -144,10 +147,13 @@ const VeiwIcon = Styled.div`
     & > ul > li > svg,
     & > ul > li > span > svg
     {
-        font-size : 40px;
+        font-size : 35px;
     }
 
     @media only screen and (min-width:768px){
+        & > ul {
+            
+        }
         & > ul > li > svg {
             font-size : 40px;
         }

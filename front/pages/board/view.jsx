@@ -6,6 +6,7 @@ import WebLayout from "../../component/layout/webLayout"
 import ViewContent from "../../component/view/ViewContent"
 import Router from "next/router"
 
+
 const view = () => {
     const data = useSelector(state => state.post.view)
 
