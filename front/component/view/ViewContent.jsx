@@ -3,29 +3,41 @@ import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded'
 import CreateRoundedIcon from '@material-ui/icons/CreateRounded'
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded'
 import { useDispatch, useSelector } from "react-redux"
-import { AddLikes_REQUEST, PostDelete_REQUEST } from "../../reducers/post"
+import { AddLikes_REQUEST, PostDelete_REQUEST, PostModify_REQUEST } from "../../reducers/post"
 import Router from "next/router"
 
 const ViewContent = (props) => {
+    // if(props.data === undefined){
+    //     Router.push('/board/list')
+    // }
     //console.log(props.data);
     let { title, content, nickName, hit, id, likeIdx } = props.data
+    //console.log(props.data);
+    let contentData = {...props.data};
+    //console.log(contentData);
+
 
     const dispatch = useDispatch()
-    const handleModify = (idx) => {
 
+    const handleModify = (data) => {
+        dispatch(PostModify_REQUEST(data))
+        Router.push('/board/modify')
     }
 
     const msg = useSelector(state => state.post.deleteMsg)
     const handleDelete = (idx) => {
         dispatch(PostDelete_REQUEST(idx))
 
-        if (msg === '삭제 성공') {
-            Router.push('/board/list')
-        }
+        Router.push('/board/list')
+
+        // if (msg === '삭제 성공') {
+        //     Router.push('/board/list')
+        // }
     }
 
     const handleLikes = (idx) =>{
-        dispatch(AddLikes_REQUEST(idx))
+        
+        //dispatch(AddLikes_REQUEST(idx))
         
     }
 
@@ -44,7 +56,7 @@ const ViewContent = (props) => {
                 <VeiwIcon>
                     <ul>
                         <li onClick={() => { handleLikes(id) }}><FavoriteRoundedIcon /></li>
-                        <li onClick={() => { handleModify(id) }}><CreateRoundedIcon /></li>
+                        <li onClick={() => { handleModify(contentData) }}><CreateRoundedIcon /></li>
                         <li onClick={() => { handleDelete(id) }}><DeleteRoundedIcon /></li>
                     </ul>
                 </VeiwIcon>
