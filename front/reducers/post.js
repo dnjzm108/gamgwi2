@@ -158,21 +158,22 @@ export const PostView_ERROR = () => {
 }
 
 
-/* 수정 
+/* 수정 */
 export const PostModify_REQUEST = data => {
-    return{
-        type : POST_MODIFY_REQUEST,      
-        data,                          
+    console.log("modify -====",data);
+    return {
+        type: POST_MODIFY_REQUEST,
+        data,
     }
 }
 export const PostModify_SUCCESS = () => {
-    return{
-        type : POST_MODIFY_SUCCESS,
+    return {
+        type: POST_MODIFY_SUCCESS,
     }
 }
 export const PostModify_ERROR = () => {
-    return{
-        type : POST_MODIFY_ERROR,
+    return {
+        type: POST_MODIFY_ERROR,
     }
 }
 
@@ -324,6 +325,25 @@ const reducer = (state = initalState, action) => {
                 loading: false,
             }
         case POST_DELETE_ERROR:
+            console.log('delete 실패');
+            return {
+                ...state,
+                loading: false,
+            }
+        /* 수정 */
+        case POST_MODIFY_REQUEST:
+            console.log('MODIFY request action========', action);
+            return {
+                ...state,
+                loading: true,
+            }
+        case POST_MODIFY_SUCCESS:
+            console.log('modify 성공 action =====', action);
+            return {
+                ...state,
+                loading: false,
+            }
+        case POST_MODIFY_ERROR:
             console.log('delete 실패');
             return {
                 ...state,

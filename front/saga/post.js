@@ -102,12 +102,6 @@ function* postGetSearch(action){
 function* reqPost() {
     yield takeLatest('POST_INSERT_REQUEST', postGetSearch)
 }
-
-
-function* reqPost() {
-    yield takeLatest('POST_SEARCH_REQUEST', postGetSearch)
-}
-
 /* 글 view 가져옴 */
 function* getView(action) {
     const result = yield call(axios.post,'http://localhost:3500/board/view',{idx:action.idx})
@@ -156,9 +150,34 @@ function* deleteView(action) {
     }
 }
 
-
 function* reqViewDelete() {
     yield takeLatest('POST_DELETE_REQUEST', deleteView)
+}
+
+/* 글 수정 */
+function* modifyView(action) {
+    console.log("getMODIFY ===== ",action);
+    // const result = yield call(axios.post,'http://localhost:3500/board/delete',{idx:action.idx})
+    // console.log('view 백단 요청 result ====',result);
+    // const { msg, deletedRes } = result.data
+    // console.log("view data =======",deletedRes);
+   
+    // if (result.data.result === 'OK') {
+    //     yield put({
+    //         type: 'POST_MODIFY_SUCCESS',
+    //         deletedList : deletedRes,
+    //         msg
+    //     })
+    // } else {
+    //     yield put({
+    //         type: 'POST_MODIFY_ERROR',
+    //         msg
+    //     })
+    // }
+}
+
+function* reqViewModify() {
+    yield takeLatest('POST_MODIFY_REQUEST', modifyView)
 }
 
 /* 좋아요 추가할 때 */
@@ -193,6 +212,7 @@ export default function* writeSaga() {
         fork(reqPost),
         fork(reqViewList),
         fork(reqViewDelete),
+        fork(reqViewModify),
         fork(reqAddLikes),
     ])
 }

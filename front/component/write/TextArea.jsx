@@ -46,8 +46,8 @@ const TextArea = () => {
                 <TodayWeather weatherChange={weatherChange}/>
                 <WriteWrap>
                     <div>
-                        <InputTitle type="text" {...writeTitle} />
-                        <InputContent {...writeContent} />
+                        <InputTitle type="text"  {...writeTitle} />
+                        <InputContent  {...writeContent} />
                     </div>
 
                     <ButtonBox>
