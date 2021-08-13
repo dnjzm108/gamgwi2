@@ -16,7 +16,7 @@ let post_view = async (req,res)=>{
     let {idx} = req.body
     let result = {};
     try {
-        let view = await Board.findOne({where:{id:idx},attributes:['title','content','nickName','hit','id','likeIdx']})
+        let view = await Board.findOne({where:{id:idx},attributes:['title','content','nickName','hit','id','likeIdx','date']})
         result = {
             result : 'OK',
             view : view.dataValues
@@ -125,9 +125,10 @@ let get_write = (req,res) => {
     res.send('get_write')
 }
 
+// 글 수정에 들어왔을때===========================================
 let modify = async (req,res) =>{
     let {idx} = req.query
-    let list = await Board.findAll({where:{id:idx}})
+    let list = await Board.findAll({where:{id:idx},attributes:['id','title','content','date']})
     res.json(list)
 }
 
@@ -157,10 +158,13 @@ let write_succece = async (req,res) =>{
     res.json(sucWrite)
     // 작성완료된 후 작성된 내용을 보여주는 
 }
+// 글 수정 완료시에 =============================================
 let modify_succece = async (req,res)=>{
-    //let {idx,title,content,category} = req.body
-    //await Board.update({where:{id:idx}})
-    res.json({report:'수정이 완료되었습니다.'})
+    let {idx} = req.body
+    await Board.update({title:'수정',content:'수정',updatedAt:'수정'},{where:{id:idx}})
+    // 수정후 보여지는게 list인 경우 => let modifiedRes = Board.findAll({})
+    // 수정후 보여지는게 수정완료된 view인 경우 => let modifiedReas = Board.findAll({where:{id:idx},attributes:['title','content','hit','date]})
+    res.json({modifiedRes})
 }
 
 //post =========================================================================

@@ -104,9 +104,9 @@ function* reqPost() {
 }
 
 
-function* reqPost() {
-    yield takeLatest('POST_SEARCH_REQUEST', postGetSearch)
-}
+// function* reqPost() {
+//     yield takeLatest('POST_SEARCH_REQUEST', postGetSearch)
+// }
 
 /* 글 view 가져옴 */
 function* getView(action) {
