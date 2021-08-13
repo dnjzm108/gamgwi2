@@ -1,7 +1,7 @@
 const initalState = {
     loading: false,
     IsLogin: false,
-    Login_info:{}
+    user_info:{}
 }
 
 const USER_LOGIN_REQUEST = "USER_LOGIN_REQUEST"
@@ -57,6 +57,7 @@ const reducer = (state = initalState, action) => {
                 IsLogin: true,
                 loadding: false,
                 data:action.data,
+                user_info:action.user_info,
             }
         case USER_LOGIN_ERROR:
             console.log('로그인 실패');

@@ -26,7 +26,7 @@ import { all, call, takeLatest,fork,put} from "redux-saga/effects";
 
 function loginAPI(data){
     console.log(data);
-    return axios.post('http://localhost:3500/user/login',data,{ withCredentials: true })
+    return axios.post('http://localhost:3500/user/login',data) //,{ withCredentials: true }
 }
 
 function* login(action){
@@ -37,7 +37,8 @@ function* login(action){
     if (data.login_info !== null) {
         yield put({
             type: 'USER_LOGIN_SUCCESS',
-            data: 'OK'
+            data: 'OK',
+            user_info:data.login_info
         })
     } else {
         yield put({
