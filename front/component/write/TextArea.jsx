@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import TodayWeather from './TodayWeather'
 import Link from 'next/link'
 import { WriteWrap, InputTitle, InputContent, ButtonBox } from './TextAreaCss'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 const TextArea = () => {
     const dispatch = useDispatch()
@@ -46,7 +47,7 @@ const TextArea = () => {
 
                     <ButtonBox>
                         <Link href="/board/list">
-                            <a><DeleteForeverRoundedIcon /></a>
+                            <a><ArrowBackIcon /></a>
                         </Link>
                         <button type='submit'>
                             <DoneOutlineRoundedIcon />

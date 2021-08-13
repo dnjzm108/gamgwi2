@@ -8,6 +8,8 @@ import TodayWeather from './TodayWeather'
 import Link from 'next/link'
 import Router from "next/router"
 import { WriteWrap, InputTitle, InputContent, ButtonBox } from './TextAreaCss'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+
 
 const ModifyArea = () => {
     const modifyData = useSelector(state => state.post.modifyData)
@@ -60,7 +62,7 @@ const ModifyArea = () => {
 
                     <ButtonBox>
                         <Link href="/board/list">
-                            <a><DeleteForeverRoundedIcon /></a>
+                            <a><ArrowBackIcon /></a>
                         </Link>
                         <button type='submit'>
                             <DoneOutlineRoundedIcon />

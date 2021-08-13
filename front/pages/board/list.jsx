@@ -26,7 +26,6 @@ const List = () => {
             dispatch(PostView_REQUEST(idx))
             Router.push(`/board/view`)
         }
-
         list = data.map((v) => {
             return (
                 <>
