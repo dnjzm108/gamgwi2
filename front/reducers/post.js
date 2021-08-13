@@ -118,10 +118,11 @@ export const GetLikes_ERROR = () => {
 }
 
 /* 좋아요 누르기 */
-export const AddLikes_REQUEST = (idx) => {
+export const AddLikes_REQUEST = (likeData) => {
+    console.log('좋아용!!!! === ',likeData);
     return {
         type: ADD_LIKES_REQUEST,
-        idx
+        likeData
     }
 }
 export const AddLikes_SUCCESS = () => {

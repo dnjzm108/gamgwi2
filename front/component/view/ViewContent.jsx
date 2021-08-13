@@ -5,15 +5,16 @@ import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded'
 import { useDispatch, useSelector } from "react-redux"
 import { AddLikes_REQUEST, PostDelete_REQUEST, PostModify_REQUEST } from "../../reducers/post"
 import Router from "next/router"
+import { useEffect, useState } from "react"
 
 const ViewContent = (props) => {
     // if(props.data === undefined){
     //     Router.push('/board/list')
     // }
     //console.log(props.data);
-    let { title, content, nickName, hit, id, likeIdx } = props.data
+    let { title, content, nickName, hit, id, likeIdx, date } = props.data
     //console.log(props.data);
-    let contentData = {...props.data};
+    let contentData = { ...props.data };
     //console.log(contentData);
 
 
@@ -35,9 +36,15 @@ const ViewContent = (props) => {
         // }
     }
 
-    const handleLikes = (idx) =>{
+    const [likeState, setLikeState] = useState(false)
+    const handleLikes = (idx) => {
+        setLikeState(!likeState)
         
-        //dispatch(AddLikes_REQUEST(idx))
+        // useEffect(()=>{
+        //     dispatch(AddLikes_REQUEST(idx))
+        // },[likeState])
+        const likeData = {idx, likeState}
+        dispatch(AddLikes_REQUEST(likeData))
         
     }
 
@@ -48,14 +55,19 @@ const ViewContent = (props) => {
                     {title}
                 </TitleWrap>
                 <DateWrap>
-                    date and time
+                    {date}
                 </DateWrap>
                 <ContentWrap>
                     {content}
                 </ContentWrap>
                 <VeiwIcon>
                     <ul>
-                        <li onClick={() => { handleLikes(id) }}><FavoriteRoundedIcon /></li>
+                        <li onClick={() => { handleLikes(id) }}>
+                            <LikesWrap flag={likeState}>
+                                <FavoriteRoundedIcon />
+                            </LikesWrap>
+                            {/* <FavoriteRoundedIcon flag = {likeState}/> */}
+                        </li>
                         <li onClick={() => { handleModify(contentData) }}><CreateRoundedIcon /></li>
                         <li onClick={() => { handleDelete(id) }}><DeleteRoundedIcon /></li>
                     </ul>
@@ -69,26 +81,44 @@ export default ViewContent
 const ViewContentWrap = Styled.div`
     width : 100%;
     height : 100%;
-    background : #e9a9a9;
+    // background : #e9a9a9;
 `
 
 const TitleWrap = Styled.div`
-    width : 100%;
-    height : 15%;
-    background : yellow;
-`
+    width: 100%;
+    height: auto;
+    font-size: 30px;
+    padding: 5% 2%;
+    box-sizing: border-box;
 
+    @media only screen and (min-width:768px){
+        font-size : 35px;
+    }
+`
 const ContentWrap = Styled.div`
     width: 100%;
-    background: cadetblue;
     height: 69%;
+    font-size: 23px;
+    padding: 6% 2%;
+    box-sizing: border-box;
 
+    @media only screen and (min-width:768px){
+        font-size : 25px;
+    }
 `
-
 const DateWrap = Styled.div`
-    width : 100%;
-    height : 10%;
-    background : #dfdfab;
+    width: 100%;
+    height: 10%;
+    text-align: right;
+    border-top: 1px dotted  #6663;
+    border-bottom: 1px dotted  #6663;
+    padding: 5% 0;
+    box-sizing: border-box;
+
+    @media only screen and (min-width:768px){
+        font-size : 20px;
+        padding: 2% 0;
+    }
 `
 
 const VeiwIcon = Styled.div`
@@ -111,13 +141,21 @@ const VeiwIcon = Styled.div`
         width : 70px;
     }
 
-    & > ul > li > svg {
-        font-size : 35px;
+    & > ul > li > svg,
+    & > ul > li > span > svg
+    {
+        font-size : 40px;
     }
 
     @media only screen and (min-width:768px){
         & > ul > li > svg {
             font-size : 40px;
         }
+    }
+`
+
+const LikesWrap = Styled.span`
+    & > svg {
+        color : ${props => (props.flag ? '#ff000087' : 'black')};
     }
 `
