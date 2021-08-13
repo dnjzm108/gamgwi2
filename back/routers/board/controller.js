@@ -21,6 +21,22 @@ let post_view = async (req,res)=>{
             result : 'OK',
             view : view.dataValues
         }
+        if('like'==true){
+            await Like.update({likeStatus:1},{
+                include:[{
+                    model:Board,
+                    where:{id:idx}
+                }],
+                
+            })
+        }else if('like'==false){
+            await Like.update({likeStatus:0},{
+                include:[{
+                    model:Board,
+                    where:{id,idx}
+                }]
+            })
+        }
     } catch (error) {
         result = {
             result: 'Fail',
@@ -103,7 +119,8 @@ let get_list = async (req,res) =>{
 }
 let get_likes = async(req,res) => {
     let result ={}
-    await Like.create({likeBoardIdx:1,likeCount:0,likeStatus:1})
+    //await Like.create({likeBoardIdx:2,likeCount:0,likeStatus:1})
+    //await Like.create({likeBoardIdx:3,likeCount:0,likeStatus:0})
 
     //let list = await Board.findAll({where:{like:1,category:'글귀'},attributes:['title','like','nickName','content']})
     let list = await Board.findAll({
@@ -136,6 +153,12 @@ let Delete = async(req,res) =>{
     let {idx} = req.body
     try {
         await Board.destroy({where:{id:idx}})
+        await Like.destroy({
+            include:[{
+                model:Board,
+                where:{id:idx}
+            }]
+        })
         let deletedRes = await Board.findAll({})
         result = {
             deletedRes,
@@ -163,7 +186,7 @@ let modify_succece = async (req,res)=>{
     let {idx} = req.body
     await Board.update({title:'수정',content:'수정',updatedAt:'수정'},{where:{id:idx}})
     // 수정후 보여지는게 list인 경우 => let modifiedRes = Board.findAll({})
-    // 수정후 보여지는게 수정완료된 view인 경우 => let modifiedReas = Board.findAll({where:{id:idx},attributes:['title','content','hit','date]})
+    // 수정후 보여지는게 수정완료된 view인 경우 => let modifiedReas = Board.findAll({where:{id:idx},attributes:['title','content','hit','date']})
     res.json({modifiedRes})
 }
 

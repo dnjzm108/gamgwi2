@@ -99,14 +99,14 @@ function* postGetSearch(action){
         })
     }
 }
-function* reqPost() {
-    yield takeLatest('POST_INSERT_REQUEST', postGetSearch)
-}
-
-
 // function* reqPost() {
-//     yield takeLatest('POST_SEARCH_REQUEST', postGetSearch)
+//     yield takeLatest('POST_INSERT_REQUEST', postGetSearch)
 // }
+
+
+function* reqPost() {
+    yield takeLatest('POST_SEARCH_REQUEST', postGetSearch)
+}
 
 /* 글 view 가져옴 */
 function* getView(action) {

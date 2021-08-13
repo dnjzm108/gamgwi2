@@ -10,6 +10,7 @@ const Post = ()=>{
             <Head>
                 <title>Gamgwi | Post</title>
             </Head>
+            <p>{post}</p>
         </>
     )
 }

@@ -24,6 +24,7 @@ const SearchBar = () => {
             searchedValue:searchedValue.value
         }
         dispatch(PostSearch_REQUEST(data))
+        Router.push(`/board/${search}_${searchedValue.value}`)
     }
 
     useEffect(()=>{
