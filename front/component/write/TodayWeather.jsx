@@ -10,7 +10,7 @@ const TodayWeather = (props) => {
                 <TodayMyWeather>오늘, 내 마음의 날씨</TodayMyWeather>
                 <TodayWeatherUl>
                     <li>
-                        <TodayWeatherCheckBox type="radio" id="sun" name="weather" value="sun" onChange={props.weatherChange}/>
+                        <TodayWeatherCheckBox type="radio" id="sun" name="weather" value="sun" onChange={props.weatherChange} />
                         <label htmlFor="sun">
                             <WbSunnyRoundedIcon style={FontSize} />
                         </label>

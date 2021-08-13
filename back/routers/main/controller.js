@@ -5,8 +5,8 @@ let first_main = (req,res) =>{
 }
 
 let main = (req,res) =>{
-    
-    res.send('main')
+    console.log('여기까지 왔니?');
+   return ;
 }
 
 

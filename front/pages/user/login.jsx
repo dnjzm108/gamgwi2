@@ -7,17 +7,17 @@ import { useEffect,useCallback } from 'react'
 
 const Login = () => {
     const dispatch = useDispatch()
-    const data = useSelector(state => state.user.data)
+    const data = useSelector(state => state.user)
 
     useEffect(() => {
-        if (data !== undefined) {
+        if (data.data !== undefined) {
             console.log('login___data+++++++++',data);
-             if (data === 'OK') {
+             if (data.data === 'OK') {
                  Router.push('/home')
              }else{
-                 
-                 alert(data)
+                 alert(data.data)
              }
+
         }
     }, [data])
 

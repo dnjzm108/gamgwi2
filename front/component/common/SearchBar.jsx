@@ -37,7 +37,7 @@ const SearchBar = () => {
                 {/* <form method="POST" action="http://localhost:3500/board/list"> */}
                 <form onSubmit={handleSubmit}>
                     <select name="search" onChange={handleChange}>
-                        <option value="none" selected>==선택==</option>
+                        <option value="none" >==선택==</option>
                         <option value="nickName"  >작성자</option>
                         <option value="content">내용</option>
                         <option value="title">제목</option>

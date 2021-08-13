@@ -26,7 +26,7 @@ import { all, call, takeLatest,fork,put} from "redux-saga/effects";
 
 function loginAPI(data){
     console.log(data);
-    return axios.post('http://localhost:3500/user/login',data) //,{ withCredentials: true }
+    return axios.post('http://localhost:3500/user/login',data,{ withCredentials: true }) //
 }
 
 function* login(action){
@@ -63,11 +63,27 @@ function* join(action){
 }
 
 function cookieAPI(data){
+    console.log('cookie_data+++++++',data);
     return axios.get('http://localhost:3500',{ withCredentials: true })
 }
 
 function* cookie_check(action){
-    let result = yield call(cookieAPI,action.data)
+    console.log('action+++++++',action);
+    let result = yield call(cookieAPI,action)
+    let {data} = result;
+
+    if (data.cookie == 'success') {
+        yield put({
+            type: 'USER_COOKIE_SUCCESS',
+            data: data.cookie,
+            user_info:data.user_info
+        })
+    } else {
+        yield put({
+            type: 'USER_COOKIE_ERROR',
+            data: data.cookie,
+        })
+    }
 }
 
 function* watchUser(){
