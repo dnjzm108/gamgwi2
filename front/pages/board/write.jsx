@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Router from "next/router"
-import { useEffect,useCallback } from 'react'
-import { useSelector,useDispatch } from 'react-redux';
+import { useEffect, useCallback } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
 import WebLayout from "../../component/layout/webLayout";
 import Styled from "styled-components";
 import TextArea from '../../component/write/TextArea';
@@ -9,7 +9,7 @@ import TextArea from '../../component/write/TextArea';
 const Write = () => {
     const dispatch = useDispatch()
     const data = useSelector(state => state.post.data)
-
+    
     useEffect(() => {
         if (data !== undefined) {
             alert(data)
@@ -17,7 +17,7 @@ const Write = () => {
             if (data === '글 작성 성공') {
                 Router.push('/board/list')
             }
-            dispatch({type:'POST_INSERT_RESET'})
+            dispatch({ type: 'POST_INSERT_RESET' })
         }
     }, [data])
 
