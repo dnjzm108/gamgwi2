@@ -185,9 +185,16 @@ function* reqViewModify() {
 
 /* 좋아요 추가할 때 */
 function* addLikes(action) {
-    console.log(action);
-    // const result = yield call(axios.post,'http://localhost:3500/board/view',{idx:action.idx})
-    //const { data } = result
+    console.log(action.likeData);
+    /*
+        {idx: 30, likeState: true}
+        이런식으로 오는데 왜인지 잘 모르겠는데 
+        빨간색이면 false 검정이면 ture 가 되네여..
+        이대로 백단에 보내서 likeState 값 update 해준다음에
+        idx 로 해당 글 조회해서 view 에 뿌려주면 되지 않을까.. 싶습니다.
+    */
+    // const result = yield call(axios.post,'http://localhost:3500/board/링크',action.likeData)
+    // const { data } = result
     
     // if (data.result === 'OK') {
     //     yield put({

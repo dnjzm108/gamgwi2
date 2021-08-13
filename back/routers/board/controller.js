@@ -13,6 +13,7 @@ let view_reply = async (req, res) => {
 }
 
 let post_view = async (req, res) => {
+
     let { idx } = req.body
     let result = {};
     try {
