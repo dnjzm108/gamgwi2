@@ -157,27 +157,30 @@ function* reqViewDelete() {
 /* 글 수정 */
 function* modifyView(action) {
     console.log("getMODIFY ===== ",action);
-    // const result = yield call(axios.post,'http://localhost:3500/board/delete',{idx:action.idx})
-    // console.log('view 백단 요청 result ====',result);
-    // const { msg, deletedRes } = result.data
-    // console.log("view data =======",deletedRes);
+    console.log("getMODIFY data===== ",action.modifiedData);
+
+    const result = yield call(axios.post,'http://localhost:3500/board/modify', {modifyData : action.modifiedData})
+    console.log('modify 백단 요청 result ====',result);
+    const {data} = result
+    console.log(data);
+    
    
-    // if (result.data.result === 'OK') {
-    //     yield put({
-    //         type: 'POST_MODIFY_SUCCESS',
-    //         deletedList : deletedRes,
-    //         msg
-    //     })
-    // } else {
-    //     yield put({
-    //         type: 'POST_MODIFY_ERROR',
-    //         msg
-    //     })
-    // }
+    if (result.data.result === 'OK') {
+        yield put({
+            type: 'POST_MODIFY_SUCCESS',
+            modifiedList : data.modifiedRes,
+            msg : data.msg
+        })
+    } else {
+        yield put({
+            type: 'POST_MODIFY_ERROR',
+            msg : data.msg
+        })
+    }
 }
 
 function* reqViewModify() {
-    yield takeLatest('POST_MODIFY_REQUEST', modifyView)
+    yield takeLatest('POST_MODIFY_SUBMIT_REQUEST', modifyView)
 }
 
 /* 좋아요 추가할 때 */

@@ -14,9 +14,6 @@ const view = () => {
 
     },[data])
 
-    // const router = useRouter()
-    // const {post} = router.query
-
     return(
         <>
             <Head>

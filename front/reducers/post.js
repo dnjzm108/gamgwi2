@@ -16,6 +16,7 @@ const POST_VIEW_SUCCESS = "POST_VIEW_SUCCESS"
 const POST_VIEW_ERROR = "POST_VIEW_ERROR"
 
 const POST_MODIFY_REQUEST = "POST_MODIFY_REQUEST"
+const POST_MODIFY_SUBMIT_REQUEST = "POST_MODIFY_SUBMIT_REQUEST"
 const POST_MODIFY_SUCCESS = "POST_MODIFY_SUCCESS"
 const POST_MODIFY_ERROR = "POST_MODIFY_ERROR"
 
@@ -139,7 +140,7 @@ export const AddLikes_ERROR = () => {
 
 /* 글 view 보기 */
 export const PostView_REQUEST = (idx) => {
-    // console.log('post view request idx ====', idx);
+    console.log('post view request idx ====', idx);
     return {
         type: POST_VIEW_REQUEST,
         idx,
@@ -160,13 +161,21 @@ export const PostView_ERROR = () => {
 
 /* 수정 */
 export const PostModify_REQUEST = data => {
-    console.log("modify -====",data);
+    console.log("modify -====", data);
     return {
         type: POST_MODIFY_REQUEST,
-        data,
+        modifyData: data,
     }
 }
-export const PostModify_SUCCESS = () => {
+export const PostModifySubmit_REQUEST = data => {
+    console.log("modify submit -====", data);
+    return {
+        type : POST_MODIFY_SUBMIT_REQUEST,
+        modifiedData : data,
+    }
+}
+export const PostModify_SUCCESS = (data) => {
+    console.log("modify success ==== 성공 ", data);
     return {
         type: POST_MODIFY_SUCCESS,
     }
@@ -287,7 +296,7 @@ const reducer = (state = initalState, action) => {
 
         /* 글 보기 */
         case POST_VIEW_REQUEST:
-            //console.log('view request action========',action);
+            console.log('view request action========',action);
             return {
                 ...state,
                 idx: action.idx,
@@ -335,12 +344,22 @@ const reducer = (state = initalState, action) => {
             console.log('MODIFY request action========', action);
             return {
                 ...state,
+                modifyData: action.modifyData,
+                loading: true,
+            }
+        case POST_MODIFY_SUBMIT_REQUEST:
+            console.log('MODIFY request action========', action);
+            return {
+                ...state,
+                modifiedData: action.modifyData,
                 loading: true,
             }
         case POST_MODIFY_SUCCESS:
             console.log('modify 성공 action =====', action);
             return {
                 ...state,
+                modifiedData2 : action.modifiedList,
+                modifiedResult : action.type,
                 loading: false,
             }
         case POST_MODIFY_ERROR:

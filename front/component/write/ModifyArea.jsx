@@ -3,17 +3,16 @@ import useInput from '../../hooks/useInput'
 import DoneOutlineRoundedIcon from '@material-ui/icons/DoneOutlineRounded'
 import DeleteForeverRoundedIcon from '@material-ui/icons/DeleteForeverRounded'
 import { useDispatch, useSelector } from 'react-redux'
-import { PostInsert_REQUEST } from '../../reducers/post'
+import { PostModifySubmit_REQUEST , PostView_REQUEST } from '../../reducers/post'
 import { useEffect, useState } from 'react'
 import TodayWeather from './TodayWeather'
 import Link from 'next/link'
+import Router from "next/router"
 
-const TextArea = () => {
+const ModifyArea = () => {
+    const modifyData = useSelector(state => state.post.modifyData)
+    console.log("modifyData!!!!!=======", modifyData);
     const dispatch = useDispatch()
-
-    /* 글 작성 */
-    const writeTitle = useInput('')
-    const writeContent = useInput('')
 
     /* 오늘 날씨 */
     const [todayWeather, setTodayWeather] = useState('')
@@ -22,16 +21,31 @@ const TextArea = () => {
         setTodayWeather(e.target.value)
     }
 
+    /* 수정 부분 */
+    let { id, title, content } = modifyData
+    const modifyTitle = useInput(title)
+    const modifyContent = useInput(content)
+
+    const modifiedResult = useSelector(state => state.post.modifiedResult)
+    console.log("modifiedLoading ==== ",modifiedResult);
     const hadleSubmit = (e) => {
         e.preventDefault()
 
         const data = {
+            id,
             todayWeather: todayWeather,
-            writeTitle: writeTitle.value,
-            writeContent: writeContent.value
+            writeTitle: modifyTitle.value,
+            writeContent: modifyContent.value
         }
-
-        dispatch(PostInsert_REQUEST(data))
+        dispatch(PostModifySubmit_REQUEST(data))
+        
+        Router.push('/board/list')
+        // if(modifiedResult === "POST_MODIFY_SUCCESS"){
+        //     // console.log("id ====",id);
+        //     // dispatch(PostView_REQUEST(id))
+        //     // Router.push('/board/view')
+            
+        // }
     }
 
     return (
@@ -40,8 +54,8 @@ const TextArea = () => {
                 <TodayWeather weatherChange={weatherChange} />
                 <WriteWrap>
                     <div>
-                        <InputTitle type="text"  {...writeTitle} />
-                        <InputContent  {...writeContent} />
+                        <InputTitle type="text" {...modifyTitle} />
+                        <InputContent {...modifyContent} />
                     </div>
 
                     <ButtonBox>
@@ -58,14 +72,13 @@ const TextArea = () => {
     )
 }
 
-export default TextArea
+export default ModifyArea
 
 const WriteWrap = Styled.div`
     width : 100%;
     height : 70vh;
     margin : 0;
 `
-
 
 const InputTitle = Styled.input`
     width : 100%;

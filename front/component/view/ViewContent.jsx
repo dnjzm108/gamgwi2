@@ -21,15 +21,18 @@ const ViewContent = (props) => {
 
     const handleModify = (data) => {
         dispatch(PostModify_REQUEST(data))
+        Router.push('/board/modify')
     }
 
     const msg = useSelector(state => state.post.deleteMsg)
     const handleDelete = (idx) => {
         dispatch(PostDelete_REQUEST(idx))
 
-        if (msg === '삭제 성공') {
-            Router.push('/board/list')
-        }
+        Router.push('/board/list')
+
+        // if (msg === '삭제 성공') {
+        //     Router.push('/board/list')
+        // }
     }
 
     const handleLikes = (idx) =>{
