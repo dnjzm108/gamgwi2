@@ -5,15 +5,16 @@ import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded'
 import { useDispatch, useSelector } from "react-redux"
 import { AddLikes_REQUEST, PostDelete_REQUEST, PostModify_REQUEST } from "../../reducers/post"
 import Router from "next/router"
+import { useState } from "react"
 
 const ViewContent = (props) => {
     // if(props.data === undefined){
     //     Router.push('/board/list')
     // }
     //console.log(props.data);
-    let { title, content, nickName, hit, id, likeIdx } = props.data
+    let { title, content, nickName, hit, id, likeIdx, date } = props.data
     //console.log(props.data);
-    let contentData = {...props.data};
+    let contentData = { ...props.data };
     //console.log(contentData);
 
 
@@ -35,10 +36,12 @@ const ViewContent = (props) => {
         // }
     }
 
-    const handleLikes = (idx) =>{
-        
+    const [likeState, setLikeState] = useState(false)
+    const handleLikes = (idx) => {
+        setLikeState(!likeState)
+        console.log(likeState);
         //dispatch(AddLikes_REQUEST(idx))
-        
+
     }
 
     return (
@@ -48,14 +51,18 @@ const ViewContent = (props) => {
                     {title}
                 </TitleWrap>
                 <DateWrap>
-                    date and time
+                    {date}
                 </DateWrap>
                 <ContentWrap>
                     {content}
                 </ContentWrap>
                 <VeiwIcon>
                     <ul>
-                        <li onClick={() => { handleLikes(id) }}><FavoriteRoundedIcon /></li>
+                        <li onClick={() => { handleLikes(id) }}>
+                            <LikesWrap flag = {likeState}>
+                                <FavoriteRoundedIcon />
+                            </LikesWrap>
+                        </li>
                         <li onClick={() => { handleModify(contentData) }}><CreateRoundedIcon /></li>
                         <li onClick={() => { handleDelete(id) }}><DeleteRoundedIcon /></li>
                     </ul>
@@ -119,5 +126,11 @@ const VeiwIcon = Styled.div`
         & > ul > li > svg {
             font-size : 40px;
         }
+    }
+`
+
+const LikesWrap = Styled.span`
+    & > svg {
+        color : ${props=>(props.flag? 'black' : 'red')};
     }
 `

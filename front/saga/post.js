@@ -186,7 +186,7 @@ function* reqViewModify() {
 /* 좋아요 추가할 때 */
 function* addLikes(action) {
     console.log(action);
-    const result = yield call(axios.post,'http://localhost:3500/board/view',{idx:action.idx})
+    // const result = yield call(axios.post,'http://localhost:3500/board/view',{idx:action.idx})
     //const { data } = result
     
     // if (data.result === 'OK') {
