@@ -14,7 +14,8 @@ const USER_JOIN_SUCCESS = "USER_JOIN_SUCCESS"
 const USER_JOIN_ERROR = "USER_JOIN_ERROR"
 
 const USER_COOKIE_CHECK ="USER_COOKIE_CHECK"
-
+const USER_COOKIE_SUCCESS = "USER_COOKIE_SUCCESS"
+const USER_COOKIE_ERROR = "USER_COOKIE_ERROR"
 
 export const UserLogin_REQUEST = data => {
     console.log("reduser+++++++", data);
@@ -100,6 +101,23 @@ const reducer = (state = initalState, action) => {
             ...state,
             lodding : true,
         }
+
+        case USER_COOKIE_SUCCESS : 
+        console.log('나 쿠키 성공했을때',action);
+        console.log('정상적인 쿠키');
+            return {
+                ...state,
+                loadding: false,
+                user_info:action.user_info
+            }
+
+        case USER_COOKIE_ERROR:
+            console.log('쿠키 없음');
+            return{
+                ...state,
+                lodding : false,
+                
+            }
 
         default:
             return state
