@@ -4,7 +4,8 @@ const crypto = require('crypto');
 module.exports = (req, res, next) => {
     let {AccessToken} = req.cookies
     if(AccessToken == undefined){
-        res.redirect('/?msg=로그인을 진행해 주세요.');
+        console.log('로그인을 진행해주세요');
+        // res.redirect('/?msg=로그인을 진행해 주세요.');
         return 0;
     }
 
@@ -14,19 +15,20 @@ module.exports = (req, res, next) => {
 
     if (sign == signature) {
         console.log('검증된 토큰입니다');
-        let {userpw,exp} = JSON.parse(Buffer.from(payload,'base64').toString());
-        console.log(userpw);
-        console.log(exp); 
+        let {userid,userIdx,userpw,exp} = JSON.parse(Buffer.from(payload,'base64').toString());
+        console.log(userid,userIdx,userpw,exp);
         let nexp = new Date().getTime();
         if (nexp > exp) {
             res.clearCookie('AccessToken');
-            res.redirect('/?msg=토큰만료');
+            console.log('토큰 만료');
+            // res.redirect('/?msg=토큰만료');
             return 0;
         }
         req.userpw = userpw;
         next();
     } else {
-       res.redirect('/?msg=부적절한 토큰')
+    //    res.redirect('/?msg=부적절한 토큰')
+    console.log('부적절한 토큰');
     }
 
 }
