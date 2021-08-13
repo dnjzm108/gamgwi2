@@ -86,7 +86,7 @@ export const PostSearch_REQUEST = (data) => {
         data
     }
 }
-export const PostSearch_SUCCESS = () => {
+export const PostSearch_SUCCESS = (data) => {
     return {
         type: POST_SEARCH_SUCCESS,
         data
@@ -95,7 +95,7 @@ export const PostSearch_SUCCESS = () => {
 export const PostSearch_ERROR = () => {
     return {
         type: POST_SEARCH_ERROR,
-        data
+    
     }
 }
 
@@ -339,6 +339,27 @@ const reducer = (state = initalState, action) => {
                 ...state,
                 loading: false,
             }
+
+        // 검색 기능===============================
+        case POST_SEARCH_REQUEST:
+            console.log('postrequest')
+            return{
+                ...state,
+                loading:true,
+            }
+        case POST_SEARCH_SUCCESS:
+            console.log('postsuccess')
+            return{
+                ...state,
+                data:action.data,
+                loading:false,
+            }
+        case POST_SEARCH_ERROR:
+            console.log('posterror')
+            return{
+                ...state,
+                loading:false
+
         /* 수정 */
         case POST_MODIFY_REQUEST:
             console.log('MODIFY request action========', action);
@@ -367,6 +388,7 @@ const reducer = (state = initalState, action) => {
             return {
                 ...state,
                 loading: false,
+
             }
         default:
             return state

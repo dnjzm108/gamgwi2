@@ -21,6 +21,22 @@ let post_view = async (req, res) => {
             result: 'OK',
             view: view.dataValues
         }
+        if('like'==true){
+            await Like.update({likeStatus:1},{
+                include:[{
+                    model:Board,
+                    where:{id:idx}
+                }],
+                
+            })
+        }else if('like'==false){
+            await Like.update({likeStatus:0},{
+                include:[{
+                    model:Board,
+                    where:{id,idx}
+                }]
+            })
+        }
     } catch (error) {
         result = {
             result: 'Fail',
@@ -101,9 +117,11 @@ let get_list = async (req, res) => {
     //         return res.json(list)
     // } 
 }
+
+
 let get_likes = async (req, res) => {
     let result = {}
-    await Like.create({ likeBoardIdx: 1, likeCount: 0, likeStatus: 1 })
+
 
     //let list = await Board.findAll({where:{like:1,category:'글귀'},attributes:['title','like','nickName','content']})
     let list = await Board.findAll({
@@ -135,7 +153,15 @@ let modify = async (req, res) => {
 let Delete = async (req, res) => {
     let { idx } = req.body
     try {
-        await Board.destroy({ where: { id: idx } })
+
+        await Board.destroy({where:{id:idx}})
+        await Like.destroy({
+            include:[{
+                model:Board,
+                where:{id:idx}
+            }]
+        })      
+
         let deletedRes = await Board.findAll({})
         result = {
             deletedRes,
@@ -159,6 +185,9 @@ let write_succece = async (req, res) => {
     // 작성완료된 후 작성된 내용을 보여주는 
 }
 // 글 수정 완료시에 =============================================
+
+
+
 let modify_succece = async (req, res) => {
     let { id, todayWeather, writeTitle, writeContent } = req.body.modifyData
 
@@ -179,6 +208,7 @@ let modify_succece = async (req, res) => {
     res.json(result)
     // 수정후 보여지는게 list인 경우 => let modifiedRes = Board.findAll({})f
     // 수정후 보여지는게 수정완료된 view인 경우 => let modifiedReas = Board.findAll({where:{id:idx},attributes:['title','content','hit','date]})
+
 }
 
 //post =========================================================================

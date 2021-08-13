@@ -99,9 +99,17 @@ function* postGetSearch(action){
         })
     }
 }
+
+// function* reqPost() {
+//     yield takeLatest('POST_INSERT_REQUEST', postGetSearch)
+// }
+
+
 function* reqPost() {
-    yield takeLatest('POST_INSERT_REQUEST', postGetSearch)
+    yield takeLatest('POST_SEARCH_REQUEST', postGetSearch)
 }
+
+
 /* 글 view 가져옴 */
 function* getView(action) {
     const result = yield call(axios.post,'http://localhost:3500/board/view',{idx:action.idx})
