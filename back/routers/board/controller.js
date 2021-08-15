@@ -217,8 +217,8 @@ let post_list = async (req, res) => {
     let { search, searchedValue } = req.body
     let list
     let result = {}
-
-
+    console.log(search,searchedValue,'post_listttttttttttttttttttttt')
+    
     try {
         switch (search) {
             case 'nickName':
@@ -227,7 +227,7 @@ let post_list = async (req, res) => {
                         nickName: {
                             [Op.like]: "%" + searchedValue + "%"
                         }
-                    }, attributes: ['title', 'likeIdx', 'nickName', 'content', 'id']
+                    }, attributes: ['title', 'likeIdx', 'nickName', 'content', 'id','hit','date']
                 })
             case 'content':
                 list = await Board.findAll({
@@ -235,7 +235,7 @@ let post_list = async (req, res) => {
                         content: {
                             [Op.like]: "%" + searchedValue + "%"
                         }
-                    }, attributes: ['title', 'likeIdx', 'nickName', 'content', 'id']
+                    }, attributes: ['title', 'likeIdx', 'nickName', 'content', 'id','hit','date']
                 })
             case 'title':
                 list = await Board.findAll({
@@ -243,7 +243,7 @@ let post_list = async (req, res) => {
                         title: {
                             [Op.like]: "%" + searchedValue + "%"
                         }
-                    }, attributes: ['title', 'likeIdx', 'nickName', 'content', 'id']
+                    }, attributes: ['title', 'likeIdx', 'nickName', 'content', 'id','hit','date']
                 })
 
                 result = {
@@ -251,6 +251,7 @@ let post_list = async (req, res) => {
                     result: 'OK',
                     msg: 'search list 가져오기 성공'
                 }
+                console.log(result,'resultttttttttttttt')
                 res.json(result)
         }
     } catch (err) {

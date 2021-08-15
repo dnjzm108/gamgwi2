@@ -81,6 +81,7 @@ export const PostGet_ERROR = () => {
 
 //검색 가져오기
 export const PostSearch_REQUEST = (data) => {
+    console.log('84번줄 export const postsearch_request')
     return {
         type: POST_SEARCH_REQUEST,
         data
@@ -349,12 +350,16 @@ const reducer = (state = initalState, action) => {
                 loading:true,
             }
         case POST_SEARCH_SUCCESS:
-            console.log('postsuccess')
+            console.log('postsuccess/reducer-post.js===================')
+            console.log(action.searchList)
+            console.log(state,'...stateaaaaaaaaaaaaaaa')
             return{
                 ...state,
-                data:action.data,
+                searchData:action.searchList,
                 loading:false,
+                
             }
+            
         case POST_SEARCH_ERROR:
             console.log('posterror')
             return{

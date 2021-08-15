@@ -81,7 +81,7 @@ function* reqGetLikes(){
 
 /* 검색 기능 */
 function postSearch(data){
-    console.log(data)
+    console.log(data,'saga-post.js ')
     return axios.post('http://localhost:3500/board/list',{search:data.search,searchedValue:data.searchedValue})
 }
 
@@ -89,20 +89,23 @@ function postSearch(data){
 function* postGetSearch(action){
     const result = yield call(postSearch,action.data)
     const {data} = result
+    console.log(result,'saga-postGetsearch====================')
+
     if(data.result==="OK"){
+        console.log('okkkkkkkkkkkkkkkk')
         yield put({
-            type:'POST_SEARCH_SUCCESS'
+            type:'POST_SEARCH_SUCCESS',
+            searchList:data.list
         })
     }else{
         yield put({
-            type:'POST_SEARCH_ERROR'
+            type:'POST_SEARCH_ERROR',
+            msg:data.msg
         })
     }
 }
 
-// function* reqPost() {
-//     yield takeLatest('POST_INSERT_REQUEST', postGetSearch)
-// }
+
 
 
 function* reqPost() {
