@@ -1,41 +1,40 @@
 import Styled from "styled-components"
-import Router from 'next/router'
 import useInput from '../../hooks/useInput'
-import {useDispatch,useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { UserLogin_REQUEST } from "../../reducers/user"
 
-const Login_form = () =>{
-  const dispatch = useDispatch();
+const Login_form = () => {
+    const dispatch = useDispatch();
 
-  const userid = useInput('')
-  const userpw = useInput('')
+    const userid = useInput('')
+    const userpw = useInput('')
 
     const handleSubmit = e => {
         e.preventDefault()
 
-        const data ={
-            userid:userid.value,
-            userpw:userpw.value
+        const data = {
+            userid: userid.value,
+            userpw: userpw.value
         }
-        console.log(userid.value , userpw.value);
+        console.log(userid.value, userpw.value);
 
-         dispatch(UserLogin_REQUEST(data))
-    
+        dispatch(UserLogin_REQUEST(data))
+
         // userid.value === "web7722" && userpw.value === "1234"
         // ? Router.push('/')
         // : alert('아이디와 패스워드가 다릅니다.')
     }
-    
-    return(
+
+    return (
         <>
-        <Form>
-            <h2>로그인</h2>
-                <form onSubmit={handleSubmit}>                                  
-                    <input type="text"  {...userid }  placeholder="아이디를입력해주세요." />
-                    <input type="password" {...userpw }   placeholder="패스워드를 입려해주세요."/>
+            <Form>
+                <h2>로그인</h2>
+                <form onSubmit={handleSubmit}>
+                    <input type="text"  {...userid} placeholder="아이디를입력해주세요." />
+                    <input type="password" {...userpw} placeholder="패스워드를 입려해주세요." />
                     <button type="submit">로그인</button>
                 </form>
-        </Form>
+            </Form>
         </>
     )
 }
@@ -43,8 +42,52 @@ const Login_form = () =>{
 export default Login_form
 
 const Form = Styled.div`
-      width : 80vw;
-      height : 80vh;
-      background : yellow;
-      margin : auto
+      width : 40vw;
+      height : 65vh;
+      border: 1px solid black;
+      margin : 10vh auto;
+
+      & >h2{
+          width: 20vw;
+          font-size:4rem;
+        margin: 5vh auto;
+      }
+
+      & > form > input{
+          display:block;
+          width : 80%;
+          height : 5vh;
+          margin: 4vh 10%; 
+          font-size:2rem;
+      }
+      & > form > button{
+          display:block;
+          font-size: 2rem;
+          background:white;
+          width:40%;
+          height:5vh;
+          margin: 10vh auto;
+      }
+      & > form > button:hover{
+    background: black;
+    color:white;
+    }
+
+      @media only screen and (max-width:768px){
+        width:80vw;   
+
+        & >h2{
+          width: 25vw;
+          font-size:1.6rem;
+        margin: 5vh auto;
+      }
+      & > form > input{
+        font-size:1rem;
+      }
+      & > form > button{
+        font-size: 1rem;
+    }
+    
+    }
+      }
 `
