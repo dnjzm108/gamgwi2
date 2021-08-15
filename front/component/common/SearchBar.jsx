@@ -4,6 +4,7 @@ import {useDispatch} from 'react-redux'
 import {PostSearch_REQUEST} from '../../reducers/post'
 import { useEffect,useState } from "react"
 import Link from 'next/link'
+import Router from 'next/router'
 
 
 const SearchBar = () => {
@@ -18,12 +19,15 @@ const SearchBar = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(search,searchedValue.value)
+        console.log(search,searchedValue.value,'searchBar.jsx')
         const data = {
             search:search,
-            searchedValue:searchedValue.value
+            searchedValue:searchedValue.value,
+            test:'test'
         }
         dispatch(PostSearch_REQUEST(data))
+        console.log(data,'searchbar.jsx_data')
+        Router.push(`/searches/search?category=${search}`)
     }
 
     useEffect(()=>{
@@ -60,7 +64,6 @@ const SearchBarWrap = Styled.div`
     text-align : center;
     padding : 10px 0;
     box-sizing : border-box;
-
     & > form > select{
         width: 20%;
         height: 5vh;
@@ -88,12 +91,10 @@ const SearchBarWrap = Styled.div`
         font-size: 13px;
         font-family: 'IM_Hyemin-Bold';
     }
-
     @media only screen and (min-width:768px){
         text-align : right;
         
         padding : 20px 0;
-
         & > form > select{
             width: 9%;
             height : 3.1vh; 
@@ -110,6 +111,5 @@ const SearchBarWrap = Styled.div`
             width: 85px;
             height : 3.2vh; 
         }
-
     }
 `

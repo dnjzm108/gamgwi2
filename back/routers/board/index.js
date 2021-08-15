@@ -1,3 +1,5 @@
+const Board = require('../../models')
+
 const express = require('express');
 const router = express.Router();
 const controller = require('./controller')
@@ -18,5 +20,10 @@ router.get('/modify',controller.modify)
 // router.get('/list',controller.list) //
 router.post('/write',controller.write)
 router.get('/reply',controller.view_reply)
+
+
+// let test = async(req,res) => {
+//     await Board
+// }
 
 module.exports = router;
