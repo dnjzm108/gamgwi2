@@ -59,6 +59,18 @@ function* join(action){
     console.log("++++++++++++result",result);
     let {data} = result
     console.log(data);
+    if (data !== null) {
+        yield put({
+            type: 'USER_JOIN_SUCCESS',
+            data: 'OK',
+            user_info:data
+        })
+    } else {
+        yield put({
+            type: 'USER_JOIN_ERROR',
+            data: '아이디와 비밀번호를 확인해주세요'
+        })
+    }
 
 }
 

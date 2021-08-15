@@ -78,9 +78,11 @@ const reducer = (state = initalState, action) => {
 
         case USER_JOIN_SUCCESS:
             console.log('완전 가입 성공');
+            console.log('+++++++++++join success',action.user_info);
             return {
                 ...state,
                 loadding: false,
+                user_info:action.user_info
             }
 
         case USER_JOIN_ERROR:

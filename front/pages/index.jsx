@@ -20,7 +20,6 @@ const Index = () => {
             console.log(data.user_info);
                  Router.push('/home')
         }else{
-            
             Router.push('/user/login')
         }
     }, [data.user_info])
