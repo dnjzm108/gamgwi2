@@ -62,9 +62,9 @@ const ViewContent = (props) => {
                 <TitleWrap>
                     {title}
                 </TitleWrap>
-                <div>
-                    {weather=='sun'?<p>sun</p>:weather=='cloud'?<p>cloud</p>:<p>snow</p>}
-                </div>
+                <weatherPosition>
+                    {weather!=='cloud'&&weather!=='snow'&&weather=='sun'?<WbSunnyRoundedIcon/>:weather=='cloud'&&weather!=='snow'&&weather!=='sun'?<FilterDramaRoundedIcon/>:weather=='snow'&&weather!=='sun'&&weather!=='cloud'?<AcUnitIcon/>:<WbSunnyRoundedIcon/>}
+                </weatherPosition>
                 <DateWrap>
                     <p>작성자 : {nickName}</p>
                     <p> {YMD} </p>
@@ -181,4 +181,11 @@ const LikesWrap = Styled.span`
     & > svg {
         color : ${props => (props.flag ? '#ff000087' : 'black')};
     }
+`
+const weatherPosition = Styled.span`
+    font : 30;
+    float:right;
+    margin-right:-50px;
+    
+    
 `
