@@ -7,9 +7,14 @@ import { AddLikes_REQUEST, PostDelete_REQUEST, PostModify_REQUEST } from "../../
 import Router from "next/router"
 import { useEffect, useState } from "react"
 import GoBack from "../common/GoBack"
+import WbSunnyRoundedIcon from '@material-ui/icons/WbSunnyRounded';
+import FilterDramaRoundedIcon from '@material-ui/icons/FilterDramaRounded';
+import AcUnitIcon from '@material-ui/icons/AcUnit';
+
 
 const ViewContent = (props) => {
-    let { title, content, nickName, hit, id, likeIdx, date } = props.data
+    let { title, content, nickName, hit, id, likeIdx, date,weather } = props.data
+    console.log(props.data,'props-dataaaaaaaaaaaaaaaaaaaaaaa')
     let contentData = { ...props.data };
     let YMD = contentData.date.substring(0,10)
 
@@ -20,7 +25,7 @@ const ViewContent = (props) => {
     //console.log(like,'page/board/view.jsx')
 
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch()  
 
     const handleModify = (data) => {
         dispatch(PostModify_REQUEST(data))
@@ -46,14 +51,20 @@ const ViewContent = (props) => {
         dispatch(AddLikes_REQUEST(likeData))
         
     }
-
+   
+    
+  
     return (
+          
         <>
             <ViewContentWrap>
                 <GoBack />
                 <TitleWrap>
                     {title}
                 </TitleWrap>
+                <div>
+                    {weather=='sun'?<p>sun</p>:weather=='cloud'?<p>cloud</p>:<p>snow</p>}
+                </div>
                 <DateWrap>
                     <p>작성자 : {nickName}</p>
                     <p> {YMD} </p>

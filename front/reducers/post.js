@@ -212,7 +212,7 @@ export const PostDelete_ERROR = () => {
 
 
 
-const reducer = (state = initalState, action) => {
+const postReducer = (state = initalState, action) => {
     switch (action.type) {
         /* 글 작성 */
         case POST_INSERT_REQUEST:
@@ -406,4 +406,4 @@ const reducer = (state = initalState, action) => {
 }
 
 
-export default reducer
+export default postReducer
