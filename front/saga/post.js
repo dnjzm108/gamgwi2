@@ -121,7 +121,8 @@ function* getView(action) {
     if (data.result === 'OK') {
         yield put({
             type: 'POST_VIEW_SUCCESS',
-            view : data.view
+            view : data.view,
+            like: data.like
         })
     } else {
         yield put({
@@ -196,7 +197,24 @@ function* reqViewModify() {
 
 /* 좋아요 추가할 때 */
 function* addLikes(action) {
-    console.log(action.likeData);
+    console.log(action.likeData,'saga-post.js(addlikes)');
+    const result = yield call(axios.post,'http://localhost:3500/board/addLike',{addLikeData:action.likeData})
+    const {data} = result
+    
+    console.log(data,'saga-post.jsssssssssssssss')
+    if(data.result=='OK'){
+        console.log('OK')
+        yield put({
+           type:'ADD_LIKES_SUCCESS',
+           addLike:data.likestate
+        })
+    }else {
+        console.log('fail')
+        yield put({
+            type:'ADD_LIKES_ERROR'
+        })
+        
+    }
     /*
         {idx: 30, likeState: true}
         이런식으로 오는데 왜인지 잘 모르겠는데 

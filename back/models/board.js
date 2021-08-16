@@ -78,6 +78,11 @@ module.exports = class Board extends Sequelize.Model{
             weatherIdx:{
                 type:Sequelize.INTEGER,
                 allowNull:true,
+            },
+            weather:{
+                type:Sequelize.STRING(20),
+                allowNull:false
+
             }
         },{
             sequelize,
