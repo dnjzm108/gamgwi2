@@ -17,7 +17,7 @@ const Join = () => {
              if (data.user_info.userIdx !== undefined) {
                  Router.push('/home')
              }else{
-                 alert(data.data)
+                 //alert(data.data)
              }
 
         }

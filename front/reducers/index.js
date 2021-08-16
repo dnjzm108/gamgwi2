@@ -2,8 +2,21 @@ import { HYDRATE } from 'next-redux-wrapper'
 import { combineReducers } from "redux";
 import post from './post'
 import user from './user'
+import {persistReducer} from 'redux-persist'
+import storage from 'redux-persist/lib/storage';
 
-const reducer = combineReducers({
+
+
+
+
+const persistConfig ={
+    key:'root',
+    storage,
+    whitelist:["user"]
+}
+
+
+const rootReducer = combineReducers({
     index: (state = {}, action) => {
         switch (action.type) {
             case HYDRATE:
@@ -15,9 +28,8 @@ const reducer = combineReducers({
                 return state
         }
     },
-
     post,
     user,
 })
 
-export default reducer
+export default persistReducer(persistConfig,rootReducer)

@@ -36,7 +36,7 @@ const MobileMenuBar = () => {
 export default MobileMenuBar
 
 const MenuBarWrap = Styled.div`
-    position : absolute;
+    position : fixed;
     bottom : 0;
     width: auto;
     height : 70px;
@@ -50,7 +50,8 @@ const MenuBarWrap = Styled.div`
     }
     
     @media only screen and (min-width:768px){
-        position : relative;
+        position : fixed;
+    bottom : 2vh;
         width : 1200px;
         & > div {
             width : 100%;

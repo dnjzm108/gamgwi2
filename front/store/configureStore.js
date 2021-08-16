@@ -1,9 +1,10 @@
 import {createWrapper} from 'next-redux-wrapper'
-import { applyMiddleware, compose, createStore } from 'redux'
+import { applyMiddleware, compose, createStore,combineReducers } from 'redux'
 import reducer from '../reducers'       
 import {composeWithDevTools} from 'redux-devtools-extension'
 import createSaga from 'redux-saga'
 import rootSaga from '../saga/index'
+import userSaga from '../saga/user'
 
 /*
     reudx-saga
@@ -25,8 +26,23 @@ const loggerMiddleware = ({dispatch,getState}) => (next) => (action) => {
     return next(action)
 }
 
+const combinedReducer = combineReducers({
+    userSaga,
+    // OTHER REDUCERS WILL BE ADDED HERE
+  });
+
 const configureStore = ()=>{
     const sagaMiddleware = createSaga()
+
+    const { persistStore, persistReducer } = require("redux-persist");
+    const storage = require("redux-persist/lib/storage").default;
+
+    const persistConfig = {
+        key: "nextjs",
+        whitelist: ["user"], // only counter will be persisted, add other reducers if needed
+        storage, // if needed, use a safer storage
+    };
+
     const middlewares = [sagaMiddleware]
    
     const enhancer = process.env.NODE_ENV === 'production'
@@ -35,6 +51,10 @@ const configureStore = ()=>{
  
     const Store = createStore(reducer,enhancer)
     Store.sagaTask = sagaMiddleware.run(rootSaga)
+
+
+    const persistedReducer = persistReducer(persistConfig, combinedReducer); 
+    Store.__persistor = persistStore(Store);
     return Store
 }
 

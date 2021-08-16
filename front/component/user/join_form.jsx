@@ -68,6 +68,7 @@ const Form = Styled.div`
           width: 20vw;
           font-size:4rem;
         margin: 5vh auto;
+        text-align: center;
       }
 
       & > form > input{

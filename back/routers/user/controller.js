@@ -18,12 +18,12 @@ let login_success = async (req, res) => {
     let login_info = await User.findOne({
         where: { userid, userpw:hash }
     });
-    let {userIdx}=login_info.dataValues
-
-    let ctoken = token(userpw,userid,userIdx);
+    console.log(login_info);
     let result = {}
+    if (login_info !== null) {
+        let {userIdx}=login_info.dataValues;
+        let ctoken = token(userpw,userid,userIdx);
 
-    if (login_info !== undefined) {
         result = {
             result: 'OK',
             msg: '로그인 성공'
@@ -70,6 +70,12 @@ let info_modify = (req, res) => {
     res.send('info_modify')
 }
 
+let logout = (req,res) =>{
+    console.log('로그아웃');
+    res.clearCookie('AccessToken');
+    res.send('로그아웃')
+}
+
 module.exports = {
     login,
     join,
@@ -77,4 +83,5 @@ module.exports = {
     info_modify,
     login_success,
     join_success,
+    logout
 }
