@@ -2,6 +2,7 @@ import axios from "axios";
 import { all, call, takeLatest,fork,put} from "redux-saga/effects";
 
 
+
 // import { NextApiRequest, NextApiResponse } from 'next'
 // import axios from 'axios'
 
@@ -34,7 +35,7 @@ function* login(action){
     let {data} = result
     console.log('saga_data++++++++++',data.login_info);
 
-    if (data.login_info !== null) {
+    if (data.login_info !== undefined) {
         yield put({
             type: 'USER_LOGIN_SUCCESS',
             data: 'OK',
@@ -98,7 +99,16 @@ function* cookie_check(action){
     }
 }
 
+function logoutAPI(){
+    return axios.get('http://localhost:3500/user/logout',{ withCredentials: true })
+}
+function* logout(){
+    let result = yield call(logoutAPI)
+    console.log(result);
+}
+
 function* watchUser(){
+    yield takeLatest('USER_LOGOUT',logout)
     yield takeLatest('USER_LOGIN_REQUEST',login)
     yield takeLatest('USER_JOIN_REQUEST',join)
     yield takeLatest('USER_COOKIE_CHECK',cookie_check)

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const controller = require('./controller')
 
-
+router.get('/logout',controller.logout)
 router.get('/info/modify',controller.info_modify)
 router.get('/info',controller.info)
 router.post('/login',controller.login_success)

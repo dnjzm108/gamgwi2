@@ -3,11 +3,22 @@ import WebLayout from "../../component/layout/webLayout"
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import FaceIcon from '@material-ui/icons/Face';
 import Styled from 'styled-components'
-import { useSelector } from "react-redux"
+import { useDispatch , useSelector } from "react-redux"
+// import { useEffect,useCallback } from 'react'
+import { User_Logout } from "../../reducers/user"
+import Router from "next/router"
 
 const Info = () => {
     const userInfo = useSelector(state => state.user.user_info)
     console.log(userInfo);
+
+    const dispatch = useDispatch()
+
+    const onLogout = () =>{
+        dispatch(User_Logout())
+        Router.push('/user/login')
+    }
+
     return (
         <>
             <Head>
@@ -26,6 +37,9 @@ const Info = () => {
                         <p>혹은 우연히 발견한 문구를</p>
                         <p>기록해보세요.</p>
                     </div>
+
+                    <button onClick={onLogout}>로그아웃</button>
+
                 </UserInfoWrap>
             </WebLayout>
         </>
@@ -47,8 +61,9 @@ const AccountCircleWrap = Styled.div`
     }
 
     @media only screen and (min-width:768px){
+        padding: 5% 0;
         & > svg {
-            width: 15vw;
+            width: 12vw;
         }
     }
 `
@@ -77,5 +92,3 @@ const UserInfoWrap = Styled.div`
         padding : 10px 0;
     }
 `
-
-

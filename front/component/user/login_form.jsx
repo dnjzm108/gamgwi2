@@ -1,5 +1,6 @@
 import Styled from "styled-components"
 import useInput from '../../hooks/useInput'
+import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux'
 import { UserLogin_REQUEST } from "../../reducers/user"
 
@@ -31,9 +32,13 @@ const Login_form = () => {
                 <h2>로그인</h2>
                 <form onSubmit={handleSubmit}>
                     <input type="text"  {...userid} placeholder="아이디를입력해주세요." />
-                    <input type="password" {...userpw} placeholder="패스워드를 입려해주세요." />
+                    <input type="password" {...userpw} placeholder="패스워드를 입력해주세요." />
                     <button type="submit">로그인</button>
                 </form>
+
+                <Link href='/user/join'>
+                    <a>회원가입</a>
+                </Link>
             </Form>
         </>
     )
@@ -52,7 +57,17 @@ const Form = Styled.div`
           font-size:4rem;
         margin: 5vh auto;
       }
-
+      & > a{
+          display: block;
+          text-align: center;
+        margin : 0 auto;
+         font-size:3rem;
+         text-decoration: none;
+      }
+      & > a :hover{
+          color:white;
+          background: black;
+      }
       & > form > input{
           display:block;
           width : 80%;
@@ -66,7 +81,7 @@ const Form = Styled.div`
           background:white;
           width:40%;
           height:5vh;
-          margin: 10vh auto;
+          margin: 10vh auto 5vh;
       }
       & > form > button:hover{
     background: black;
@@ -77,9 +92,10 @@ const Form = Styled.div`
         width:80vw;   
 
         & >h2{
-          width: 25vw;
+          width: 30vw;
           font-size:1.6rem;
         margin: 5vh auto;
+        text-align: center;
       }
       & > form > input{
         font-size:1rem;
