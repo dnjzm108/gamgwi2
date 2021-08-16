@@ -11,7 +11,11 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 const TextArea = () => {
     const dispatch = useDispatch()
-
+    const userinfo = useSelector(state=>state.user.user_info)
+    console.log(userinfo.userIdx)
+    console.log(userinfo.userpw)
+    console.log(userinfo.userid)
+    
     /* 글 작성 */
     const writeTitle = useInput('')
     const writeContent = useInput('')
@@ -29,7 +33,10 @@ const TextArea = () => {
         const data = {
             todayWeather: todayWeather,
             writeTitle: writeTitle.value,
-            writeContent: writeContent.value
+            writeContent: writeContent.value,
+            useridx:userinfo.userIdx,
+            userpw:userinfo.userpw,
+            userid:userinfo.userid
         }
 
         dispatch(PostInsert_REQUEST(data))

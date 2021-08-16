@@ -1,6 +1,6 @@
 import Styled from "styled-components"
 import useInput from '../../hooks/useInput'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {PostSearch_REQUEST} from '../../reducers/post'
 import { useEffect,useState } from "react"
 import Link from 'next/link'
@@ -12,9 +12,11 @@ const SearchBar = () => {
     //const search = useInput('')
     const searchedValue = useInput('')
     const [search,setSearch] = useState('')
+    
+    
 
     const handleChange = e => {
-        setSearch(e.target.value)    
+        setSearch(e.target.value)
     }
 
     const handleSubmit = (e) => {
@@ -33,14 +35,14 @@ const SearchBar = () => {
     useEffect(()=>{
 
     },[])
- 
+
     return (
         <>
             <SearchBarWrap>
                 {/* <form method="POST" action="http://localhost:3500/board/list"> */}
                 <form onSubmit={handleSubmit}>
                     <select name="search" onChange={handleChange}>
-                        <option value="none" >==선택==</option>
+                        <option value="none">==선택==</option>
                         <option value="nickName"  >작성자</option>
                         <option value="content">내용</option>
                         <option value="title">제목</option>

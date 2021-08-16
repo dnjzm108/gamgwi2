@@ -19,7 +19,7 @@ let post_view = async (req, res) => {
     //console.log(idx,'likeeeeeeeeeeeeeeeee')
     let result = {};
     try {
-        let view = await Board.findOne({ where: { id: idx }, attributes: ['title', 'content', 'nickName', 'hit', 'id', 'likeIdx', 'date']})
+        let view = await Board.findOne({ where: { id: idx }, attributes: ['title', 'content', 'nickName', 'hit', 'id', 'likeIdx', 'date','weather']})
         let like = await Like.findOne({where:{likeBoardIdx:view.dataValues.id}})
         result = {
             result: 'OK',
@@ -38,10 +38,10 @@ let post_view = async (req, res) => {
 }
 
 let write = async (req, res) => {
-    const { todayWeather, writeTitle, writeContent } = req.body                 // 이걸로 db에 insert 하면 됩니다.
+    const { todayWeather, writeTitle, writeContent,userpw,userid } = req.body                 // 이걸로 db에 insert 하면 됩니다.
     let result = {};
     try {
-        await Board.create({ title: writeTitle, nickName: 'al', watch: 1, report: 0, content: writeContent, category: '글귀'})
+        await Board.create({ title: writeTitle, nickName: userid, watch: 1, report: 0, content: writeContent, category: '글귀',weather:todayWeather})
         result = {
             result: 'OK',
             msg: '글 작성 성공'
@@ -64,7 +64,7 @@ let get_list = async (req, res) => {
 
         //let list = await Board.findAll({where:{watch:1,category:'글귀'},attributes:['title','likeCount','nickName','content']})
         //let list = await Board.findAll({})
-        let list = await Board.findAll({ where: { watch: 1, category: '글귀' }, attributes: ['title', 'likeIdx', 'nickName', 'content', 'date', 'hit', 'id'] })
+        let list = await Board.findAll({ where: { watch: 1, category: '글귀' }, attributes: ['title', 'likeIdx', 'nickName', 'content', 'date', 'hit', 'id','weather'] })
         //let list = await Board.findAll({})
         result = {
             list,
@@ -221,7 +221,7 @@ let post_list = async (req, res) => {
                         nickName: {
                             [Op.like]: "%" + searchedValue + "%"
                         }
-                    }, attributes: ['title', 'likeIdx', 'nickName', 'content', 'id','hit','date']
+                    }, attributes: ['title', 'likeIdx', 'nickName', 'content', 'id','hit','date','weather']
                 })
             case 'content':
                 list = await Board.findAll({
@@ -229,7 +229,7 @@ let post_list = async (req, res) => {
                         content: {
                             [Op.like]: "%" + searchedValue + "%"
                         }
-                    }, attributes: ['title', 'likeIdx', 'nickName', 'content', 'id','hit','date']
+                    }, attributes: ['title', 'likeIdx', 'nickName', 'content', 'id','hit','date','weather']
                 })
             case 'title':
                 list = await Board.findAll({
@@ -237,7 +237,7 @@ let post_list = async (req, res) => {
                         title: {
                             [Op.like]: "%" + searchedValue + "%"
                         }
-                    }, attributes: ['title', 'likeIdx', 'nickName', 'content', 'id','hit','date']
+                    }, attributes: ['title', 'likeIdx', 'nickName', 'content', 'id','hit','date','weather']
                 })
 
                 result = {

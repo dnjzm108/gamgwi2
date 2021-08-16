@@ -10,6 +10,7 @@ const Write = () => {
     const dispatch = useDispatch()
     const data = useSelector(state => state.post.data)
     
+    
     useEffect(() => {
         if (data !== undefined) {
             alert(data)
