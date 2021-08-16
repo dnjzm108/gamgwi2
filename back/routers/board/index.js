@@ -21,6 +21,7 @@ router.get('/modify',controller.modify)
 router.post('/write',controller.write)
 router.get('/reply',controller.view_reply)
 
+router.post('/addLike',controller.addLike)
 
 // let test = async(req,res) => {
 //     await Board

@@ -9,6 +9,8 @@ import Router from "next/router"
 
 const view = () => {
     const data = useSelector(state => state.post.view)
+    
+    
 
     // view 에서 새로고침시 오류나는 문제
     // console.log("veiw.jsx data=====",data);

@@ -120,14 +120,14 @@ export const GetLikes_ERROR = () => {
 
 /* 좋아요 누르기 */
 export const AddLikes_REQUEST = (likeData) => {
-    console.log('좋아용!!!! === ',likeData);
+    console.log('reducer-post.js(addlike-request) ',likeData);
     return {
         type: ADD_LIKES_REQUEST,
         likeData
     }
 }
-export const AddLikes_SUCCESS = () => {
-
+export const AddLikes_SUCCESS = (addLike) => {
+    console.log(addLike,'addlike--------------------------')
     return {
         type: ADD_LIKES_SUCCESS,
     }
@@ -279,26 +279,28 @@ const reducer = (state = initalState, action) => {
 
         /* 좋아요 추가하기 */
         case ADD_LIKES_REQUEST:
+           // console.log(state,'reducer-addlikerequest')
             return {
                 ...state,
                 loading: true
             }
         case ADD_LIKES_SUCCESS:
+            //console.log(state,'reducer-addlikesuccess')
+            console.log('addlikeeeeeeeeeeeeeeee//////////',action.addLike)
             return {
                 ...state,
-
+                addLike:action.addLike.likeStatus,
                 loading: false
             }
         case ADD_LIKES_ERROR:
             return {
-                ...state,
-
+                ...state,   
                 loading: false
             }
 
         /* 글 보기 */
         case POST_VIEW_REQUEST:
-            console.log('view request action========',action);
+            //console.log('view request action========',action);
             return {
                 ...state,
                 idx: action.idx,
@@ -309,6 +311,7 @@ const reducer = (state = initalState, action) => {
             return {
                 ...state,
                 view: action.view,
+                like: action.like,
                 loading: false,
             }
         case POST_VIEW_ERROR:
