@@ -39,13 +39,17 @@ const Join_form = () => {
         }
 
     }
+    const  idCheck = e =>{
+        let {value} = e.target;
+        console.log(value); 
+      }
 
     return (
         <>
             <Form>
                 <h2>회원가입</h2>
                 <form onSubmit={handleSubmit}>
-                    <input type="text" {...userid} placeholder="아이디를 입력해주세요." />
+                    <input type="text" {...userid} onChange={idCheck} placeholder="아이디를 입력해주세요." />
                     <input type="password" {...userpw} placeholder="패스워드를 입력해주세요." />
                     <input type="password" value={passwordCheck} onChange={handlePassword} placeholder="패스워드를 다시 입력해주세요." />
                     {passwordError && <div style={{ color: 'red' }}>비밀번호가 일치하지 않습니다.</div>}
