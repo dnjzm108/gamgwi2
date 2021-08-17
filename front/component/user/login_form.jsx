@@ -58,15 +58,19 @@ const Form = Styled.div`
         height: auto;
         text-align: center;
         padding: 10% 0;
+        cursor : default;
       }
       & > a{
         display: block;
-        text-align: right;
-        padding: 17% 4% 0 0;
-        font-size: 1.1rem;
-        font-size: 1rem;
         text-decoration: none;
-        
+        width: 20%;
+        height: auto;
+        display: block;
+        float: right;
+        text-align: center;
+        margin-top: 10%;
+        padding: 0;
+        font-size: 1rem;
       }
       & > a:hover{
           color: white;
@@ -99,25 +103,19 @@ const Form = Styled.div`
         width: 45%;  
 
         & > a{
-            width: 20%;
-            height: auto;
-            display: block;
-            float: right;
-            text-align: center;
-            margin-top: 10%;
             padding: 0;
             font-size: 1.3rem;
         }
 
         & >h2{
-          font-size: 4rem;
+          font-size: 3.5rem;
           padding: 1rem 0;
         }
         & > form{
           padding-top: 10%;
         }
         & > form > input{
-          font-size:1rem;
+          font-size: 1.5rem;
         }
         & > form > button{
           font-size: 1.3rem;

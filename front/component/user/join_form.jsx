@@ -43,7 +43,7 @@ const Join_form = () => {
     return (
         <>
             <Form>
-                <h2>회원가입</h2>
+                <h2>JOIN</h2>
                 <form onSubmit={handleSubmit}>
                     <input type="text" {...userid} placeholder="아이디를 입력해주세요." />
                     <input type="password" {...userpw} placeholder="패스워드를 입력해주세요." />
@@ -59,53 +59,56 @@ const Join_form = () => {
 export default Join_form
 
 const Form = Styled.div`
-      width : 40vw;
-      height : 65vh;
-      border: 1px solid black;
-      margin : 10vh auto;
+    width: 90%;
+    height : 70vh;
+    border: 1px solid black;
+    margin : 10vh auto;
 
-      & >h2{
-          width: 20vw;
-          font-size:4rem;
-        margin: 5vh auto;
-        text-align: center;
-      }
-
-      & > form > input{
-          display:block;
-          width : 80%;
-          height : 5vh;
-          margin: 4vh 10%; 
-          font-size:2rem;
-      }
-      & > form > button{
-          display:block;
-          font-size: 2rem;
-          background:white;
-          width:40%;
-          height:5vh;
-          margin: 10vh auto;
-      }
-      & > form > button:hover{
-    background: black;
-    color:white;
+    & >h2 {
+      width: 100%;
+      height: auto;
+      text-align: center;
+      padding: 10% 0;
+      cursor : default;
     }
 
-      @media only screen and (max-width:768px){
-        width:80vw;  
+    & > form > input {
+      display:block;
+      width : 80%;
+      height : 5vh;
+      margin: 4vh 10%; 
+      font-size: 15px;
+      font-family: 'IM_Hyemin-Bold';
+    }
+
+    & > form > button {
+      display: block;
+      font-size: 1rem;
+      background: white;
+      width: 40%;
+      height: 5vh;
+      margin: 10vh auto 5vh;
+      font-family: 'IM_Hyemin-Bold';
+      cursor : pointer;
+    }
+
+    & > form > button:hover{
+      background: black;
+      color:white;
+    }
+
+   @media only screen and (min-width:768px){
+        width: 45%; 
 
         & >h2{
-          width: 30vw;
-          font-size:1.6rem;
-        margin: 5vh auto;
-      }
-      & > form > input{
-        font-size:1rem;
-      }
-      & > form > button{
-        font-size: 1rem;
+            font-size: 3.5rem;
+            padding: 1rem 0;
+        }
+        & > form > input{
+            font-size:1rem;
+        }
+        & > form > button{
+            font-size: 1rem;
+        }
     }
-    
-    }
-      }
 `
