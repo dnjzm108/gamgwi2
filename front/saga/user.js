@@ -107,11 +107,33 @@ function* logout(){
     console.log(result);
 }
 
+function id_check_API(data){
+    console.log('id_check_data',data);
+    return axios.post('http://localhost:3500/user/id_check',data)
+}
+
+function* id_check(action){
+    console.log('saga_실행');
+    console.log('id_check_action',action);
+    let result = yield call(id_check_API,action)
+    if(result.data.Id_check == false){
+        yield put({
+            type: 'USER_ID_SUCCESS',
+            data: result.data.Id_check,
+        })
+    }else{
+        yield put({
+            type: 'USER_ID_ERROR',
+            data: result.data.Id_check,
+        })
+    }
+}
 function* watchUser(){
     yield takeLatest('USER_LOGOUT',logout)
     yield takeLatest('USER_LOGIN_REQUEST',login)
     yield takeLatest('USER_JOIN_REQUEST',join)
     yield takeLatest('USER_COOKIE_CHECK',cookie_check)
+    yield takeLatest('USER_ID_CHECKE',id_check)
 }
 
 export default function* userSaga(){
