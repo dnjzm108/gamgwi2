@@ -5,67 +5,71 @@ import { useDispatch, useSelector } from 'react-redux'
 import { UserLogin_REQUEST } from "../../reducers/user"
 
 const Login_form = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const userid = useInput('')
-    const userpw = useInput('')
+  const userid = useInput('')
+  const userpw = useInput('')
 
-    const handleSubmit = e => {
-        e.preventDefault()
+  const handleSubmit = e => {
+    e.preventDefault()
 
-        const data = {
-            userid: userid.value,
-            userpw: userpw.value
-        }
-        console.log(userid.value, userpw.value);
-
-        dispatch(UserLogin_REQUEST(data))
-
-        // userid.value === "web7722" && userpw.value === "1234"
-        // ? Router.push('/')
-        // : alert('아이디와 패스워드가 다릅니다.')
+    const data = {
+      userid: userid.value,
+      userpw: userpw.value
     }
+    console.log(userid.value, userpw.value);
 
-    return (
-        <>
-            <Form>
-                <h2>로그인</h2>
-                <form onSubmit={handleSubmit}>
-                    <input type="text"  {...userid} placeholder="아이디를입력해주세요." />
-                    <input type="password" {...userpw} placeholder="패스워드를 입력해주세요." />
-                    <button type="submit">로그인</button>
-                </form>
+    dispatch(UserLogin_REQUEST(data))
 
-                <Link href='/user/join'>
-                    <a>회원가입</a>
-                </Link>
-            </Form>
-        </>
-    )
+    // userid.value === "web7722" && userpw.value === "1234"
+    // ? Router.push('/')
+    // : alert('아이디와 패스워드가 다릅니다.')
+  }
+
+  return (
+    <>
+      <Form>
+        <h2>LOGIN</h2>
+        <form onSubmit={handleSubmit}>
+          <input type="text"  {...userid} placeholder="아이디를 입력해주세요." />
+          <input type="password" {...userpw} placeholder="패스워드를 입력해주세요." />
+          <button type="submit">로그인</button>
+        </form>
+
+        <Link href='/user/join'>
+          <a>회원가입</a>
+        </Link>
+      </Form>
+    </>
+  )
 }
 
 export default Login_form
 
 const Form = Styled.div`
-      width : 40vw;
-      height : 65vh;
+      width: 90%;
+      height : 70vh;
       border: 1px solid black;
       margin : 10vh auto;
+      
 
       & >h2{
-          width: 20vw;
-          font-size:4rem;
-        margin: 5vh auto;
+        width: 100%;
+        height: auto;
+        text-align: center;
+        padding: 10% 0;
       }
       & > a{
-          display: block;
-          text-align: center;
-        margin : 0 auto;
-         font-size:3rem;
-         text-decoration: none;
+        display: block;
+        text-align: right;
+        padding: 17% 4% 0 0;
+        font-size: 1.1rem;
+        font-size: 1rem;
+        text-decoration: none;
+        
       }
-      & > a :hover{
-          color:white;
+      & > a:hover{
+          color: white;
           background: black;
       }
       & > form > input{
@@ -73,37 +77,50 @@ const Form = Styled.div`
           width : 80%;
           height : 5vh;
           margin: 4vh 10%; 
-          font-size:2rem;
+          font-size: 15px;
+          font-family: 'IM_Hyemin-Bold';
       }
       & > form > button{
-          display:block;
-          font-size: 2rem;
-          background:white;
-          width:40%;
-          height:5vh;
+          display: block;
+          font-size: 1rem;
+          background: white;
+          width: 40%;
+          height: 5vh;
           margin: 10vh auto 5vh;
+          font-family: 'IM_Hyemin-Bold';
+          cursor : pointer;
       }
       & > form > button:hover{
-    background: black;
-    color:white;
-    }
+        background: black;
+        color:white;
+      }
 
-      @media only screen and (max-width:768px){
-        width:80vw;   
+      @media only screen and (min-width:768px){
+        width: 45%;  
+
+        & > a{
+            width: 20%;
+            height: auto;
+            display: block;
+            float: right;
+            text-align: center;
+            margin-top: 10%;
+            padding: 0;
+            font-size: 1.3rem;
+        }
 
         & >h2{
-          width: 30vw;
-          font-size:1.6rem;
-        margin: 5vh auto;
-        text-align: center;
-      }
-      & > form > input{
-        font-size:1rem;
-      }
-      & > form > button{
-        font-size: 1rem;
-    }
-    
-    }
+          font-size: 4rem;
+          padding: 1rem 0;
+        }
+        & > form{
+          padding-top: 10%;
+        }
+        & > form > input{
+          font-size:1rem;
+        }
+        & > form > button{
+          font-size: 1.3rem;
+        }
       }
 `
