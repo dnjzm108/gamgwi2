@@ -38,7 +38,7 @@ const Info = () => {
                         <p>기록해보세요.</p>
                     </div>
 
-                    <button onClick={onLogout}>로그아웃</button>
+                    <LogoutBtn onClick={onLogout}>Logout</LogoutBtn>
 
                 </UserInfoWrap>
             </WebLayout>
@@ -64,6 +64,7 @@ const AccountCircleWrap = Styled.div`
         padding: 5% 0;
         & > svg {
             width: 12vw;
+            height: 15vh;
         }
     }
 `
@@ -90,5 +91,21 @@ const UserInfoWrap = Styled.div`
     }
     & > div:nth-child(2) > p {
         padding : 10px 0;
+    }
+`
+const LogoutBtn = Styled.button`
+    float : right;
+    background : none;
+    border : none;
+    border-bottom : 2px solid #eee;
+    padding-bottom : 3px;
+    margin: 13vh 1vh 0 0;
+    font-family: 'IM_Hyemin-Bold';
+    cursor : pointer;
+
+    @media only screen and (min-width:768px){
+        margin: 10vh 2vh 0 0;
+        font-size : 20px;
+        
     }
 `
