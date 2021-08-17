@@ -59,7 +59,7 @@ const MenuBarWrap = Styled.div`
         }
         & > div > a > svg {
             font-size : 45px;
-            padding-top : 5%;
+            padding-top: 2%;
             margin : 20px 100px;
         }
     }

@@ -57,6 +57,7 @@ box-sizing: border-box;
     border-radius: 12px;
     padding-top: 3px;
     box-sizing: border-box;
+    cursor : pointer;
 }
 & > a{
     display : inline-block;
