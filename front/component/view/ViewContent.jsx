@@ -21,7 +21,7 @@ const ViewContent = (props) => {
     const like = useSelector(state => state.post.like)
     //const likeList = {...like}
     const addlike = useSelector(state=> state.post.addLike)
-    console.log(addlike,'asddlikeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
+    console.log(like.likeStatus,'asddlikeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
     //console.log(like,'page/board/view.jsx')
 
 
@@ -75,7 +75,7 @@ const ViewContent = (props) => {
                 <VeiwIcon>
                     <ul>
                         <li onClick={() => { handleLikes(id) }}>
-                            <LikesWrap flag={addlike}>
+                            <LikesWrap flag={like.likeStatus}>
                                 <FavoriteRoundedIcon />
                             </LikesWrap>
                             {/* <FavoriteRoundedIcon flag = {likeState}/> */}
