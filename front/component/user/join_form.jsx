@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { UserJoin_REQUEST } from "../../reducers/user"
 import useInput from '../../hooks/useInput'
-import Styled from "styled-components"
+import { Form } from './join_login_css'
+import Styled from 'styled-components'
+import Link from 'next/link'
 
 
 const Join_form = () => {
@@ -43,7 +45,7 @@ const Join_form = () => {
     return (
         <>
             <Form>
-                <h2>회원가입</h2>
+                <h2>JOIN</h2>
                 <form onSubmit={handleSubmit}>
                     <input type="text" {...userid} placeholder="아이디를 입력해주세요." />
                     <input type="password" {...userpw} placeholder="패스워드를 입력해주세요." />
@@ -51,6 +53,9 @@ const Join_form = () => {
                     {passwordError && <div style={{ color: 'red' }}>비밀번호가 일치하지 않습니다.</div>}
                     <button type="submit">회원가입</button>
                 </form>
+                <Link href='/user/login'>
+                    <a>로그인</a>
+                </Link>
             </Form>
         </>
     )
@@ -58,54 +63,3 @@ const Join_form = () => {
 
 export default Join_form
 
-const Form = Styled.div`
-      width : 40vw;
-      height : 65vh;
-      border: 1px solid black;
-      margin : 10vh auto;
-
-      & >h2{
-          width: 20vw;
-          font-size:4rem;
-        margin: 5vh auto;
-        text-align: center;
-      }
-
-      & > form > input{
-          display:block;
-          width : 80%;
-          height : 5vh;
-          margin: 4vh 10%; 
-          font-size:2rem;
-      }
-      & > form > button{
-          display:block;
-          font-size: 2rem;
-          background:white;
-          width:40%;
-          height:5vh;
-          margin: 10vh auto;
-      }
-      & > form > button:hover{
-    background: black;
-    color:white;
-    }
-
-      @media only screen and (max-width:768px){
-        width:80vw;  
-
-        & >h2{
-          width: 30vw;
-          font-size:1.6rem;
-        margin: 5vh auto;
-      }
-      & > form > input{
-        font-size:1rem;
-      }
-      & > form > button{
-        font-size: 1rem;
-    }
-    
-    }
-      }
-`

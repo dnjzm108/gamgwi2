@@ -57,13 +57,16 @@ const TodayWeatherUl = Styled.ul`
     & > li {
         list-style : none;
         width: 60px;
+        
     }
 `
 
 const TodayWeatherCheckBox = Styled.input`
     display : none;
+    
     & + label {
         color : #b8b8b8;
+        cursor : pointer;
     }
     &:checked + label {
         color : black;

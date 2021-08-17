@@ -92,6 +92,7 @@ const SearchBarWrap = Styled.div`
         font-weight: bold;
         font-size: 13px;
         font-family: 'IM_Hyemin-Bold';
+        cursor : pointer;
     }
     @media only screen and (min-width:768px){
         text-align : right;
