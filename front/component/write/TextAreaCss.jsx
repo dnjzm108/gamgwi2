@@ -37,7 +37,7 @@ font-family: 'IM_Hyemin-Bold';
 
 @media only screen and (min-width:768px){
     width: 99.5%;
-    height: 47vh;
+    height : 340px;
 }
 `
 

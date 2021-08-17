@@ -61,7 +61,8 @@ const AccountCircleWrap = Styled.div`
     }
 
     @media only screen and (min-width:768px){
-        padding: 5% 0;
+        padding: 2% 0;
+
         & > svg {
             width: 12vw;
             height: 15vh;
