@@ -76,6 +76,24 @@ let logout = (req,res) =>{
     res.send('로그아웃')
 }
 
+let id_check = async (req,res) =>{
+    let userid = req.body.data;
+    let result = await User.findOne({
+        where: {userid}
+    });
+    if(result == null){
+        check={
+            Id_check:false
+        }
+        res.json(check)
+    }else{
+        check={
+            Id_check:true
+        }
+        res.json(check)
+    }
+}
+
 module.exports = {
     login,
     join,
@@ -83,5 +101,6 @@ module.exports = {
     info_modify,
     login_success,
     join_success,
-    logout
+    logout,
+    id_check
 }

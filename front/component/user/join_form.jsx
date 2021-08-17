@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { UserJoin_REQUEST } from "../../reducers/user"
+import { UserJoin_REQUEST,User_Id_Checke } from "../../reducers/user"
 import useInput from '../../hooks/useInput'
 import { Form } from './join_login_css'
 import Styled from 'styled-components'
@@ -9,6 +9,7 @@ import Link from 'next/link'
 
 const Join_form = () => {
     const dispatch = useDispatch();
+    const data = useSelector(state => state.user)
 
     const userid = useInput('')
     const userpw = useInput('')
@@ -41,13 +42,19 @@ const Join_form = () => {
         }
 
     }
+    const  idCheck = e =>{
+        let {value} = e.target;
+        console.log(value);
+        dispatch(User_Id_Checke(value))
+      }
 
     return (
         <>
             <Form>
                 <h2>JOIN</h2>
                 <form onSubmit={handleSubmit}>
-                    <input type="text" {...userid} placeholder="아이디를 입력해주세요." />
+                    <input type="text" {...userid} onMouseOut={idCheck} placeholder="아이디를 입력해주세요." />
+                    {data.Id_check ? <div style={{ color: 'red' }}>사용 불가능한 아이디 입니다.</div>:<div style={{ color: 'blue' }}>사용가능한 아이디 입니다.</div>}
                     <input type="password" {...userpw} placeholder="패스워드를 입력해주세요." />
                     <input type="password" value={passwordCheck} onChange={handlePassword} placeholder="패스워드를 다시 입력해주세요." />
                     {passwordError && <div style={{ color: 'red' }}>비밀번호가 일치하지 않습니다.</div>}
