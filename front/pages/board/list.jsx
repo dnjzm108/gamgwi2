@@ -23,6 +23,7 @@ const List = () => {
     let list = []
     if (data !== undefined) {
         const handleClick = (idx) => {
+            console.log(idx);
             dispatch(PostView_REQUEST(idx))
             Router.push(`/board/view`)
         }

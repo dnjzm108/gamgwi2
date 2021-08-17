@@ -34,9 +34,12 @@ export const Form = Styled.div`
         display:block;
         width : 80%;
         height : 5vh;
-        margin: 4vh 10%; 
+        margin: 1.5vh 10%;
         font-size: 15px;
         font-family: 'IM_Hyemin-Bold';
+    }
+    & > form > div{
+        margin: 1.5vh 10%;
     }
     & > form > button{
         display: block;

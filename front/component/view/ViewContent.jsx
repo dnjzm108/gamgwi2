@@ -13,19 +13,19 @@ import AcUnitIcon from '@material-ui/icons/AcUnit';
 
 
 const ViewContent = (props) => {
-    let { title, content, nickName, hit, id, likeIdx, date,weather } = props.data
-    console.log(props.data,'props-dataaaaaaaaaaaaaaaaaaaaaaa')
+    let { title, content, nickName, hit, id, likeIdx, date, weather } = props.data
+    console.log(props.data, 'props-dataaaaaaaaaaaaaaaaaaaaaaa')
     let contentData = { ...props.data };
-    let YMD = contentData.date.substring(0,10)
+    let YMD = contentData.date.substring(0, 10)
 
     const like = useSelector(state => state.post.like)
     //const likeList = {...like}
-    const addlike = useSelector(state=> state.post.addLike)
-    console.log(like.likeStatus,'asddlikeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
+    const addlike = useSelector(state => state.post.addLike)
+    console.log(like.likeStatus, 'asddlikeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
     //console.log(like,'page/board/view.jsx')
 
 
-    const dispatch = useDispatch()  
+    const dispatch = useDispatch()
 
     const handleModify = (data) => {
         dispatch(PostModify_REQUEST(data))
@@ -46,25 +46,25 @@ const ViewContent = (props) => {
     const [likeState, setLikeState] = useState(false)
     const handleLikes = (idx) => {
         setLikeState(!likeState)
-        const likeData = {idx, likeState}
+        const likeData = { idx, likeState }
         console.log('component-view-viewcontent')
         dispatch(AddLikes_REQUEST(likeData))
-        
+
     }
-   
-    
-  
+
+
+
     return (
-          
+
         <>
             <ViewContentWrap>
                 <GoBack />
                 <TitleWrap>
                     {title}
+                    <WeatherPosition>
+                        {weather !== 'cloud' && weather !== 'snow' && weather == 'sun' ? <WbSunnyRoundedIcon /> : weather == 'cloud' && weather !== 'snow' && weather !== 'sun' ? <FilterDramaRoundedIcon /> : weather == 'snow' && weather !== 'sun' && weather !== 'cloud' ? <AcUnitIcon /> : <WbSunnyRoundedIcon />}
+                    </WeatherPosition>
                 </TitleWrap>
-                <weatherPosition>
-                    {weather!=='cloud'&&weather!=='snow'&&weather=='sun'?<WbSunnyRoundedIcon/>:weather=='cloud'&&weather!=='snow'&&weather!=='sun'?<FilterDramaRoundedIcon/>:weather=='snow'&&weather!=='sun'&&weather!=='cloud'?<AcUnitIcon/>:<WbSunnyRoundedIcon/>}
-                </weatherPosition>
                 <DateWrap>
                     <p>작성자 : {nickName}</p>
                     <p> {YMD} </p>
@@ -182,10 +182,16 @@ const LikesWrap = Styled.span`
         color : ${props => (props.flag ? '#ff000087' : 'black')};
     }
 `
-const weatherPosition = Styled.span`
-    font : 30;
-    float:right;
-    margin-right:-50px;
-    
-    
+const WeatherPosition = Styled.span`
+    float : right;
+    padding-top : 2%;
+    & > svg {
+        font-size : 25px;
+    }
+    @media only screen and (min-width:768px){
+        padding-top : 1%;
+        & > svg {
+            font-size : 30px;
+        }
+    }
 `
