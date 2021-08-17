@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { UserJoin_REQUEST } from "../../reducers/user"
 import useInput from '../../hooks/useInput'
-import Styled from "styled-components"
+import { Form } from './join_login_css'
+import Styled from 'styled-components'
+import Link from 'next/link'
 
 
 const Join_form = () => {
@@ -51,6 +53,9 @@ const Join_form = () => {
                     {passwordError && <div style={{ color: 'red' }}>비밀번호가 일치하지 않습니다.</div>}
                     <button type="submit">회원가입</button>
                 </form>
+                <Link href='/user/login'>
+                    <a>로그인</a>
+                </Link>
             </Form>
         </>
     )
@@ -58,57 +63,3 @@ const Join_form = () => {
 
 export default Join_form
 
-const Form = Styled.div`
-    width: 90%;
-    height : 70vh;
-    border: 1px solid black;
-    margin : 10vh auto;
-
-    & >h2 {
-      width: 100%;
-      height: auto;
-      text-align: center;
-      padding: 10% 0;
-      cursor : default;
-    }
-
-    & > form > input {
-      display:block;
-      width : 80%;
-      height : 5vh;
-      margin: 4vh 10%; 
-      font-size: 15px;
-      font-family: 'IM_Hyemin-Bold';
-    }
-
-    & > form > button {
-      display: block;
-      font-size: 1rem;
-      background: white;
-      width: 40%;
-      height: 5vh;
-      margin: 10vh auto 5vh;
-      font-family: 'IM_Hyemin-Bold';
-      cursor : pointer;
-    }
-
-    & > form > button:hover{
-      background: black;
-      color:white;
-    }
-
-   @media only screen and (min-width:768px){
-        width: 45%; 
-
-        & >h2{
-            font-size: 3.5rem;
-            padding: 1rem 0;
-        }
-        & > form > input{
-            font-size:1rem;
-        }
-        & > form > button{
-            font-size: 1rem;
-        }
-    }
-`
