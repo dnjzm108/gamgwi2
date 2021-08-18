@@ -17,9 +17,11 @@ const ViewContent = (props) => {
     let contentData = { ...props.data };
     let YMD = contentData.date.substring(0, 10)
 
+    const userid = useSelector(state => state.user.user_info.userid)
     const like = useSelector(state => state.post.like)
     const addlike = useSelector(state => state.post.addLike)
 
+    console.log(userid);
 
     const dispatch = useDispatch()
 
@@ -72,8 +74,15 @@ const ViewContent = (props) => {
                             </LikesWrap>
                         </li> */}
                         <li></li>
-                        <li onClick={() => { handleModify(contentData) }}><CreateRoundedIcon /></li>
-                        <li onClick={() => { handleDelete(id) }}><DeleteRoundedIcon /></li>
+                        {
+                            nickName === userid 
+                            ? <>
+                                <li onClick={() => { handleModify(contentData) }}><CreateRoundedIcon /></li>
+                                <li onClick={() => { handleDelete(id) }}><DeleteRoundedIcon /></li>
+                            </>
+                            : <></>
+                        }
+                        
                     </ul>
                 </VeiwIcon>
             </ViewContentWrap>
