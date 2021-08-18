@@ -163,6 +163,7 @@ export const PostModify_REQUEST = data => {
     }
 }
 export const PostModifySubmit_REQUEST = data => {
+    console.log("POST_MODIFY_SUBMIT_REQUEST === ", data);
     return {
         type : POST_MODIFY_SUBMIT_REQUEST,
         modifiedData : data,
@@ -345,6 +346,7 @@ const postReducer = (state = initalState, action) => {
                 loading: true,
             }
         case POST_MODIFY_SUBMIT_REQUEST:
+            console.log(action.modifiedData);
             return {
                 ...state,
                 modifiedData: action.modifyData,

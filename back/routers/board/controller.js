@@ -178,7 +178,7 @@ let modify_succece = async (req, res) => {
     let { id, todayWeather, writeTitle, writeContent } = req.body.modifyData
 
     try {
-        await Board.update({ title: writeTitle, content: writeContent }, { where: { id } })
+        await Board.update({ title: writeTitle, content: writeContent, weather:todayWeather }, { where: { id } })
         let modifiedRes = await Board.findOne({where:{id},attributes:['title','content','hit','date']})
         result = {
             modifiedRes,

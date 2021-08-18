@@ -147,8 +147,10 @@ function* reqViewDelete() {
 
 /* 글 수정 */
 function* modifyView(action) {
+    console.log("modifyView ==== ", action);
     const result = yield call(axios.post,'http://localhost:3500/board/modify', {modifyData : action.modifiedData})
     const {data} = result
+    console.log("db에서 온 data",data);
     
     if (result.data.result === 'OK') {
         yield put({

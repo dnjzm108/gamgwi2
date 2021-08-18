@@ -54,7 +54,7 @@ const ViewContent = (props) => {
                 <TitleWrap>
                     {title}
                     <WeatherPosition>
-                        {weather !== 'cloud' && weather !== 'snow' && weather == 'sun' ? <WbSunnyRoundedIcon /> : weather == 'cloud' && weather !== 'snow' && weather !== 'sun' ? <FilterDramaRoundedIcon /> : weather == 'snow' && weather !== 'sun' && weather !== 'cloud' ? <AcUnitIcon /> : <WbSunnyRoundedIcon />}
+                        {weather !== 'cloud' && weather !== 'snow' && weather == 'sun' ? <WbSunnyRoundedIcon /> : weather == 'cloud' && weather !== 'snow' && weather !== 'sun' ? <FilterDramaRoundedIcon /> : weather == 'snow' && weather !== 'sun' && weather !== 'cloud' ? <AcUnitIcon /> : <span></span>}
                     </WeatherPosition>
                 </TitleWrap>
                 <DateWrap>
