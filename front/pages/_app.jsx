@@ -11,6 +11,7 @@ const App = ({ Component }) => {
     return (
         <>
             <Head>
+            <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
                 {/* <meta property="og:type" content="website" />
                 <meta property="og:title" content="감성 글귀, Gamgwi" />
                 <meta property="og:site_name" content="Gamgwi" />

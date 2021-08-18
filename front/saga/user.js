@@ -2,6 +2,7 @@ import axios from "axios";
 import { all, call, takeLatest,fork,put} from "redux-saga/effects";
 
 const url = 'api.hyejun.co.kr'
+
 function loginAPI(data){
     console.log(data);
     return axios.post(`https://${url}/user/login`,data,{ withCredentials: true })
