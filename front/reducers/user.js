@@ -31,7 +31,6 @@ export const User_Logout = () => {
 }
 
 export const User_Id_Checke = data => {
-    console.log('reducer 함수까지옴');
     return {
         type: USER_ID_CHECKE,
         data
@@ -39,7 +38,6 @@ export const User_Id_Checke = data => {
 }
 
 export const UserLogin_REQUEST = data => {
-    console.log("reduser+++++++", data);
     return {
         type: USER_LOGIN_REQUEST,
         data,
@@ -47,7 +45,6 @@ export const UserLogin_REQUEST = data => {
 }
 
 export const UserJoin_REQUEST = data => {
-    console.log("join reduser++++++", data);
     return {
         type: USER_JOIN_REQUEST,
         data
@@ -70,7 +67,6 @@ const reducer = (state = initalState, action) => {
             }
 
         case USER_LOGIN_REQUEST:
-            console.log('로그인 성공1');
             return {
                 ...state,
                 loadding: true,
@@ -78,8 +74,6 @@ const reducer = (state = initalState, action) => {
 
 
         case USER_LOGIN_SUCCESS:
-            console.log('로그인 성공2');
-            console.log('_____________data', action);
             return {
                 ...state,
                 IsLogin: true,
@@ -88,8 +82,6 @@ const reducer = (state = initalState, action) => {
                 user_info: action.user_info,
             }
         case USER_LOGIN_ERROR:
-            console.log('로그인 실패');
-            console.log("++++++++++=+++실패", action);
             return {
                 ...state,
                 loadding: false,
@@ -97,15 +89,12 @@ const reducer = (state = initalState, action) => {
             }
 
         case USER_JOIN_REQUEST:
-            console.log('가입 성공');
             return {
                 ...state,
                 loadding: true,
             }
 
         case USER_JOIN_SUCCESS:
-            console.log('완전 가입 성공');
-            console.log('+++++++++++join success', action.user_info);
             return {
                 ...state,
                 loadding: false,
@@ -113,7 +102,6 @@ const reducer = (state = initalState, action) => {
             }
 
         case USER_JOIN_ERROR:
-            console.log('가입 실패');
             return {
                 ...state,
                 loadding: false,
@@ -128,7 +116,6 @@ const reducer = (state = initalState, action) => {
             }
 
         case USER_ID_CHECKE:
-            console.log("USER_ID_CHECKE", action);
             return {
                 ...state,
                 lodding: true,
@@ -156,8 +143,6 @@ const reducer = (state = initalState, action) => {
             }
 
         case USER_COOKIE_SUCCESS:
-            console.log('나 쿠키 성공했을때', action);
-            console.log('정상적인 쿠키');
             return {
                 ...state,
                 loadding: false,
@@ -165,7 +150,6 @@ const reducer = (state = initalState, action) => {
             }
 
         case USER_COOKIE_ERROR:
-            console.log('쿠키 없음');
             return {
                 ...state,
                 lodding: false,

@@ -42,12 +42,6 @@ const ModifyArea = () => {
         dispatch(PostModifySubmit_REQUEST(data))
         
         Router.push('/board/list')
-        // if(modifiedResult === "POST_MODIFY_SUCCESS"){
-        //     // console.log("id ====",id);
-        //     // dispatch(PostView_REQUEST(id))
-        //     // Router.push('/board/view')
-            
-        // }
     }
 
     return (

@@ -15,9 +15,9 @@ const MobileMenuBar = () => {
                     <Link href="/board/list">
                         <a ><FormatListBulletedRoundedIcon /></a>
                     </Link>
-                    <Link href="/board/likes">
+                    {/* <Link href="/board/likes">
                         <a ><FavoriteRoundedIcon /></a>
-                    </Link>
+                    </Link> */}
                     <Link href="/home">
                         <a ><HomeRoundedIcon /></a>
                     </Link>
@@ -69,7 +69,8 @@ const MenubarBox = Styled.div`
     display : flex;
     & > a {
         display : inline-block;
-        width : 20vw;
+        /* width : 20vw; */
+        width: 25vw;
         text-align : center;
     } 
 `

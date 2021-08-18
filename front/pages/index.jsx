@@ -10,17 +10,13 @@ import Login from './user/login'
 
 const Index = () => {
     const dispatch = useDispatch()
-    
-
     const data = useSelector(state => state.user)
     
     useEffect(() => {
         dispatch(UserCookieCheck())
-        console.log('리렌더 되기전',data);
     }, [])
 
     if (data.user_info.userIdx !== undefined){
-        console.log(data.user_info);
         Router.push('/home')
     }
 

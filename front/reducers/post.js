@@ -59,13 +59,11 @@ export const PostInsert_ERROR = () => {
 
 /* 가져오기 */
 export const PostGet_REQUEST = () => {
-    //console.log('postget request');
     return {
         type: POST_GET_REQUEST,
     }
 }
 export const PostGet_SUCCESS = (list) => {
-    //console.log('post get list', list);
     return {
         type: POST_GET_SUCCESS,
         list
@@ -81,7 +79,6 @@ export const PostGet_ERROR = () => {
 
 //검색 가져오기
 export const PostSearch_REQUEST = (data) => {
-    console.log('84번줄 export const postsearch_request')
     return {
         type: POST_SEARCH_REQUEST,
         data
@@ -120,14 +117,12 @@ export const GetLikes_ERROR = () => {
 
 /* 좋아요 누르기 */
 export const AddLikes_REQUEST = (likeData) => {
-    console.log('reducer-post.js(addlike-request) ',likeData);
     return {
         type: ADD_LIKES_REQUEST,
         likeData
     }
 }
 export const AddLikes_SUCCESS = (addLike) => {
-    console.log(addLike,'addlike--------------------------')
     return {
         type: ADD_LIKES_SUCCESS,
     }
@@ -142,7 +137,6 @@ export const AddLikes_ERROR = () => {
 
 /* 글 view 보기 */
 export const PostView_REQUEST = (idx) => {
-    console.log('post view request idx ====', idx);
     return {
         type: POST_VIEW_REQUEST,
         idx,
@@ -163,21 +157,18 @@ export const PostView_ERROR = () => {
 
 /* 수정 */
 export const PostModify_REQUEST = data => {
-    console.log("modify -====", data);
     return {
         type: POST_MODIFY_REQUEST,
         modifyData: data,
     }
 }
 export const PostModifySubmit_REQUEST = data => {
-    console.log("modify submit -====", data);
     return {
         type : POST_MODIFY_SUBMIT_REQUEST,
         modifiedData : data,
     }
 }
 export const PostModify_SUCCESS = (data) => {
-    console.log("modify success ==== 성공 ", data);
     return {
         type: POST_MODIFY_SUCCESS,
     }
@@ -197,7 +188,6 @@ export const PostDelete_REQUEST = (idx) => {
 }
 
 export const PostDelete_SUCCESS = (deletedList) => {
-    console.log(deletedList);
     return {
         type: POST_DELETE_SUCCESS,
         deletedList,
@@ -221,14 +211,12 @@ const postReducer = (state = initalState, action) => {
                 loading: true,
             }
         case POST_INSERT_SUCCESS:
-            //console.log('insert 성공');
             return {
                 ...state,
                 data: action.data,
                 loading: false,
             }
         case POST_INSERT_ERROR:
-            //console.log('insert 실패');
             return {
                 ...state,
                 data: action.data,
@@ -247,16 +235,12 @@ const postReducer = (state = initalState, action) => {
                 loading: true,
             }
         case POST_GET_SUCCESS:
-            /*console.log('get 성공');
-            console.log('action =======', action);
-            console.log('action.list =======', action.list);*/
             return {
                 ...state,
                 list: action.list,
                 loading: false,
             }
         case POST_GET_ERROR:
-            // console.log('get 실패');
             return {
                 ...state,
                 loading: false,
@@ -268,9 +252,6 @@ const postReducer = (state = initalState, action) => {
                 loading: true
             }
         case GET_LIKES_SUCCESS:
-            /*console.log('likes 성공')
-            console.log(action, 'likes action')
-            console.log(action.list, 'action=================likeslist')*/
             return {
                 ...state,
                 list: action.list,
@@ -279,14 +260,11 @@ const postReducer = (state = initalState, action) => {
 
         /* 좋아요 추가하기 */
         case ADD_LIKES_REQUEST:
-           // console.log(state,'reducer-addlikerequest')
             return {
                 ...state,
                 loading: true
             }
         case ADD_LIKES_SUCCESS:
-            //console.log(state,'reducer-addlikesuccess')
-            console.log('addlikeeeeeeeeeeeeeeee//////////',action.addLike)
             return {
                 ...state,
                 addLike:action.addLike.likeStatus,
@@ -300,14 +278,12 @@ const postReducer = (state = initalState, action) => {
 
         /* 글 보기 */
         case POST_VIEW_REQUEST:
-            //console.log('view request action========',action);
             return {
                 ...state,
                 idx: action.idx,
                 loading: true,
             }
         case POST_VIEW_SUCCESS:
-            //console.log('view 성공 action =====', action);
             return {
                 ...state,
                 view: action.view,
@@ -315,7 +291,6 @@ const postReducer = (state = initalState, action) => {
                 loading: false,
             }
         case POST_VIEW_ERROR:
-            console.log('view 실패');
             return {
                 ...state,
                 msg: action.msg,
@@ -323,14 +298,12 @@ const postReducer = (state = initalState, action) => {
             }
         /* 글 삭제 */
         case POST_DELETE_REQUEST:
-            console.log('DELETE request action========', action);
             return {
                 ...state,
                 idx: action.idx,
                 loading: true,
             }
         case POST_DELETE_SUCCESS:
-            console.log('delete 성공 action =====', action);
             let { deletedList, msg } = action
             return {
                 ...state,
@@ -339,7 +312,6 @@ const postReducer = (state = initalState, action) => {
                 loading: false,
             }
         case POST_DELETE_ERROR:
-            console.log('delete 실패');
             return {
                 ...state,
                 loading: false,
@@ -347,15 +319,11 @@ const postReducer = (state = initalState, action) => {
 
         // 검색 기능===============================
         case POST_SEARCH_REQUEST:
-            console.log('postrequest')
             return{
                 ...state,
                 loading:true,
             }
         case POST_SEARCH_SUCCESS:
-            console.log('postsuccess/reducer-post.js===================')
-            console.log(action.searchList)
-            console.log(state,'...stateaaaaaaaaaaaaaaa')
             return{
                 ...state,
                 searchData:action.searchList,
@@ -364,7 +332,6 @@ const postReducer = (state = initalState, action) => {
             }
             
         case POST_SEARCH_ERROR:
-            console.log('posterror')
             return{
                 ...state,
                 loading:false
@@ -372,21 +339,18 @@ const postReducer = (state = initalState, action) => {
 
         /* 수정 */
         case POST_MODIFY_REQUEST:
-            console.log('MODIFY request action========', action);
             return {
                 ...state,
                 modifyData: action.modifyData,
                 loading: true,
             }
         case POST_MODIFY_SUBMIT_REQUEST:
-            console.log('MODIFY request action========', action);
             return {
                 ...state,
                 modifiedData: action.modifyData,
                 loading: true,
             }
         case POST_MODIFY_SUCCESS:
-            console.log('modify 성공 action =====', action);
             return {
                 ...state,
                 modifiedData2 : action.modifiedList,
@@ -394,7 +358,6 @@ const postReducer = (state = initalState, action) => {
                 loading: false,
             }
         case POST_MODIFY_ERROR:
-            console.log('delete 실패');
             return {
                 ...state,
                 loading: false,

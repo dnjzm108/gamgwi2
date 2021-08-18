@@ -20,10 +20,6 @@ const Login_form = () => {
     console.log(userid.value, userpw.value);
 
     dispatch(UserLogin_REQUEST(data))
-
-    // userid.value === "web7722" && userpw.value === "1234"
-    // ? Router.push('/')
-    // : alert('아이디와 패스워드가 다릅니다.')
   }
 
   return (

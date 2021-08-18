@@ -14,7 +14,7 @@ const Likes = () => {
     },[])
 
     const data = useSelector(state=>state.post.list)
-    console.log('likessssssssssssssssssssssss==========',data)
+    
     useEffect(()=>{
 
     },[data])

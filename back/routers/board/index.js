@@ -13,18 +13,13 @@ router.get('/write',controller.get_write)
 router.post('/view',controller.post_view)
 
 router.post('/modify',controller.modify_succece)
-//router.post('/write',controller.write_succece)
 
 router.post('/delete',controller.Delete)
 router.get('/modify',controller.modify)
-// router.get('/list',controller.list) //
 router.post('/write',controller.write)
 router.get('/reply',controller.view_reply)
 
 router.post('/addLike',controller.addLike)
 
-// let test = async(req,res) => {
-//     await Board
-// }
 
 module.exports = router;

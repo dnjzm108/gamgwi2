@@ -39,7 +39,6 @@ const SearchBar = () => {
     return (
         <>
             <SearchBarWrap>
-                {/* <form method="POST" action="http://localhost:3500/board/list"> */}
                 <form onSubmit={handleSubmit}>
                     <select name="search" onChange={handleChange}>
                         <option value="none">==선택==</option>
