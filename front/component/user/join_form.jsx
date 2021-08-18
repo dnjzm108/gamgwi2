@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { UserJoin_REQUEST, User_Id_Checke } from "../../reducers/user"
 import useInput from '../../hooks/useInput'
-import { Form } from './join_login_css'
+import { Form } from './Join_login_css'
 // import Styled from 'styled-components'
 import Link from 'next/link'
 

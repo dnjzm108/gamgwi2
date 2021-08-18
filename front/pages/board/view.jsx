@@ -2,7 +2,7 @@ import Head from "next/head"
 import {useRouter} from 'next/router'
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import WebLayout from "../../component/layout/webLayout"
+import WebLayout from "../../component/layout/WebLayout"
 import ViewContent from "../../component/view/ViewContent"
 
 

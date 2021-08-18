@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Router from "next/router"
 import { useEffect, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import WebLayout from "../../component/layout/webLayout";
+import WebLayout from "../../component/layout/WebLayout";
 import Styled from "styled-components";
 import TextArea from '../../component/write/TextArea';
 

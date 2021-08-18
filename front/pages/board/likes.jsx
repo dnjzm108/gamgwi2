@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useEffect } from 'react'
 import SearchBar from '../../component/common/SearchBar'
-import WebLayout from "../../component/layout/webLayout"
+import WebLayout from "../../component/layout/WebLayout"
 import PostList from '../../component/list/PostList'
 import { useDispatch,useSelector } from 'react-redux'
 import { GetLikes_REQUEST, PostView_REQUEST } from '../../reducers/post'

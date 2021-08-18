@@ -1,7 +1,7 @@
 import Head from "next/head"
 import { useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux'
-import WebLayout from "../../component/layout/webLayout"
+import WebLayout from "../../component/layout/WebLayout"
 import Styled from "styled-components"
 import ModifyArea from "../../component/write/ModifyArea"
 

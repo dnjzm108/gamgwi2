@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import PostList from '../../component/list/PostList'
-import WebLayout from "../../component/layout/webLayout"
+import WebLayout from "../../component/layout/WebLayout"
 import SearchBar from '../../component/common/SearchBar'
 import { useDispatch, useSelector } from 'react-redux'
 import { PostGet_REQUEST, PostView_REQUEST } from '../../reducers/post'

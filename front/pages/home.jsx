@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import WebLayout from "../component/layout/webLayout"
+import WebLayout from "../component/layout/WebLayout"
 import HomeContent from '../component/home/HomeContent'
 
 const Home = () => {

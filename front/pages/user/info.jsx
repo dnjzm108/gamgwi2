@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import WebLayout from "../../component/layout/webLayout"
+import WebLayout from "../../component/layout/WebLayout"
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import FaceIcon from '@material-ui/icons/Face';
 import Styled from 'styled-components'
