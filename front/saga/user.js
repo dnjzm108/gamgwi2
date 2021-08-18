@@ -4,7 +4,7 @@ import { all, call, takeLatest,fork,put} from "redux-saga/effects";
 const url = '52.78.60.47'
 function loginAPI(data){
     console.log(data);
-    return axios.post(`http://${url}/user/login`,data,{ withCredentials: true })
+    return axios.post(`https://${url}/user/login`,data,{ withCredentials: true })
 }
 
 function* login(action){
@@ -27,7 +27,7 @@ function* login(action){
 }
 
 function joinAPI(data){
-    return axios.post(`http://${url}/user/join`,data)
+    return axios.post(`https://${url}/user/join`,data)
 }
 function* join(action){
     let result = yield call(joinAPI,action.data)
@@ -49,7 +49,7 @@ function* join(action){
 }
 
 function cookieAPI(data){
-    return axios.get(`http://${url}`,{ withCredentials: true })
+    return axios.get(`https://${url}`,{ withCredentials: true })
 }
 
 function* cookie_check(action){
@@ -71,14 +71,14 @@ function* cookie_check(action){
 }
 
 function logoutAPI(){
-    return axios.get(`http://${url}/user/logout`,{ withCredentials: true })
+    return axios.get(`https://${url}/user/logout`,{ withCredentials: true })
 }
 function* logout(){
     let result = yield call(logoutAPI)
 }
 
 function id_check_API(data){
-    return axios.post(`http://${url}/user/id_check`,data)
+    return axios.post(`https://${url}/user/id_check`,data)
 }
 
 function* id_check(action){
