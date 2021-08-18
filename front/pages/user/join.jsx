@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import BasicLayout from '../../component/layout/BasicLayout'
-import Join_form from "../../component/user/Join_form"
+import Join_form from "../../component/user/join_form"
 // import Styled from "styled-components";
 import { useSelector,useDispatch } from 'react-redux';
 import { useEffect,useCallback } from 'react'

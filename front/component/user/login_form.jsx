@@ -1,4 +1,4 @@
-import { Form } from './Join_login_css'
+import { Form } from './join_login_css'
 import useInput from '../../hooks/useInput'
 import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux'

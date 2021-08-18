@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Router from "next/router"
 import BasicLayout from '../../component/layout/BasicLayout'
-import Login_form from "../../component/user/Login_form"
+import Login_form from '../../component/user/login_form'
 import { useSelector,useDispatch } from 'react-redux';
 import { useEffect,useCallback } from 'react'
 
