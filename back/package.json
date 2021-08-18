@@ -16,7 +16,8 @@
     "sequelize": "^6.6.5"
   },
   "scripts": {
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "pm2 start server.js"
   },
   "name": "back",
   "version": "1.0.0",
