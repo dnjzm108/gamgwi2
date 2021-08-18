@@ -13,7 +13,7 @@ const BasicLayout = ({ children }) => {
         </>
     )
 }
-
+// babel-plugin-styled-components
 export default BasicLayout
 
 const MainLayout = Styled.div`
