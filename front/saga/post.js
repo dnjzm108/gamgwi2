@@ -1,7 +1,7 @@
 import { all, fork, put, takeLatest, call } from 'redux-saga/effects'
 import axios from 'axios'
 
-const url = '52.78.60.47'
+const url = 'api.hyejun.co.kr'
 
 /* 글 작성 */
 function writeAPI(data) {
