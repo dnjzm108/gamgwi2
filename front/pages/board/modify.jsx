@@ -9,7 +9,6 @@ import ModifyArea from "../../component/write/ModifyArea"
 const Modify = () => {
     const dispatch = useDispatch()
     const modifyData = useSelector(state => state.post.modifyData)
-    console.log("modifyData=======", modifyData);
 
     return (
         <>

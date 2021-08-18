@@ -14,15 +14,11 @@ import AcUnitIcon from '@material-ui/icons/AcUnit';
 
 const ViewContent = (props) => {
     let { title, content, nickName, hit, id, likeIdx, date, weather } = props.data
-    console.log(props.data, 'props-dataaaaaaaaaaaaaaaaaaaaaaa')
     let contentData = { ...props.data };
     let YMD = contentData.date.substring(0, 10)
 
     const like = useSelector(state => state.post.like)
-    //const likeList = {...like}
     const addlike = useSelector(state => state.post.addLike)
-    console.log(like.likeStatus, 'asddlikeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
-    //console.log(like,'page/board/view.jsx')
 
 
     const dispatch = useDispatch()
@@ -37,10 +33,6 @@ const ViewContent = (props) => {
         dispatch(PostDelete_REQUEST(idx))
 
         Router.push('/board/list')
-
-        // if (msg === '삭제 성공') {
-        //     Router.push('/board/list')
-        // }
     }
 
     const [likeState, setLikeState] = useState(false)
@@ -74,12 +66,12 @@ const ViewContent = (props) => {
                 </ContentWrap>
                 <VeiwIcon>
                     <ul>
-                        <li onClick={() => { handleLikes(id) }}>
+                        {/* <li onClick={() => { handleLikes(id) }}>
                             <LikesWrap flag={like.likeStatus}>
                                 <FavoriteRoundedIcon />
                             </LikesWrap>
-                            {/* <FavoriteRoundedIcon flag = {likeState}/> */}
-                        </li>
+                        </li> */}
+                        <li></li>
                         <li onClick={() => { handleModify(contentData) }}><CreateRoundedIcon /></li>
                         <li onClick={() => { handleDelete(id) }}><DeleteRoundedIcon /></li>
                     </ul>
@@ -93,7 +85,6 @@ export default ViewContent
 const ViewContentWrap = Styled.div`
     width : 100%;
     height : 100%;
-    // background : #e9a9a9;
 `
 
 const TitleWrap = Styled.div`
@@ -105,7 +96,7 @@ const TitleWrap = Styled.div`
 
     @media only screen and (min-width:768px){
         font-size : 35px;
-        padding: 3% 5%;
+        padding: 3% 1% 3% 7%;
     }
 `
 const ContentWrap = Styled.div`
@@ -154,11 +145,16 @@ const VeiwIcon = Styled.div`
         display : flex;
         height: auto;
         float: right;
-        text-align: right;
+        text-align: center;
     }
 
     & > ul > li {
         width : 70px;
+    }
+    /* 임시 */
+    & > ul > li:nth-child(2),
+    & > ul > li:nth-child(3){
+        cursor : pointer;
     }
 
     & > ul > li > svg,

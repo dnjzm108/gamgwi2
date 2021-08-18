@@ -4,7 +4,6 @@ const crypto = require('crypto');
 module.exports = (req, res, next) => {
     let { AccessToken } = req.cookies
     if (AccessToken == undefined) {
-        console.log('로그인을 진행해주세요');
         res.json({ cookie:'Fail' });
         return 0;
     }
@@ -14,7 +13,6 @@ module.exports = (req, res, next) => {
     console.log(signature);
 
     if (sign == signature) {
-        console.log('검증된 토큰입니다');
         let { userid,userIdx,userpw, exp } = JSON.parse(Buffer.from(payload, 'base64').toString());
         let user_info = {userid, userIdx};
 
@@ -22,7 +20,6 @@ module.exports = (req, res, next) => {
 
         if (nexp > exp) {
             res.clearCookie('AccessToken');
-            console.log('토큰 만료');
             res.json({ cookie: 'Fail '});
             return 0;
         }
@@ -34,7 +31,6 @@ module.exports = (req, res, next) => {
     } else {
         res.clearCookie('AccessToken');
         res.json({ cookie: 'Fail' });
-        console.log('부적절한 토큰');
     }
 
 }

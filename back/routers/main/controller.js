@@ -5,7 +5,6 @@ let first_main = (req,res) =>{
 }
 
 let main = (req,res) =>{
-    console.log('여기까지 왔니?');
    return ;
 }
 
@@ -13,5 +12,4 @@ let main = (req,res) =>{
 module.exports={
     first_main,
     main,
-    
 }

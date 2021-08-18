@@ -61,8 +61,6 @@ let join = (req, res) => {
 }
 
 let info = async (req, res) => {
-    // let {idx} = 
-    // let res = await User.findAll({where:{id:idx}})
     res.send('info')
 }
 

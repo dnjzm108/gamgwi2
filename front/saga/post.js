@@ -3,20 +3,14 @@ import axios from 'axios'
 
 /* 글 작성 */
 function writeAPI(data) {
-    //console.log("write api = ", data);
-    return axios.post('http://localhost:3500/board/write', data)   //6번
+    return axios.post('http://localhost:3500/board/write', data)   
 }
 
 function* write(action) {
-    //console.log("action = ", action);
     const result = yield call(writeAPI, action.data)
-    //console.log("result = ", result);
     const { data } = result
-    //console.log("data = ", data);
-    // 성공하면 data.msg 를 보내서 alert 띄우고 글 view 로 가기
 
     if (data.result === 'OK') {
-        //alert(data.msg)
         yield put({
             type: 'POST_INSERT_SUCCESS',
             data: data.msg
@@ -36,11 +30,7 @@ function* reqWrite() {
 /* 글 목록 가져옴 */
 function* getList() {
     const result = yield call(axios.get,'http://localhost:3500/board/list')
-    //console.log('get 요청 result ====',result);
     const { data } = result
-    //console.log("get data =======",data);
-    //console.log("get data list =======",data.list);
-   
 
     if (data.result === 'OK') {
         yield put({
@@ -62,7 +52,6 @@ function* reqGetList() {
 function* getLikes() {
     const result = yield call(axios.get,'http://localhost:3500/board/likes')
     const {data} = result
-    console.log(data,'likessssssssssssssssssssss__post.jsx')
     if(data.result=='OK'){
         yield put({
             type:'GET_LIKES_SUCCESS',
@@ -81,7 +70,6 @@ function* reqGetLikes(){
 
 /* 검색 기능 */
 function postSearch(data){
-    console.log(data,'saga-post.js ')
     return axios.post('http://localhost:3500/board/list',{search:data.search,searchedValue:data.searchedValue})
 }
 
@@ -89,10 +77,8 @@ function postSearch(data){
 function* postGetSearch(action){
     const result = yield call(postSearch,action.data)
     const {data} = result
-    console.log(result,'saga-postGetsearch====================')
 
     if(data.result==="OK"){
-        console.log('okkkkkkkkkkkkkkkk')
         yield put({
             type:'POST_SEARCH_SUCCESS',
             searchList:data.list
@@ -104,9 +90,6 @@ function* postGetSearch(action){
         })
     }
 }
-
-
-
 
 function* reqPost() {
     yield takeLatest('POST_SEARCH_REQUEST', postGetSearch)
@@ -141,12 +124,8 @@ function* reqViewList() {
 
 /* 글 삭제 */
 function* deleteView(action) {
-    console.log("getDELETE ===== ",action);
-    console.log("action.idx ===== ",action.idx);
     const result = yield call(axios.post,'http://localhost:3500/board/delete',{idx:action.idx})
-    console.log('view 백단 요청 result ====',result);
     const { msg, deletedRes } = result.data
-    console.log("view data =======",deletedRes);
    
     if (result.data.result === 'OK') {
         yield put({
@@ -168,15 +147,9 @@ function* reqViewDelete() {
 
 /* 글 수정 */
 function* modifyView(action) {
-    console.log("getMODIFY ===== ",action);
-    console.log("getMODIFY data===== ",action.modifiedData);
-
     const result = yield call(axios.post,'http://localhost:3500/board/modify', {modifyData : action.modifiedData})
-    console.log('modify 백단 요청 result ====',result);
     const {data} = result
-    console.log(data);
     
-   
     if (result.data.result === 'OK') {
         yield put({
             type: 'POST_MODIFY_SUCCESS',
@@ -197,45 +170,20 @@ function* reqViewModify() {
 
 /* 좋아요 추가할 때 */
 function* addLikes(action) {
-    console.log(action.likeData,'saga-post.js(addlikes)');
     const result = yield call(axios.post,'http://localhost:3500/board/addLike',{addLikeData:action.likeData})
     const {data} = result
-    
-    console.log(data,'saga-post.jsssssssssssssss')
+
     if(data.result=='OK'){
-        console.log('OK')
         yield put({
            type:'ADD_LIKES_SUCCESS',
            addLike:data.likestate
         })
     }else {
-        console.log('fail')
         yield put({
             type:'ADD_LIKES_ERROR'
         })
         
     }
-    /*
-        {idx: 30, likeState: true}
-        이런식으로 오는데 왜인지 잘 모르겠는데 
-        빨간색이면 false 검정이면 ture 가 되네여..
-        이대로 백단에 보내서 likeState 값 update 해준다음에
-        idx 로 해당 글 조회해서 view 에 뿌려주면 되지 않을까.. 싶습니다.
-    */
-    // const result = yield call(axios.post,'http://localhost:3500/board/링크',action.likeData)
-    // const { data } = result
-    
-    // if (data.result === 'OK') {
-    //     yield put({
-    //         type: 'ADD_LIKES_SUCCESS',
-            
-    //     })
-    // } else {
-    //     yield put({
-    //         type: 'ADD_LIKES_ERROR',
-            
-    //     })
-    // }
 }
 
 function* reqAddLikes() {

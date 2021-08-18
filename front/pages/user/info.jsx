@@ -10,7 +10,6 @@ import Router from "next/router"
 
 const Info = () => {
     const userInfo = useSelector(state => state.user.user_info)
-    console.log(userInfo);
 
     const dispatch = useDispatch()
 
@@ -98,7 +97,7 @@ const LogoutBtn = Styled.button`
     float : right;
     background : none;
     border : none;
-    border-bottom : 2px solid #eee;
+    border-bottom : 2px solid #d0d0d0;
     padding-bottom : 3px;
     margin: 13vh 1vh 0 0;
     font-family: 'IM_Hyemin-Bold';

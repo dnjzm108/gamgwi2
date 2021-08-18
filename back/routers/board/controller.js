@@ -7,7 +7,6 @@ const { create } = require('../../models/weather')
 const { callbackify } = require('util')
 
 let view_reply = async (req, res) => {
-    //let {url} = req.query(
     await Comment.create({ commenter_name: 'algml', category: '글귀', titleIdx: 1 })
     let comment = await Comment.findAll({})
     res.send(comment)
@@ -16,7 +15,6 @@ let view_reply = async (req, res) => {
 let post_view = async (req, res) => {
 
     let { idx } = req.body
-    //console.log(idx,'likeeeeeeeeeeeeeeeee')
     let result = {};
     try {
         let view_hit = await Board.findOne({ where: { id: idx }, attributes: ['hit']})
@@ -28,7 +26,6 @@ let post_view = async (req, res) => {
             view: view.dataValues,
             like: like.dataValues
         }
-        // console.log(like,'viewwwwwwwwwwwwwwww')
 
     } catch (error) {
         result = {
@@ -63,11 +60,8 @@ let write = async (req, res) => {
 let get_list = async (req, res) => {
     let result = {};
     try {
-
-        //let list = await Board.findAll({where:{watch:1,category:'글귀'},attributes:['title','likeCount','nickName','content']})
-        //let list = await Board.findAll({})
         let list = await Board.findAll({ where: { watch: 1, category: '글귀' }, attributes: ['title', 'likeIdx', 'nickName', 'content', 'date', 'hit', 'id','weather'] })
-        //let list = await Board.findAll({})
+        
         result = {
             list,
             result: 'OK',
@@ -117,9 +111,6 @@ let get_list = async (req, res) => {
 
 let get_likes = async (req, res) => {
     let result = {}
-
-
-    //let list = await Board.findAll({where:{like:1,category:'글귀'},attributes:['title','like','nickName','content']})
     let list = await Board.findAll({
         include: [{
             model: Like,
@@ -131,7 +122,6 @@ let get_likes = async (req, res) => {
         result: 'OK',
         msg: '좋아요 가져오기 성공'
     }
-    //console.log(result,'board-controller.js===============')
     res.json(result)
 }
 
@@ -174,7 +164,6 @@ let Delete = async (req, res) => {
 }
 
 let write_succece = async (req, res) => {
-    //let {title,writer_name,report,content,category} = req.body
     await Board.create({ title: 'tt', nickName: 'al', report: 0, content: 'd', category: '글귀', })
     
     let sucWrite = await Board.findAll({})
@@ -213,7 +202,6 @@ let post_list = async (req, res) => {
     let { search, searchedValue } = req.body
     let list
     let result = {}
-    //console.log(search,searchedValue,'post_listttttttttttttttttttttt')
     
     try {
         switch (search) {
@@ -247,7 +235,6 @@ let post_list = async (req, res) => {
                     result: 'OK',
                     msg: 'search list 가져오기 성공'
                 }
-                //console.log(result,'resultttttttttttttt')
                 res.json(result)
         }
     } catch (err) {
@@ -262,7 +249,6 @@ let post_list = async (req, res) => {
 }
 
 let addLike = async (req,res) => {
-    console.log(req.body.addLikeData)
     let {idx,likeState} = req.body.addLikeData
     try{
         if(likeState==true){
@@ -271,13 +257,11 @@ let addLike = async (req,res) => {
             await Like.update({likeStatus:1},{where:{likeBoardIdx:idx}})
         }
         let likestate = await Like.findOne({where:{likeBoardIdx:idx}})
-        //console.log(likestate.likeStatus)
 
         let data = {
             result:'OK',
             likestate
         }
-        //console.log(data,'dataaaaaaaaaaaa')
         res.json(data)
     }catch(err){
         console.log(err)
@@ -287,9 +271,6 @@ let addLike = async (req,res) => {
         }
         res.json(result)
     }
-    
-   
-
 }
 
 module.exports = {

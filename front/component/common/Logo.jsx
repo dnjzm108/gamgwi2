@@ -17,13 +17,10 @@ const LogoWrap = Styled.div`
     height : auto;
     padding-top : 20%;
     box-sizing : border-box;
-    //background : #dfdfb6;
 
     @media only screen and (min-width:768px){
         // PC 버전
         padding-top : 0;
-        //min-height : 500px;
-        
     }
 `
 
