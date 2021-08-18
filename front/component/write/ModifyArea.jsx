@@ -23,6 +23,8 @@ const ModifyArea = () => {
         setTodayWeather(e.target.value)
     }
 
+    console.log("오늘의 날씨 === ",todayWeather);
+
     /* 수정 부분 */
     let { id, title, content } = modifyData
     const modifyTitle = useInput(title)
@@ -33,6 +35,7 @@ const ModifyArea = () => {
     const hadleSubmit = (e) => {
         e.preventDefault()
 
+        console.log("submit 날씨 ==== ",todayWeather);
         const data = {
             id,
             todayWeather: todayWeather,
