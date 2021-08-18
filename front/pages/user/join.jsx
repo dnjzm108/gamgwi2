@@ -11,6 +11,10 @@ const Join = () => {
     const dispatch = useDispatch()
     const data = useSelector(state => state.user)
 
+    useEffect(()=>{
+dispatch({type:'test'})
+    },[])
+
     useEffect(() => {
         console.log(data);
         if (data.user_info !== undefined) {
