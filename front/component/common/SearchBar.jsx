@@ -9,7 +9,6 @@ import Router from 'next/router'
 
 const SearchBar = () => {
     const dispatch = useDispatch()
-    //const search = useInput('')
     const searchedValue = useInput('')
     const [search,setSearch] = useState('')
     
