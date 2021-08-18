@@ -202,6 +202,9 @@ let post_list = async (req, res) => {
     let { search, searchedValue } = req.body
     let list
     let result = {}
+    console.log("req.body ==== ",req.body);
+    console.log("reqbodysearch ==== ",req.body.search);
+    console.log("search ===",search);
     
     try {
         switch (search) {
@@ -213,6 +216,12 @@ let post_list = async (req, res) => {
                         }
                     }, attributes: ['title', 'likeIdx', 'nickName', 'content', 'id','hit','date','weather']
                 })
+                result = {
+                    list,
+                    result: 'OK',
+                    msg: 'search list 가져오기 성공'
+                }
+                res.json(result)
             case 'content':
                 list = await Board.findAll({
                     where: {
@@ -221,6 +230,12 @@ let post_list = async (req, res) => {
                         }
                     }, attributes: ['title', 'likeIdx', 'nickName', 'content', 'id','hit','date','weather']
                 })
+                result = {
+                    list,
+                    result: 'OK',
+                    msg: 'search list 가져오기 성공'
+                }
+                res.json(result)
             case 'title':
                 list = await Board.findAll({
                     where: {
@@ -229,7 +244,6 @@ let post_list = async (req, res) => {
                         }
                     }, attributes: ['title', 'likeIdx', 'nickName', 'content', 'id','hit','date','weather']
                 })
-
                 result = {
                     list,
                     result: 'OK',
