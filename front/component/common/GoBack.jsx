@@ -17,6 +17,7 @@ export default GoBack
 
 
 const GoBackWrap = Styled.div`
+    cursor : pointer;
     @media only screen and (min-width:768px){
         & > p > svg{
             font-size : 40px;
