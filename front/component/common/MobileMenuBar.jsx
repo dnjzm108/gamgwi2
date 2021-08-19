@@ -15,9 +15,9 @@ const MobileMenuBar = () => {
                     <Link href="/board/list">
                         <a ><FormatListBulletedRoundedIcon /></a>
                     </Link>
-                    {/* <Link href="/board/likes">
+                    <Link href="/board/likes">
                         <a ><FavoriteRoundedIcon /></a>
-                    </Link> */}
+                    </Link>
                     <Link href="/home">
                         <a ><HomeRoundedIcon /></a>
                     </Link>

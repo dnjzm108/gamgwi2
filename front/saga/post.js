@@ -173,7 +173,7 @@ function* reqViewModify() {
 
 /* 좋아요 추가할 때 */
 function* addLikes(action) {
-    const result = yield call(axios.post,`${url}/board/addLike1`,{addLikeData:action.likeData})
+    const result = yield call(axios.post,`${url}/board/addLike`,{addLikeData:action.likeData})
     const {data} = result
 
     if(data.result=='OK'){
@@ -183,7 +183,8 @@ function* addLikes(action) {
         })
     }else {
         yield put({
-            type:'ADD_LIKES_ERROR'
+            type:'ADD_LIKES_ERROR',
+            addlikefail:data
         })
         
     }

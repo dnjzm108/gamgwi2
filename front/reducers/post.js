@@ -125,6 +125,7 @@ export const AddLikes_REQUEST = (likeData) => {
 export const AddLikes_SUCCESS = (addLike) => {
     return {
         type: ADD_LIKES_SUCCESS,
+        addLike
     }
 }
 export const AddLikes_ERROR = () => {
@@ -267,9 +268,10 @@ const postReducer = (state = initalState, action) => {
                 loading: true
             }
         case ADD_LIKES_SUCCESS:
+            console.log(action.addLike,'action addlike====================')
             return {
                 ...state,
-                addLike:action.addLike.likeStatus,
+                addLike:action.addLike,
                 loading: false
             }
         case ADD_LIKES_ERROR:

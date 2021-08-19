@@ -19,11 +19,9 @@ const ViewContent = (props) => {
     let YMD = contentData.date.substring(0, 10)
 
     const userid = useSelector(state => state.user.user_info.userid)
-    const like = useSelector(state => state.post.like)
-    const addlike = useSelector(state => state.post.addLike)
-
-    console.log(userid);
-
+    //const like = useSelector(state => state.post.like)
+    const like = useSelector(state=>state.post.addLike)
+    console.log(like,'test')
     const dispatch = useDispatch()
 
     const handleModify = (data) => {
@@ -34,22 +32,19 @@ const ViewContent = (props) => {
     const msg = useSelector(state => state.post.deleteMsg)
     const handleDelete = (idx) => {
         dispatch(PostDelete_REQUEST(idx))
-
         Router.push('/board/list')
     }
 
-    const [likeState, setLikeState] = useState(false)
+    const [likeState, setLikeState] = useState(like.likeStatus)
     const handleLikes = (idx) => {
-        setLikeState(!likeState)
+        setLikeState(!likeStatus)
         const likeData = { idx, likeState }
-        console.log('component-view-viewcontent')
         dispatch(AddLikes_REQUEST(likeData))
-
     }
 
 
-
     return (
+        
 
         <>
             <ViewContentWrap>
@@ -69,11 +64,11 @@ const ViewContent = (props) => {
                 </ContentWrap>
                 <VeiwIcon>
                     <ul>
-                        {/* <li onClick={() => { handleLikes(id) }}>
+                        <li onClick={() => { handleLikes(id) }}>
                             <LikesWrap flag={like.likeStatus}>
                                 <FavoriteRoundedIcon />
                             </LikesWrap>
-                        </li> */}
+                        </li>
                         <li></li>
                         {
                             nickName === userid 

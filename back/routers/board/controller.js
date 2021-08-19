@@ -268,8 +268,11 @@ let addLike = async (req,res) => {
     try{
         if(likeState==true){
             await Like.update({likeStatus:0},{where:{likeBoardIdx:idx}})
+            await Board.update({likeIdx:0},{where:{id:idx}})
+            
         }else if(likeState==false){
             await Like.update({likeStatus:1},{where:{likeBoardIdx:idx}})
+            await Board.update({likeIdx:1},{where:{id:idx}})
         }
         let likestate = await Like.findOne({where:{likeBoardIdx:idx}})
 
@@ -280,11 +283,11 @@ let addLike = async (req,res) => {
         res.json(data)
     }catch(err){
         console.log(err)
-        result = {
+        data = {
             result: 'Fail',
-            msg: '리스트 가져오기 실패'
+            msg: '리스트 가져오기 실패's
         }
-        res.json(result)
+        res.json(data)
     }
 }
 
