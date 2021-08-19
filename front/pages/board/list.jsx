@@ -18,7 +18,7 @@ const List = () => {
 
     // list 값 가져오기
     const data = useSelector(state => state.post.list)
-    useEffect(() => {}, [data])
+    useEffect(() => { }, [data])
 
     let list = []
     if (data !== undefined) {
@@ -29,14 +29,12 @@ const List = () => {
         let reverseitem = data.map(item=>item).reverse()       
         list = reverseitem.map((v) => {            
             return (
-                <>
-                    <tr key={v.id}>
-                        <td onClick={()=>{handleClick(v.id)}}>{v.title}</td>
-                        <td>{v.nickName}</td>
-                        <td>{v.hit}</td>
-                        <td>{v.date}</td>
-                    </tr>
-                </>
+                <tr key={v.id}>
+                    <td onClick={() => { handleClick(v.id) }}>{v.title}</td>
+                    <td>{v.nickName}</td>
+                    <td>{v.hit}</td>
+                    <td>{v.date}</td>
+                </tr>
             )
         })
     }

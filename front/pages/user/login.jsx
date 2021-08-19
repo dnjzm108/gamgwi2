@@ -11,7 +11,6 @@ const Login = () => {
 
     useEffect(() => {
         if (data.data !== undefined) {
-            console.log('login___data+++++++++',data);
              if (data.data === 'OK') {
                  Router.push('/home')
              }else if(data.data === '아이디와 비밀번호를 확인해주세요'){

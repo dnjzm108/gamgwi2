@@ -13,12 +13,10 @@ let login = (req, res) => {
 let login_success = async (req, res) => {
     let userid = req.body.userid
     let userpw = req.body.userpw
-    console.log(userid, userpw);
     let hash = chash(userpw);
     let login_info = await User.findOne({
         where: { userid, userpw:hash }
     });
-    console.log(login_info);
     let result = {}
     if (login_info !== null) {
         let {userIdx}=login_info.dataValues;
@@ -41,15 +39,12 @@ let login_success = async (req, res) => {
         let test = { result }
         res.json(test)
     }
-    console.log(req.cookies);
 }
 
 let join_success = async (req, res) => {
     let userid = req.body.userid
     let userpw = req.body.userpw
     let hash = chash(userpw);
-
-    console.log(userid, userpw);
     let result = await User.create({
         userid, userpw:hash
     })
@@ -69,7 +64,6 @@ let info_modify = (req, res) => {
 }
 
 let logout = (req,res) =>{
-    console.log('로그아웃');
     res.clearCookie('AccessToken');
     res.send('로그아웃')
 }

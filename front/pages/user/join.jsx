@@ -16,7 +16,6 @@ dispatch({type:'test'})
     },[])
 
     useEffect(() => {
-        console.log(data);
         if (data.user_info !== undefined) {
              if (data.user_info.userIdx !== undefined) {
                  Router.push('/home')
