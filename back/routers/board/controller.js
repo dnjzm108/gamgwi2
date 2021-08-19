@@ -55,7 +55,7 @@ let write = async (req, res) => {
             msg: '글 작성 실패..'
         }
     }
-    res.json(result)
+    await res.json(result)
 }
 
 let get_list = async (req, res) => {

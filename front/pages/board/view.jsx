@@ -9,6 +9,7 @@ import { PostView_REQUEST } from "../../reducers/post"
 
 const view = () => {
     const viewIdx = useSelector(state => state.post.viewIdx)
+    console.log(viewIdx);
     
     const dispatch = useDispatch()
     
@@ -17,6 +18,7 @@ const view = () => {
     },[viewIdx])
 
     const viewData = useSelector(state => state.post.view)
+    console.log(viewData);
     const viewDataCopy = {...viewData}
     return(
         <>
