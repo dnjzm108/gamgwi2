@@ -23,11 +23,11 @@ const List = () => {
     let list = []
     if (data !== undefined) {
         const handleClick = (idx) => {
-            console.log(idx);
             dispatch(PostView_REQUEST(idx))
             Router.push(`/board/view`)
         }
-        list = data.map((v) => {
+        let reverseitem = data.map(item=>item).reverse()       
+        list = reverseitem.map((v) => {            
             return (
                 <tr key={v.id}>
                     <td onClick={() => { handleClick(v.id) }}>{v.title}</td>
