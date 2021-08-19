@@ -4,7 +4,7 @@ import PostList from '../../component/list/PostList'
 import WebLayout from "../../component/layout/WebLayout"
 import SearchBar from '../../component/common/SearchBar'
 import { useDispatch, useSelector } from 'react-redux'
-import { PostGet_REQUEST, PostView_REQUEST } from '../../reducers/post'
+import { PostGet_REQUEST, PostView_IDX } from '../../reducers/post'
 import { useEffect } from 'react'
 import Router from "next/router"
 
@@ -23,7 +23,7 @@ const List = () => {
     let list = []
     if (data !== undefined) {
         const handleClick = (idx) => {
-            dispatch(PostView_REQUEST(idx))
+            dispatch(PostView_IDX(idx))
             Router.push(`/board/view`)
         }
         let reverseitem = data.map(item=>item).reverse()       

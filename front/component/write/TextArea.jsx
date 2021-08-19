@@ -12,9 +12,6 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 const TextArea = () => {
     const dispatch = useDispatch()
     const userinfo = useSelector(state=>state.user.user_info)
-    console.log(userinfo.userIdx)
-    console.log(userinfo.userpw)
-    console.log(userinfo.userid)
     
     /* 글 작성 */
     const writeTitle = useInput('')
@@ -23,7 +20,6 @@ const TextArea = () => {
     /* 오늘 날씨 */
     const [todayWeather, setTodayWeather] = useState('')
     const weatherChange = (e) => {
-        console.log(e.target.value);
         setTodayWeather(e.target.value)
     }
 

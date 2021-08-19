@@ -20,14 +20,12 @@ const SearchBar = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(search,searchedValue.value,'searchBar.jsx')
         const data = {
             search:search,
             searchedValue:searchedValue.value,
             test:'test'
         }
         dispatch(PostSearch_REQUEST(data))
-        console.log(data,'searchbar.jsx_data')
         Router.push(`/searches/search?category=${search}`)
     }
 
