@@ -13,16 +13,13 @@ import AcUnitIcon from '@material-ui/icons/AcUnit';
 
 
 const ViewContent = (props) => {
-    let { title, content, nickName, hit, id, likeIdx, date, weather } = props.data
-    console.log(title)
-    let contentData = { ...props.data };
-    let YMD = contentData.date.substring(0, 10)
+    let { title, content, nickName, hit, id, likeIdx, date, weather } = props.viewData
+    // let contentData = { ...props.viewData };
+    // let YMD = contentData.date.substring(0, 10)
 
     const userid = useSelector(state => state.user.user_info.userid)
     const like = useSelector(state => state.post.like)
     const addlike = useSelector(state => state.post.addLike)
-
-    console.log(userid);
 
     const dispatch = useDispatch()
 
@@ -42,7 +39,6 @@ const ViewContent = (props) => {
     const handleLikes = (idx) => {
         setLikeState(!likeState)
         const likeData = { idx, likeState }
-        console.log('component-view-viewcontent')
         dispatch(AddLikes_REQUEST(likeData))
 
     }
@@ -62,7 +58,7 @@ const ViewContent = (props) => {
                 </TitleWrap>
                 <DateWrap>
                     <p>작성자 : {nickName}</p>
-                    <p> {YMD} </p>
+                    {/* <p> {date} </p> */}
                 </DateWrap>
                 <ContentWrap>
                     {content}
