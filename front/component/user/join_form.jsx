@@ -37,8 +37,6 @@ const Join_form = () => {
         } else {
 
             if (userpw.value !== passwordCheck) {
-              
-                console.log('@@@@@@@@@@@', {passwordCheck});
                 alert('비밀번호가 같지 않습니다.')
                 setPasswordError(true)
                 return

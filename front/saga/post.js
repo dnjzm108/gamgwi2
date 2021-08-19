@@ -1,11 +1,10 @@
 import { all, fork, put, takeLatest, call } from 'redux-saga/effects'
 import axios from 'axios'
-
-const url = 'api.hyejun.co.kr'
+import {url} from './url'
 
 /* 글 작성 */
 function writeAPI(data) {
-    return axios.post(`https://${url}/board/write`, data)   
+    return axios.post(`${url}/board/write`, data)   
 }
 
 function* write(action) {
@@ -31,7 +30,7 @@ function* reqWrite() {
 
 /* 글 목록 가져옴 */
 function* getList() {
-    const result = yield call(axios.get,`https://${url}/board/list`)
+    const result = yield call(axios.get,`${url}/board/list`)
     const { data } = result
 
     if (data.result === 'OK') {
@@ -52,7 +51,7 @@ function* reqGetList() {
 
 /* Likes 가져옴 */
 function* getLikes() {
-    const result = yield call(axios.get,`https://${url}/board/likes`)
+    const result = yield call(axios.get,`${url}/board/likes`)
     const {data} = result
     if(data.result=='OK'){
         yield put({
@@ -72,7 +71,7 @@ function* reqGetLikes(){
 
 /* 검색 기능 */
 function postSearch(data){
-    return axios.post(`https://${url}/board/list`,{search:data.search,searchedValue:data.searchedValue})
+    return axios.post(`${url}/board/list`,{search:data.search,searchedValue:data.searchedValue})
 }
 
 
@@ -100,7 +99,7 @@ function* reqPost() {
 
 /* 글 view 가져옴 */
 function* getView(action) {
-    const result = yield call(axios.post,`https://${url}/board/view`,{idx:action.idx})
+    const result = yield call(axios.post,`${url}/board/view`,{idx:action.idx})
     const { data } = result
     
     if (data.result === 'OK') {
@@ -126,7 +125,7 @@ function* reqViewList() {
 
 /* 글 삭제 */
 function* deleteView(action) {
-    const result = yield call(axios.post,`https://${url}/board/delete`,{idx:action.idx})
+    const result = yield call(axios.post,`${url}/board/delete`,{idx:action.idx})
     const { msg, deletedRes } = result.data
    
     if (result.data.result === 'OK') {
@@ -150,7 +149,7 @@ function* reqViewDelete() {
 /* 글 수정 */
 function* modifyView(action) {
     console.log("modifyView ==== ", action);
-    const result = yield call(axios.post,`https://${url}/board/modify`, {modifyData : action.modifiedData})
+    const result = yield call(axios.post,`${url}/board/modify`, {modifyData : action.modifiedData})
     const {data} = result
     console.log("db에서 온 data",data);
     
@@ -174,7 +173,7 @@ function* reqViewModify() {
 
 /* 좋아요 추가할 때 */
 function* addLikes(action) {
-    const result = yield call(axios.post,`https://${url}/board/addLike1`,{addLikeData:action.likeData})
+    const result = yield call(axios.post,`${url}/board/addLike1`,{addLikeData:action.likeData})
     const {data} = result
 
     if(data.result=='OK'){

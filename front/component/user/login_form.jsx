@@ -17,7 +17,6 @@ const Login_form = () => {
       userid: userid.value,
       userpw: userpw.value
     }
-    console.log(userid.value, userpw.value);
 
     dispatch(UserLogin_REQUEST(data))
   }
