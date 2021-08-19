@@ -31,8 +31,7 @@ function* reqWrite() {
 
 /* 글 목록 가져옴 */
 function* getList() {
-    //const result = yield call(axios.get,`https://${url}/board/list`)
-    const result = yield call(axios.get,`http://localhost:3500/board/list`)
+    const result = yield call(axios.get,`https://${url}/board/list`)
     const { data } = result
 
     if (data.result === 'OK') {
