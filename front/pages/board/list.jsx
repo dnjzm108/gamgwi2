@@ -28,6 +28,8 @@ const List = () => {
             Router.push(`/board/view`)
         }
         list = data.map((v) => {
+            console.log(data.length,'length----------------------')
+            
             return (
                 <>
                     <tr key={v.id}>
