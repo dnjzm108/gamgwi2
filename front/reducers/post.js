@@ -137,6 +137,7 @@ export const AddLikes_ERROR = () => {
 
 /* 글 view 보기 */
 export const PostView_REQUEST = (idx) => {
+    console.log(idx);
     return {
         type: POST_VIEW_REQUEST,
         idx,

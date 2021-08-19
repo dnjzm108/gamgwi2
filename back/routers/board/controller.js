@@ -13,7 +13,7 @@ let view_reply = async (req, res) => {
 }
 
 let post_view = async (req, res) => {
-
+    console.log(req.body);
     let { idx } = req.body
     let result = {};
     try {
@@ -21,6 +21,7 @@ let post_view = async (req, res) => {
         await Board.update({ hit : view_hit.dataValues.hit + 1 }, { where: { id : idx } })
         let view = await Board.findOne({ where: { id: idx }, attributes: ['title', 'content', 'nickName', 'hit', 'id', 'likeIdx', 'date','weather']})
         let like = await Like.findOne({where:{likeBoardIdx:view.dataValues.id}})
+        console.log(view);
         result = {
             result: 'OK',
             view: view.dataValues,

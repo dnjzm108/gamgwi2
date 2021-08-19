@@ -8,6 +8,7 @@ import ViewContent from "../../component/view/ViewContent"
 
 const view = () => {
     const data = useSelector(state => state.post.view)
+    console.log(data);
 
     useEffect(()=>{
 

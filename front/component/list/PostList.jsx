@@ -3,29 +3,33 @@ import DateRangeIcon from '@material-ui/icons/DateRange';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import FaceIcon from '@material-ui/icons/Face';
 
-const PostContent = (props)=>{
-    return(
+const PostContent = (props) => {
+    return (
         <>
             <PostContentWrap>
                 <ListTable>
-                    <tr>
-                        <th>TITLE</th>
-                        <th><FaceIcon/></th>
-                        <th><VisibilityIcon/></th>
-                        <th><DateRangeIcon/></th>
-                    </tr>
-                    {props.list}
+                    <thead>
+                        <tr>
+                            <th>TITLE</th>
+                            <th><FaceIcon /></th>
+                            <th><VisibilityIcon /></th>
+                            <th><DateRangeIcon /></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {props.list}
+                    </tbody>
                 </ListTable>
             </PostContentWrap>
         </>
     )
 }
 
-const PostList = (props)=>{
-    return(
+const PostList = (props) => {
+    return (
         <>
             <ListWrap>
-                <PostContent list={props.list}/>
+                <PostContent list={props.list} />
             </ListWrap>
         </>
     )
@@ -54,7 +58,7 @@ const ListWrap = Styled.div`
         background-color: rgba(0,0,0,0); 
     }
 
-` 
+`
 
 const PostContentWrap = Styled.div`
     
@@ -66,73 +70,71 @@ const ListTable = Styled.table`
 
     
 
-    & > tr:nth-child(1){
+    & >thead> tr:nth-child(1){
         width: 100%;
         height : auto;
     }
     
-    & > tr:nth-child(1)>th{
+    & >thead> tr:nth-child(1)>th{
         border-bottom: 4px solid #efefef;
     }
-    & > tr:nth-child(1) > th:nth-child(1) {
+    & >thead> tr:nth-child(1) > th:nth-child(1) {
         width: 50%;
     }
-    & > tr:nth-child(1) > th:nth-child(2) {
+    & >thead> tr:nth-child(1) > th:nth-child(2) {
         width: 15%;
     }
-    & > tr:nth-child(1) > th:nth-child(3){
+    & >thead> tr:nth-child(1) > th:nth-child(3){
         width: 5%;
     }
-    & > tr:nth-child(1) > th:nth-child(4){
+    & >thead > tr:nth-child(1) > th:nth-child(4){
         width: 30%;
     }
-    & > tr {
+    & > tbody >tr {
         height: 70px;
         text-align : center;
         font-size : 16px;
     }
-    & > tr > td:nth-child(1){
+    & > tbody >tr > td:nth-child(1){
         cursor : pointer;
     }
-    & > tr > td:nth-child(2){
+    & > tbody> tr > td:nth-child(2){
         font-size : 14px;
         cursor : pointer;
     }
-    & > tr > td:nth-child(3){
+    & > tbody > tr > td:nth-child(3){
         font-size : 14px;
     }
-    & > tr > td:nth-child(4){
+    & > tbody > tr > td:nth-child(4){
         font-size : 12px;
     }
 
     @media only screen and (min-width:768px){
 
-        & > tr:nth-child(1){
+        & > thead > tr:nth-child(1){
             font-size : 35px;
         }
-        & > tr:nth-child(1) > th,
-        & > tr:nth-child(1) > th > svg {
+        & > thead > tr:nth-child(1) > th,
+        & > thead >tr:nth-child(1) > th > svg {
             font-size : 30px;
         }
-        & > tr {
+        & > tbody > tr {
             height: 140px;
             font-size : 25px;
         }
-        & > tr:nth-child(1) > th:nth-child(1) {
+        & >thead >tr:nth-child(1) > th:nth-child(1) {
             width: 60%;
         }
-        & > tr:nth-child(1) > th:nth-child(2) {
+        & >thead >tr:nth-child(1) > th:nth-child(2) {
             width: 15%;
         }
-        & > tr:nth-child(1) > th:nth-child(3){
+        & > thead > tr:nth-child(1) > th:nth-child(3){
             width: 10%;
         }
-        & > tr:nth-child(1) > th:nth-child(4){
+        & > thead> tr:nth-child(1) > th:nth-child(4){
             width : 15%;
         }
-        & > tr > td:nth-child(2),
-        & > tr > td:nth-child(3),
-        & > tr > td:nth-child(4){
+        & > tbody > tr > td {
             font-size : 20px;
         }
     }
