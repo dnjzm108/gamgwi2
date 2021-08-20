@@ -47,6 +47,7 @@ let write = async (req, res) => {
             msg: '글 작성 성공'
         }
         let resu =  await Board.findAndCountAll({})
+        console.log(resu,'resuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu')
         await Like.create({likeBoardIdx:resu.count})
     } catch (error) {
         console.log(error)
@@ -264,7 +265,6 @@ let post_list = async (req, res) => {
 
 let addLike = async (req,res) => {
     let {idx,likeState,likeIdx} = req.body.addLikeData
-    console.log(likeIdx,'likeidxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
     
     try{
         if(likeState==true||likeIdx==1){

@@ -19,7 +19,6 @@ const ViewContent = (props) => {
 
     const userid = useSelector(state => state.user.user_info.userid)
     const {addLike} = useSelector(state=>state.post)
-    console.log(addLike,'addmlike')
 
     const dispatch = useDispatch()
 
@@ -38,12 +37,10 @@ const ViewContent = (props) => {
 
     const handleLikes = (idx) => {
         if(addLike==undefined){
-            console.log('addlike-undefined')
             setLikeState(!likeIdx)
             const likeData = {idx,likeState,likeIdx}
             dispatch(AddLikes_REQUEST(likeData))
         }else{
-            console.log('addlikeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
             setLikeState(!likeState)
             const likeData = {idx,likeState}
             dispatch(AddLikes_REQUEST(likeData))
