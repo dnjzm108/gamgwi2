@@ -203,9 +203,9 @@ let post_list = async (req, res) => {
     let { search, searchedValue } = req.body
     let list
     let result = {}
-    console.log("req.body ==== ",req.body);
-    console.log("reqbodysearch ==== ",req.body.search);
-    console.log("search ===",search);
+    //console.log("req.body ==== ",req.body);
+    //console.log("reqbodysearch ==== ",req.body.search);
+    //console.log("search ===",search);
     
     try {
         switch (search) {
@@ -260,17 +260,17 @@ let post_list = async (req, res) => {
         }
 
     }
-
 }
 
 let addLike = async (req,res) => {
-    let {idx,likeState} = req.body.addLikeData
+    let {idx,likeState,likeIdx} = req.body.addLikeData
+    console.log(likeIdx,'likeidxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+    
     try{
-        if(likeState==true){
+        if(likeState==true||likeIdx==1){
             await Like.update({likeStatus:0},{where:{likeBoardIdx:idx}})
             await Board.update({likeIdx:0},{where:{id:idx}})
-            
-        }else if(likeState==false){
+        }else if(likeState==false||likeIdx==0){
             await Like.update({likeStatus:1},{where:{likeBoardIdx:idx}})
             await Board.update({likeIdx:1},{where:{id:idx}})
         }
