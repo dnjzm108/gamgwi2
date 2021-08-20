@@ -113,8 +113,9 @@ const TitleWrap = Styled.div`
 `
 const ContentWrap = Styled.div`
     width: 100%;
-    height: 64%;
-    font-size: 23px;
+    height: 60vh;
+    overflow-y: scroll;
+    font-size: 15px;
     padding: 6% 2%;
     box-sizing: border-box;
     word-break:break-all;
