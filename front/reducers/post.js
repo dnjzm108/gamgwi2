@@ -11,6 +11,7 @@ const POST_GET_REQUEST = "POST_GET_REQUEST"
 const POST_GET_SUCCESS = "POST_GET_SUCCESS"
 const POST_GET_ERROR = "POST_GET_ERROR"
 
+const POST_VIEW_IDX = "POST_VIEW_IDX"
 const POST_VIEW_REQUEST = "POST_VIEW_REQUEST"
 const POST_VIEW_SUCCESS = "POST_VIEW_SUCCESS"
 const POST_VIEW_ERROR = "POST_VIEW_ERROR"
@@ -38,7 +39,6 @@ const POST_SEARCH_ERROR = "POST_SEARCH_ERROR"
 
 /* 입력 */
 export const PostInsert_REQUEST = data => {
-    console.log("insert === ", data);
     return {
         type: POST_INSERT_REQUEST,
         data
@@ -137,14 +137,23 @@ export const AddLikes_ERROR = () => {
 
 
 /* 글 view 보기 */
+export const PostView_IDX = (idx) => {
+    //console.log(idx);
+    return {
+        type: POST_VIEW_IDX,
+        idx,
+    }
+}
+
 export const PostView_REQUEST = (idx) => {
-    console.log(idx);
+    //console.log("PostView_REQUEST ==== ",idx);
     return {
         type: POST_VIEW_REQUEST,
         idx,
     }
 }
-export const PostView_SUCCESS = () => {
+export const PostView_SUCCESS = (data) => {
+    //console.log("POST_VIEW_SUCCESS 여기 ==== ",data);
     return {
         type: POST_VIEW_SUCCESS,
     }
@@ -165,7 +174,6 @@ export const PostModify_REQUEST = data => {
     }
 }
 export const PostModifySubmit_REQUEST = data => {
-    console.log("POST_MODIFY_SUBMIT_REQUEST === ", data);
     return {
         type : POST_MODIFY_SUBMIT_REQUEST,
         modifiedData : data,
@@ -281,6 +289,12 @@ const postReducer = (state = initalState, action) => {
             }
 
         /* 글 보기 */
+        case POST_VIEW_IDX:
+            return {
+                ...state,
+                viewIdx : action.idx,
+                loading: true,
+            }
         case POST_VIEW_REQUEST:
             return {
                 ...state,
@@ -288,6 +302,7 @@ const postReducer = (state = initalState, action) => {
                 loading: true,
             }
         case POST_VIEW_SUCCESS:
+            //console.log("POST_VIEW_SUCCESS ==== ",action);
             return {
                 ...state,
                 view: action.view,
@@ -349,7 +364,6 @@ const postReducer = (state = initalState, action) => {
                 loading: true,
             }
         case POST_MODIFY_SUBMIT_REQUEST:
-            console.log(action.modifiedData);
             return {
                 ...state,
                 modifiedData: action.modifyData,

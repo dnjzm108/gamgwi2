@@ -13,17 +13,13 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 const ModifyArea = () => {
     const modifyData = useSelector(state => state.post.modifyData)
-    console.log("modifyData!!!!!=======", modifyData);
     const dispatch = useDispatch()
 
     /* 오늘 날씨 */
     const [todayWeather, setTodayWeather] = useState('')
     const weatherChange = (e) => {
-        console.log(e.target.value);
         setTodayWeather(e.target.value)
     }
-
-    console.log("오늘의 날씨 === ",todayWeather);
 
     /* 수정 부분 */
     let { id, title, content } = modifyData
@@ -31,11 +27,9 @@ const ModifyArea = () => {
     const modifyContent = useInput(content)
 
     const modifiedResult = useSelector(state => state.post.modifiedResult)
-    console.log("modifiedLoading ==== ",modifiedResult);
     const hadleSubmit = (e) => {
         e.preventDefault()
 
-        console.log("submit 날씨 ==== ",todayWeather);
         const data = {
             id,
             todayWeather: todayWeather,

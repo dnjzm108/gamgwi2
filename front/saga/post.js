@@ -99,9 +99,10 @@ function* reqPost() {
 
 /* 글 view 가져옴 */
 function* getView(action) {
+    //console.log(action);
     const result = yield call(axios.post,`${url}/board/view`,{idx:action.idx})
     const { data } = result
-    
+    console.log(data);
     if (data.result === 'OK') {
         yield put({
             type: 'POST_VIEW_SUCCESS',
@@ -148,10 +149,8 @@ function* reqViewDelete() {
 
 /* 글 수정 */
 function* modifyView(action) {
-    console.log("modifyView ==== ", action);
     const result = yield call(axios.post,`${url}/board/modify`, {modifyData : action.modifiedData})
     const {data} = result
-    console.log("db에서 온 data",data);
     
     if (result.data.result === 'OK') {
         yield put({

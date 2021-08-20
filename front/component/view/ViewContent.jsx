@@ -13,15 +13,14 @@ import AcUnitIcon from '@material-ui/icons/AcUnit';
 
 
 const ViewContent = (props) => {
-    let { title, content, nickName, hit, id, likeIdx, date, weather } = props.data
-    console.log(title)
-    let contentData = { ...props.data };
-    let YMD = contentData.date.substring(0, 10)
+    let { title, content, nickName, hit, id, likeIdx, date, weather } = props.viewData
+    // let contentData = { ...props.viewData };
+    // let YMD = contentData.date.substring(0, 10)
 
     const userid = useSelector(state => state.user.user_info.userid)
-    //const like = useSelector(state => state.post.like)
-    const like = useSelector(state=>state.post.addLike)
-    console.log(like,'test')
+    const {like} = useSelector(state => state.post)
+    console.log(like,'state-post')
+    console.log(like.likeStatus)
     const dispatch = useDispatch()
 
     const handleModify = (data) => {
@@ -35,9 +34,9 @@ const ViewContent = (props) => {
         Router.push('/board/list')
     }
 
-    const [likeState, setLikeState] = useState(like.likeStatus)
+    const [likeState, setLikeState] = useState(false)
     const handleLikes = (idx) => {
-        setLikeState(!likeStatus)
+        setLikeState(!likeState)
         const likeData = { idx, likeState }
         dispatch(AddLikes_REQUEST(likeData))
     }
@@ -57,7 +56,7 @@ const ViewContent = (props) => {
                 </TitleWrap>
                 <DateWrap>
                     <p>작성자 : {nickName}</p>
-                    <p> {YMD} </p>
+                    {/* <p> {date} </p> */}
                 </DateWrap>
                 <ContentWrap>
                     {content}

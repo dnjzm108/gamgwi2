@@ -276,7 +276,7 @@ let addLike = async (req,res) => {
         }
         let likestate = await Like.findOne({where:{likeBoardIdx:idx}})
 
-        let data = {
+        let data =  {
             result:'OK',
             likestate
         }
@@ -285,7 +285,7 @@ let addLike = async (req,res) => {
         console.log(err)
         data = {
             result: 'Fail',
-            msg: '리스트 가져오기 실패's
+            msg: '리스트 가져오기 실패'
         }
         res.json(data)
     }
