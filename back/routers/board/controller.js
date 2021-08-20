@@ -13,7 +13,6 @@ let view_reply = async (req, res) => {
 }
 
 let post_view = async (req, res) => {
-    console.log(req.body);
     let { idx } = req.body
     let result = {};
     try {
@@ -203,9 +202,6 @@ let post_list = async (req, res) => {
     let { search, searchedValue } = req.body
     let list
     let result = {}
-    console.log("req.body ==== ",req.body);
-    console.log("reqbodysearch ==== ",req.body.search);
-    console.log("search ===",search);
     
     try {
         switch (search) {
