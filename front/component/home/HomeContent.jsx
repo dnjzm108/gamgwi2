@@ -24,9 +24,9 @@ const HomeMent = Styled.div`
 
     & > p {
         width: 100%;
-        height: 32vh;
+        height: 25vh;
         font-size: 20px;
-        padding: 26% 0;
+        padding: 10% 0;
         box-sizing: border-box;
 
         
@@ -36,7 +36,7 @@ const HomeMent = Styled.div`
         & > p{
             font-size: 25px;
             height: 240px;
-            padding: 11.5% 0;
+            padding: 8% 0;
             box-sizing: border-box;
             color: #333f50;
         }

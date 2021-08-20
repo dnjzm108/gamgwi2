@@ -8,17 +8,18 @@ margin : 0;
 & > div > label {
     display: block;
     font-size: 0.9rem;
-    margin-bottom: 10px;
+    margin: 0 0 10px 3%;
 }
 `
 
 export const InputTitle = Styled.input`
-width : 100%;
+width : 94%;
 height : 35px;
 border : 1px solid lightgray;
 border-radius: 5px;
 font-size : 20px;
 font-family: 'IM_Hyemin-Bold';
+margin: 0 3% ;
 
 :focus {
     outline:none;
@@ -29,6 +30,7 @@ font-family: 'IM_Hyemin-Bold';
 
 `
 export const InputContent = Styled.textarea`
+resize: none;
 width: 100%;
 /* height: 320px; */
 height: 170px;
@@ -44,11 +46,13 @@ font-family: 'IM_Hyemin-Bold';
 
 @media only screen and (min-width:768px){
     width: 99.5%;
-    height : 275px;
+    height : 40vh;
 }
 
 @media only screen and (max-height:667px){
-    height: 120px;
+    width : 94%;
+    height : 30vh;
+    margin-left: 3% ;
 }
 
 `
@@ -86,10 +90,12 @@ box-sizing: border-box;
 & > a > svg {
     font-size : 25px;
 }
-
+@media only screen and (max-height:667px){
+    padding: 2.5vh 0 0 0;
+}
 @media only screen and (min-width:768px){
     height : auto;
-    padding: 100px 0 0 0;
+    padding: 3vh 0 0 0;
 
 
     & > button,
