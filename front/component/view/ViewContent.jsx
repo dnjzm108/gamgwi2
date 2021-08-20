@@ -14,8 +14,8 @@ import AcUnitIcon from '@material-ui/icons/AcUnit';
 
 const ViewContent = (props) => {
     let { title, content, nickName, hit, id, likeIdx, date, weather } = props.viewData
-    // let contentData = { ...props.viewData };
-    // let YMD = contentData.date.substring(0, 10)
+    let contentData = { ...props.viewData };
+    //let YMD = contentData.date.substring(0, 10)
 
     const userid = useSelector(state => state.user.user_info.userid)
     const like = useSelector(state => state.post.like)
