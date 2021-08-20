@@ -102,7 +102,7 @@ const SearchBarWrap = Styled.div`
     }
     @media only screen and (min-width:768px){
         text-align : right;
-        right: 18vw;
+        right: 20vw;
         padding : 20px 0;
         & > form > select{
             width: 17%;
