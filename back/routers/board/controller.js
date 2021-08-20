@@ -20,12 +20,12 @@ let post_view = async (req, res) => {
         let view_hit = await Board.findOne({ where: { id: idx }, attributes: ['hit']})
         await Board.update({ hit : view_hit.dataValues.hit + 1 }, { where: { id : idx } })
         let view = await Board.findOne({ where: { id: idx }, attributes: ['title', 'content', 'nickName', 'hit', 'id', 'likeIdx', 'date','weather']})
-        let like = await Like.findOne({where:{likeBoardIdx:view.dataValues.id}})
-        console.log(view);
+        // let like = await Like.findOne({where:{likeBoardIdx:view.dataValues.id}})
+        // console.log(view);
         result = {
             result: 'OK',
             view: view.dataValues,
-            like: like.dataValues
+            // like: like.dataValues
         }
 
     } catch (error) {
