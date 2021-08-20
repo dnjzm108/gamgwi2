@@ -34,7 +34,7 @@ const WebWrap = Styled.div`
 const WebInnerWrap = Styled.div`
     // 모바일 버전
     width: 100%;
-    height: 100vh;
+    height: 90vh;
     
     @media only screen and (min-width:768px){
         // PC 버전
