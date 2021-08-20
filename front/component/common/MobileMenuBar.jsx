@@ -41,17 +41,16 @@ const MenuBarWrap = Styled.div`
     width: auto;
     height : 70px;
     border-top: 1px solid #e4e4e4;
-    margin-top: 30px;
+    /* margin-top: 30px; */
 
     & > div > a >svg {
         color: black;
         font-size : 39px;
-        padding-top : 16%;
+        padding: 14% 0 14% 0;
     }
     
     @media only screen and (min-width:768px){
         position : fixed;
-    bottom : 2vh;
         width : 1200px;
         & > div {
             width : 100%;
@@ -59,8 +58,8 @@ const MenuBarWrap = Styled.div`
         }
         & > div > a > svg {
             font-size : 45px;
-            padding-top: 2%;
-            margin : 20px 100px;
+            padding-top: 1%;
+            margin : 10px 0 0 0;
         }
     }
 `

@@ -8,7 +8,26 @@ import { PostGet_REQUEST, PostView_IDX } from '../../reducers/post'
 import { useEffect } from 'react'
 import Router from "next/router"
 
+//infinity
+const handleScroll = () =>{
+    const scrollHeight = document.documentElement.scrollHeight;
+    const scrollTop = document.documentElement.scrollTop;
+    const clientHeight = document.documentElement.clientHeight;
+    console.log("scrollHeight:++++++++++++",scrollHeight);
+    console.log("scrollTop:+++++++++++++",scrollTop);
+    console.log("clientHeight:============",clientHeight);
+    if(scrollTop + clientHeight >= scrollHeight && fetching === false){
+        fetchMoreComment()
+    };
+}
 
+// useEffect(() => {
+// console.log('sajfljdasfijsoijfsfskjf');
+//     // window.addEventListener("scrooll",handleScroll);
+//     return()=>{
+//         // window.removeEventListener("scroll",handleScroll);
+//     };
+// },[]);
 
 const List = () => {
     const dispatch = useDispatch()
