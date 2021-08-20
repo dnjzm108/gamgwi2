@@ -34,7 +34,7 @@ let post_view = async (req, res) => {
             msg: '해당 페이지가 없어요'
         }
     }
-    res.json(result)
+    await res.json(result)
 }
 
 let write = async (req, res) => {
