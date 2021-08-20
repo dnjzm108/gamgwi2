@@ -7,6 +7,7 @@ margin : 0;
 
 & > div > label {
     display: block;
+    font-size: 0.9rem;
     margin-bottom: 10px;
 }
 `
@@ -45,6 +46,11 @@ font-family: 'IM_Hyemin-Bold';
     width: 99.5%;
     height : 275px;
 }
+
+@media only screen and (max-height:667px){
+    height: 120px;
+}
+
 `
 
 export const ButtonBox = Styled.div`

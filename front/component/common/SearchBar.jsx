@@ -59,7 +59,9 @@ const SearchBarWrap = Styled.div`
 // 모바일 버전
     position: fixed;
     bottom: 13vh;
-    padding: 0px 15px;
+    display : flex;
+    justify-content : center;
+    /* padding: 0px 15px; */
     /* width: 100%; */
     /* height: 9.5%; */
     /* text-align: center; */
@@ -94,10 +96,11 @@ const SearchBarWrap = Styled.div`
     }
     @media only screen and (min-width:768px){
         text-align : right;
+        right: 7vw;
         
         padding : 20px 0;
         & > form > select{
-            width: 9%;
+            width: 17%;
             height : 3.1vh; 
         }
         & > form > input{
