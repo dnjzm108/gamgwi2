@@ -18,13 +18,14 @@ const view = () => {
 
     const viewData = useSelector(state => state.post.view)
     const viewDataCopy = {...viewData}
+    
     return(
         <>
             <Head>
                 <title>Gamgwi | View</title>
             </Head>
             <WebLayout>
-                <ViewContent viewData = {viewDataCopy}/>
+                <ViewContent viewData = {viewDataCopy} />
             </WebLayout>
         </>
     )

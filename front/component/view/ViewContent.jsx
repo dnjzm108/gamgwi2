@@ -15,7 +15,11 @@ import AcUnitIcon from '@material-ui/icons/AcUnit';
 const ViewContent = (props) => {
     let { title, content, nickName, hit, id, likeIdx, date, weather } = props.viewData
     let contentData = { ...props.viewData };
-    //let YMD = contentData.date.substring(0, 10)
+
+    let ymd
+    if (contentData.date !== undefined) {
+        ymd = contentData.date.substring(0, 10)
+    }
 
     const userid = useSelector(state => state.user.user_info.userid)
     const like = useSelector(state => state.post.like)
@@ -40,10 +44,7 @@ const ViewContent = (props) => {
         setLikeState(!likeState)
         const likeData = { idx, likeState }
         dispatch(AddLikes_REQUEST(likeData))
-
     }
-
-
 
     return (
 
@@ -58,10 +59,15 @@ const ViewContent = (props) => {
                 </TitleWrap>
                 <DateWrap>
                     <p>작성자 : {nickName}</p>
-                    {/* <p> {date} </p> */}
+                    <p> {ymd} </p>
                 </DateWrap>
                 <ContentWrap>
-                    {content}
+                    {
+                        contentData.content !== undefined &&
+                        content.split('\n').map(line => {
+                            return (<span key={line}>{line}<br/></span>)
+                        })
+                    }
                 </ContentWrap>
                 <VeiwIcon>
                     <ul>
@@ -72,14 +78,14 @@ const ViewContent = (props) => {
                         </li> */}
                         <li></li>
                         {
-                            nickName === userid 
-                            ? <>
-                                <li onClick={() => { handleModify(contentData) }}><CreateRoundedIcon /></li>
-                                <li onClick={() => { handleDelete(id) }}><DeleteRoundedIcon /></li>
-                            </>
-                            : <></>
+                            nickName === userid
+                                ? <>
+                                    <li onClick={() => { handleModify(contentData) }}><CreateRoundedIcon /></li>
+                                    <li onClick={() => { handleDelete(id) }}><DeleteRoundedIcon /></li>
+                                </>
+                                : <></>
                         }
-                        
+
                     </ul>
                 </VeiwIcon>
             </ViewContentWrap>
