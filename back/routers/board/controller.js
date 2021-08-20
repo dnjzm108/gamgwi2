@@ -46,8 +46,8 @@ let write = async (req, res) => {
             result: 'OK',
             msg: '글 작성 성공'
         }
-        let resu =  await Board.findAndCountAll({})
-        await Like.create({likeBoardIdx:resu.count})
+        // let resu =  await Board.findAndCountAll({})
+        // await Like.create({likeBoardIdx:resu.count})
     } catch (error) {
         console.log(error)
         result = {
