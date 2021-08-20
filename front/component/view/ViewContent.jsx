@@ -113,7 +113,7 @@ const TitleWrap = Styled.div`
 `
 const ContentWrap = Styled.div`
     width: 100%;
-    height: 60vh;
+    height: 50vh;
     overflow-y: scroll;
     font-size: 15px;
     padding: 6% 2%;
@@ -159,6 +159,7 @@ const VeiwIcon = Styled.div`
         height: auto;
         float: right;
         text-align: center;
+        margin-top: 10px;
     }
 
     & > ul > li {
@@ -178,7 +179,7 @@ const VeiwIcon = Styled.div`
 
     @media only screen and (min-width:768px){
         & > ul {
-            
+            margin-top: 30px;
         }
         & > ul > li > svg {
             font-size : 40px;
