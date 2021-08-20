@@ -10,7 +10,6 @@ module.exports = (req, res, next) => {
 
     let [header, payload, sign] = AccessToken.split('.');
     let signature = getSignature(header, payload);
-    console.log(signature);
 
     if (sign == signature) {
         let { userid,userIdx,userpw, exp } = JSON.parse(Buffer.from(payload, 'base64').toString());

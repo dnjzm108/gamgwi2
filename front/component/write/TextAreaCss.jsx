@@ -4,6 +4,12 @@ export const WriteWrap = Styled.div`
 width : 100%;
 height : 70vh;
 margin : 0;
+
+& > div > label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
 `
 
 export const InputTitle = Styled.input`
@@ -24,8 +30,9 @@ font-family: 'IM_Hyemin-Bold';
 `
 export const InputContent = Styled.textarea`
 width: 100%;
-height: 320px;
-margin-top: 30px;
+/* height: 320px; */
+height: 170px;
+margin: 30px 0;
 border : 1px solid lightgray;
 border-radius: 5px;
 font-size : 20px;
@@ -37,13 +44,18 @@ font-family: 'IM_Hyemin-Bold';
 
 @media only screen and (min-width:768px){
     width: 99.5%;
-    height : 340px;
+    height : 275px;
 }
+
+@media only screen and (max-height:667px){
+    height: 120px;
+}
+
 `
 
 export const ButtonBox = Styled.div`
 text-align: right;
-padding-top: 20px;
+padding-top: 40px;
 box-sizing: border-box;
 
 & > button,
