@@ -19,11 +19,11 @@ const List = () => {
     // list 값 가져오기
     const data = useSelector(state => state.post.list)
     useEffect(() => { }, [data])
-    console.log(data)
+    //console.log(data)
     let list = []
     if (data !== undefined) {
         const handleClick = (idx) => {
-            console.log(idx,'idxxxxxxxxxxxx')
+            //console.log(idx,'idxxxxxxxxxxxx')
             dispatch(PostView_IDX(idx))
             Router.push(`/board/view`)
         }

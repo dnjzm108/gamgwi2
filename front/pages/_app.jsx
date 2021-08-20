@@ -11,14 +11,14 @@ const App = ({ Component }) => {
     return (
         <>
             <Head>
-            {/* <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+            <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
                 <meta property="og:type" content="website" />
                 <meta property="og:title" content="감성 글귀, Gamgwi" />
                 <meta property="og:site_name" content="Gamgwi" />
                 <meta property="og:locale" content="en_US" />
                 <meta property="og:url" content="http://hyejun.co.kr" />
                 <meta property="og:image" content="표시되는 이미지" />
-                <meta property="og:description" content="감성 글귀 기록" />  */}
+                <meta property="og:description" content="감성 글귀 기록" /> 
             </Head>
 
             <GoogleAnalytics />

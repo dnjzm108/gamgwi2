@@ -14,13 +14,13 @@ import AcUnitIcon from '@material-ui/icons/AcUnit';
 
 const ViewContent = (props) => {
     let { title, content, nickName, hit, id, likeIdx, date, weather } = props.viewData
-    // let contentData = { ...props.viewData };
+    let contentData = { ...props.viewData };
     // let YMD = contentData.date.substring(0, 10)
 
     const userid = useSelector(state => state.user.user_info.userid)
-    const {like} = useSelector(state => state.post)
-    console.log(like,'state-post')
-    console.log(like.likeStatus)
+    const {addLike} = useSelector(state=>state.post)
+    console.log(addLike,'addmlike')
+
     const dispatch = useDispatch()
 
     const handleModify = (data) => {
@@ -34,11 +34,20 @@ const ViewContent = (props) => {
         Router.push('/board/list')
     }
 
-    const [likeState, setLikeState] = useState(false)
+    const [likeState, setLikeState] = useState(likeIdx)
+
     const handleLikes = (idx) => {
-        setLikeState(!likeState)
-        const likeData = { idx, likeState }
-        dispatch(AddLikes_REQUEST(likeData))
+        if(addLike==undefined){
+            console.log('addlike-undefined')
+            setLikeState(!likeIdx)
+            const likeData = {idx,likeState,likeIdx}
+            dispatch(AddLikes_REQUEST(likeData))
+        }else{
+            console.log('addlikeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
+            setLikeState(!likeState)
+            const likeData = {idx,likeState}
+            dispatch(AddLikes_REQUEST(likeData))
+        }
     }
 
 
@@ -64,9 +73,17 @@ const ViewContent = (props) => {
                 <VeiwIcon>
                     <ul>
                         <li onClick={() => { handleLikes(id) }}>
-                            <LikesWrap flag={like.likeStatus}>
-                                <FavoriteRoundedIcon />
-                            </LikesWrap>
+                            {
+                                addLike
+                                ?
+                                <LikesWrap flag={likeState}>
+                                    <FavoriteRoundedIcon />
+                                </LikesWrap>
+                                :
+                                <LikesWrap flag={likeIdx}>
+                                    <FavoriteRoundedIcon />
+                                </LikesWrap>
+                            }
                         </li>
                         <li></li>
                         {
