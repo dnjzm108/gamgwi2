@@ -61,6 +61,7 @@ const SearchBarWrap = Styled.div`
     bottom: 13vh;
     display : flex;
     justify-content : center;
+    padding: 0 5vw;
     /* padding: 0px 15px; */
     /* width: 100%; */
     /* height: 9.5%; */
@@ -93,6 +94,11 @@ const SearchBarWrap = Styled.div`
         font-size: 13px;
         font-family: 'IM_Hyemin-Bold';
         cursor : pointer;
+    }
+    @media only screen and (max-width:375px){
+        & > form > input{
+            width : 45vw;
+        }
     }
     @media only screen and (min-width:768px){
         text-align : right;
