@@ -50,9 +50,10 @@ const MenuBarWrap = Styled.div`
     }
     
     @media only screen and (min-width:768px){
-        position : fixed;
-        bottom : 2vh;
-        width : 1200px;
+        position: fixed;
+        bottom: 0;
+        width: 1200px;
+        height: 90px;
         & > div {
             width : 100%;
             text-align : center;
@@ -73,7 +74,7 @@ const MenubarBox = Styled.div`
     & > a {
         display : inline-block;
         /* width : 20vw; */
-        width: 25vw;
+        width: 22vw;
         text-align : center;
     } 
 `
