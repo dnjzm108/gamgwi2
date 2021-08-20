@@ -73,7 +73,12 @@ const MenubarBox = Styled.div`
     background : white;
     & > a {
         display : inline-block;
-        width : 20vw;
+        width : 25vw;
         text-align : center;
     } 
+    @media only screen and (min-width:768px){
+        & > a {
+            width : 20vw;
+        }
+    }
 `
