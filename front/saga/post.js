@@ -99,10 +99,8 @@ function* reqPost() {
 
 /* 글 view 가져옴 */
 function* getView(action) {
-    console.log(action);
     const result = yield call(axios.post,`${url}/board/view`,{idx:action.idx})
     const { data } = result
-    console.log(data);
     if (data.result === 'OK') {
         yield put({
             type: 'POST_VIEW_SUCCESS',

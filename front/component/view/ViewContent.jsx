@@ -13,7 +13,6 @@ import AcUnitIcon from '@material-ui/icons/AcUnit';
 
 
 const ViewContent = (props) => {
-    console.log(props);
     let { title, content, nickName, hit, id, likeIdx, date, weather } = props.viewData
     // let contentData = { ...props.viewData };
     // let YMD = contentData.date.substring(0, 10)
