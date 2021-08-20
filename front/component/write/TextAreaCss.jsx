@@ -19,13 +19,16 @@ border : 1px solid lightgray;
 border-radius: 5px;
 font-size : 20px;
 font-family: 'IM_Hyemin-Bold';
-margin: 0 3% ;
 
 :focus {
     outline:none;
 }
 @media only screen and (min-width:768px){
     width: 99.5%;
+
+}
+@media only screen and (max-width:700px){
+    margin: 0 3% ;
 }
 
 `
