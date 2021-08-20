@@ -57,11 +57,13 @@ export default SearchBar
 
 const SearchBarWrap = Styled.div`
 // 모바일 버전
-    width : 100%;
-    height: 9.5%;
-    text-align : center;
-    padding : 10px 0;
-    box-sizing : border-box;
+    position: fixed;
+    bottom: 13vh;
+    padding: 0px 15px;
+    /* width: 100%; */
+    /* height: 9.5%; */
+    /* text-align: center; */
+    /* box-sizing: border-box;*/
     & > form > select{
         width: 20%;
         height: 5vh;
