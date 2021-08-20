@@ -78,7 +78,7 @@ const MenubarBox = Styled.div`
     } 
     @media only screen and (min-width:768px){
         & > a {
-            width : 20vw;
+            width: 15vw;
         }
     }
 `
