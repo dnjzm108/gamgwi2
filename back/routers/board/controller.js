@@ -13,19 +13,17 @@ let view_reply = async (req, res) => {
 }
 
 let post_view = async (req, res) => {
-    console.log(req.body);
     let { idx } = req.body
     let result = {};
     try {
         let view_hit = await Board.findOne({ where: { id: idx }, attributes: ['hit']})
         await Board.update({ hit : view_hit.dataValues.hit + 1 }, { where: { id : idx } })
         let view = await Board.findOne({ where: { id: idx }, attributes: ['title', 'content', 'nickName', 'hit', 'id', 'likeIdx', 'date','weather']})
-        // let like = await Like.findOne({where:{likeBoardIdx:view.dataValues.id}})
-        // console.log(view);
+        let like = await Like.findOne({where:{likeBoardIdx:view.dataValues.id}})
         result = {
             result: 'OK',
             view: view.dataValues,
-            // like: like.dataValues
+            like: like.dataValues
         }
 
     } catch (error) {
@@ -34,7 +32,7 @@ let post_view = async (req, res) => {
             msg: '해당 페이지가 없어요'
         }
     }
-    await res.json(result)
+    res.json(result)
 }
 
 let write = async (req, res) => {
@@ -46,8 +44,8 @@ let write = async (req, res) => {
             result: 'OK',
             msg: '글 작성 성공'
         }
-        // let resu =  await Board.findAndCountAll({})
-        // await Like.create({likeBoardIdx:resu.count})
+        let resu =  await Board.findAndCountAll({})
+        await Like.create({likeBoardIdx:resu.count})
     } catch (error) {
         console.log(error)
         result = {
@@ -55,7 +53,7 @@ let write = async (req, res) => {
             msg: '글 작성 실패..'
         }
     }
-    await res.json(result)
+    res.json(result)
 }
 
 let get_list = async (req, res) => {

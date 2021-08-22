@@ -46,7 +46,7 @@ const WebInnerWrap = Styled.div`
 
 const WebHeight = Styled.div`
     width: 100%;
-    height: 86vh;
+    height: 80vh;
     padding: 3vw;
     box-sizing: border-box;
 `
