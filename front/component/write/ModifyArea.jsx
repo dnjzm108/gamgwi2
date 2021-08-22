@@ -49,6 +49,8 @@ const ModifyArea = () => {
                     <div>
                         <InputTitle type="text" {...modifyTitle} />
                         <InputContent {...modifyContent} />
+                        <label htmlFor="source">어디에서 발견하셨나요? (출처를 남겨주세요!)</label>
+                        <InputTitle type="text" id="source"/>
                     </div>
 
                     <ButtonBox>

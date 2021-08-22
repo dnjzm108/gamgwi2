@@ -201,9 +201,6 @@ let post_list = async (req, res) => {
     let { search, searchedValue } = req.body
     let list
     let result = {}
-    console.log("req.body ==== ",req.body);
-    console.log("reqbodysearch ==== ",req.body.search);
-    console.log("search ===",search);
     
     try {
         switch (search) {

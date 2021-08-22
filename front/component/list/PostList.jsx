@@ -123,7 +123,7 @@ const ListTable = Styled.table`
             font-size : 25px;
         }
         & >thead >tr:nth-child(1) > th:nth-child(1) {
-            width: 60%;
+            width: 50%;
         }
         & >thead >tr:nth-child(1) > th:nth-child(2) {
             width: 15%;

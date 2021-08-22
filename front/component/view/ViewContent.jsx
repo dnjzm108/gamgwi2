@@ -13,10 +13,13 @@ import AcUnitIcon from '@material-ui/icons/AcUnit';
 
 
 const ViewContent = (props) => {
-    console.log(props.viewData);
     let { title, content, nickName, hit, id, likeIdx, date, weather } = props.viewData
     let contentData = { ...props.viewData };
-    let YMD = contentData.date.substring(0, 10)
+
+    let ymd
+    if (contentData.date !== undefined) {
+        ymd = contentData.date.substring(0, 10)
+    }
 
     const userid = useSelector(state => state.user.user_info.userid)
     const like = useSelector(state => state.post.like)
@@ -41,10 +44,7 @@ const ViewContent = (props) => {
         setLikeState(!likeState)
         const likeData = { idx, likeState }
         dispatch(AddLikes_REQUEST(likeData))
-
     }
-
-
 
     return (
 
@@ -59,10 +59,15 @@ const ViewContent = (props) => {
                 </TitleWrap>
                 <DateWrap>
                     <p>작성자 : {nickName}</p>
-                    {/* <p> {date} </p> */}
+                    <p> {ymd} </p>
                 </DateWrap>
                 <ContentWrap>
-                    {content}
+                    {
+                        contentData.content !== undefined &&
+                        content.split('\n').map(line => {
+                            return (<span key={line}>{line}<br/></span>)
+                        })
+                    }
                 </ContentWrap>
                 <VeiwIcon>
                     <ul>
@@ -73,14 +78,14 @@ const ViewContent = (props) => {
                         </li> */}
                         <li></li>
                         {
-                            nickName === userid 
-                            ? <>
-                                <li onClick={() => { handleModify(contentData) }}><CreateRoundedIcon /></li>
-                                <li onClick={() => { handleDelete(id) }}><DeleteRoundedIcon /></li>
-                            </>
-                            : <></>
+                            nickName === userid
+                                ? <>
+                                    <li onClick={() => { handleModify(contentData) }}><CreateRoundedIcon /></li>
+                                    <li onClick={() => { handleDelete(id) }}><DeleteRoundedIcon /></li>
+                                </>
+                                : <></>
                         }
-                        
+
                     </ul>
                 </VeiwIcon>
             </ViewContentWrap>
@@ -97,7 +102,7 @@ const ViewContentWrap = Styled.div`
 const TitleWrap = Styled.div`
     width: 100%;
     height: auto;
-    font-size: 30px;
+    font-size: 22px;
     padding: 5% 2%;
     box-sizing: border-box;
 
@@ -108,8 +113,9 @@ const TitleWrap = Styled.div`
 `
 const ContentWrap = Styled.div`
     width: 100%;
-    height: 64%;
-    font-size: 23px;
+    height: 40vh;
+    overflow-y: scroll;
+    font-size: 15px;
     padding: 6% 2%;
     box-sizing: border-box;
     word-break:break-all;
@@ -122,20 +128,19 @@ const ContentWrap = Styled.div`
 `
 const DateWrap = Styled.div`
     width: 100%;
-    height: 13%;
+    height: 15%;
     text-align: right;
     border-top: 1px dotted #6663;
     border-bottom: 1px dotted #6663;
-    padding: 2%;
     box-sizing: border-box;
 
     & > p {
-        height : 50%;
+        height : 30%;
+        margin : 1%
     }
 
     @media only screen and (min-width:768px){
         font-size : 20px;
-        padding: 2%;
     }
 `
 
@@ -153,6 +158,7 @@ const VeiwIcon = Styled.div`
         height: auto;
         float: right;
         text-align: center;
+        margin-top: 10px;
     }
 
     & > ul > li {
@@ -172,7 +178,7 @@ const VeiwIcon = Styled.div`
 
     @media only screen and (min-width:768px){
         & > ul {
-            
+            margin-top: 30px;
         }
         & > ul > li > svg {
             font-size : 40px;

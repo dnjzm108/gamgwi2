@@ -16,6 +16,7 @@ const TextArea = () => {
     /* 글 작성 */
     const writeTitle = useInput('')
     const writeContent = useInput('')
+    const writeSource = useInput('')
 
     /* 오늘 날씨 */
     const [todayWeather, setTodayWeather] = useState('')
@@ -30,6 +31,7 @@ const TextArea = () => {
             todayWeather: todayWeather,
             writeTitle: writeTitle.value,
             writeContent: writeContent.value,
+            writeSource: writeSource.value,
             useridx:userinfo.userIdx,
             userpw:userinfo.userpw,
             userid:userinfo.userid
@@ -46,6 +48,8 @@ const TextArea = () => {
                     <div>
                         <InputTitle type="text"  {...writeTitle} />
                         <InputContent  {...writeContent} />
+                        <label htmlFor="source">어디에서 발견하셨나요? (출처를 남겨주세요!)</label>
+                        <InputTitle type="text" id="source" {...writeSource}/>
                     </div>
 
                     <ButtonBox>

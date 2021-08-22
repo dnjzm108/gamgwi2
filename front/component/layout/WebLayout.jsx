@@ -22,7 +22,8 @@ export default WebLayout
 const WebWrap = Styled.div`
     // 모바일 버전
     width : 100%;
-    min-height : 600px;
+    height: auto;
+    overflow: hidden;
     
     @media only screen and (min-width:768px){
         // PC 버전
@@ -34,7 +35,7 @@ const WebWrap = Styled.div`
 const WebInnerWrap = Styled.div`
     // 모바일 버전
     width: 100%;
-    height: 100vh;
+    height: 90vh;
     
     @media only screen and (min-width:768px){
         // PC 버전

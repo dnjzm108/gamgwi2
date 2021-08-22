@@ -137,7 +137,6 @@ export const AddLikes_ERROR = () => {
 
 /* 글 view 보기 */
 export const PostView_IDX = (idx) => {
-    //console.log(idx);
     return {
         type: POST_VIEW_IDX,
         idx,
@@ -145,14 +144,12 @@ export const PostView_IDX = (idx) => {
 }
 
 export const PostView_REQUEST = (idx) => {
-    console.log("PostView_REQUEST ==== ",idx);
     return {
         type: POST_VIEW_REQUEST,
         idx,
     }
 }
 export const PostView_SUCCESS = (data) => {
-    console.log("POST_VIEW_SUCCESS 여기 ==== ",data);
     return {
         type: POST_VIEW_SUCCESS,
     }
@@ -294,14 +291,12 @@ const postReducer = (state = initalState, action) => {
                 loading: true,
             }
         case POST_VIEW_REQUEST:
-            console.log("post view request 제발 ==== ",action);
             return {
                 ...state,
                 idx: action.idx,
                 loading: true,
             }
         case POST_VIEW_SUCCESS:
-            console.log("POST_VIEW_SUCCESS ==== ",action);
             return {
                 ...state,
                 view: action.view,

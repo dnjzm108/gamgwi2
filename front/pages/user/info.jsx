@@ -75,7 +75,7 @@ const UserInfoWrap = Styled.div`
     & > div:nth-child(1) {
         font-size: 35px;
         padding: 5%;
-        height: 120px;
+        height: 65px;
         text-align: center;
     }
 
