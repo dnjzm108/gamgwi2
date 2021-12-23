@@ -25,16 +25,16 @@ module.exports = class Comment extends Sequelize.Model{
             }           
         },{
             sequelize,
-            timestamps:true,
+            timestamps:false,
             modelName:'Comment',
             tableName:'comments',
-            paranoid:true,
+            paranoid:false,
             charset:'utf8',
             collate:'utf8_general_ci'
         })
     }
     static associate(db){
-        db.Comment.belongsTo(db.Board,{foreignKey:'titleIdx',targetKey:'id',onDelete:'Cascade'}        
-        )
+        db.Comment.belongsTo(db.Board,{foreignKey:'titleIdx',targetKey:'id', onDelete:'Cascade'})
+        db.Comment.belongsTo(db.User,{foreignKey:'commenter_name',targetKey:'userid', onDelete:'Cascade'})
     }
 }

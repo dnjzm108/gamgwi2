@@ -31,6 +31,7 @@ module.exports = class Like extends Sequelize.Model{
         })
     }
     static associate(db){
-        db.Like.belongsTo(db.Board,{foreignKey:'likeBoardIdx',targetKey:'id'})
+        db.Like.belongsTo(db.Board,{foreignKey:'likeBoardIdx',targetKey:'id',onDelete:'Cascade'})
+        db.Like.belongsTo(db.User,{foreignKEy:'userid',targetKey:'userid',onDelete:'Cascade'})
     }
 }
