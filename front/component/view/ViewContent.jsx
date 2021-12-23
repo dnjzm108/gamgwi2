@@ -10,6 +10,8 @@ import GoBack from "../common/GoBack"
 import WbSunnyRoundedIcon from '@material-ui/icons/WbSunnyRounded';
 import FilterDramaRoundedIcon from '@material-ui/icons/FilterDramaRounded';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
+import {AiOutlineHeart,AiFillHeart} from 'react-icons/Ai'
+import Coment_containder from "../coment_Box/Coment_container"
 
 
 const ViewContent = (props) => {
@@ -76,19 +78,32 @@ const ViewContent = (props) => {
                                 <FavoriteRoundedIcon />
                             </LikesWrap>
                         </li> */}
-                        <li></li>
+                        {/* <li></li> */}
                         {
-                            nickName === userid
+                            nickName !== userid
                                 ? <>
                                     <li onClick={() => { handleModify(contentData) }}><CreateRoundedIcon /></li>
                                     <li onClick={() => { handleDelete(id) }}><DeleteRoundedIcon /></li>
                                 </>
-                                : <></>
+                                : <>
+                             <li>
+                                 {/* <LikeButton>   */}
+                                     <AiFillHeart size='30'/> 
+                                     {/* </LikeButton> */}
+                                     </li>   
+                             <li>
+                                 {/* <LikeButton>  */}
+                                     <AiOutlineHeart size='30'/> 
+                                     {/* </LikeButton> */}
+                                     </li> 
+                           
+                                </>
                         }
 
                     </ul>
                 </VeiwIcon>
             </ViewContentWrap>
+            <Coment_containder />
         </>
     )
 }
@@ -97,6 +112,10 @@ export default ViewContent
 const ViewContentWrap = Styled.div`
     width : 100%;
     height : 100%;
+    
+    @media only screen and (min-width:768px){
+        margin: 0 0 30px 0 ;
+    }
 `
 
 const TitleWrap = Styled.div`
@@ -146,7 +165,7 @@ const DateWrap = Styled.div`
 
 const VeiwIcon = Styled.div`
     width : 100%;
-    height : auto;
+    /* height : auto; */
 
     & > ul, & > ul > li {
         list-style : none;
@@ -157,6 +176,7 @@ const VeiwIcon = Styled.div`
         display : flex;
         height: auto;
         float: right;
+        flex-direction: row-reverse;
         text-align: center;
         margin-top: 10px;
     }
@@ -203,4 +223,15 @@ const WeatherPosition = Styled.span`
             font-size : 30px;
         }
     }
+`
+const LikeButton = Styled.button`
+ &{
+     padding: 8px;
+     background: #ffff;
+     border-radius: 10px;
+     box-sizing:border-box;
+ }
+ &:hover{
+     background: red;
+ }
 `
