@@ -19,7 +19,6 @@ let post_view = async (req, res) => {
         let view_hit = await Board.findOne({ where: { id: idx }, attributes: ['hit'] })
         await Board.update({ hit: view_hit.dataValues.hit + 1 }, { where: { id: idx } })
         let view = await Board.findOne({ where: { id: idx }, attributes: ['title', 'content', 'nickName', 'hit', 'id', 'likeIdx', 'date', 'weather'] })
-        console.log(view);
         // let like = await Like.findOne({where:{likeBoardIdx:view.dataValues.id}})
         result = {
             result: 'OK',
@@ -111,20 +110,81 @@ let get_list = async (req, res) => {
 
 
 let get_likes = async (req, res) => {
-    let result = {}
-    let list = await Board.findAll({
-        include: [{
-            model: Like,
-            where: { likeStatus: 1 }
-        }]
-    })
-    result = {
-        list,
-        result: 'OK',
-        msg: '좋아요 가져오기 성공'
+    let { board_id, userid } = req.body;
+    let check;
+    let result;
+    try {
+        let one = await Like.findOne({ board_id, userid })
+        let all = await Like.findAll({ board_id })
+        if (one == null) {
+            check = false
+        } else {
+            check = true
+        }
+        result={
+            result:"OK",
+            count:all.length,
+            check
+        }
+        res.json(result)
+    } catch (e) {
+        console.log(e);
+    }
+}
+let addLike = async (req, res) => {
+    let { board_id, userid } = req.body.likeData;
+    let check;
+    let result;
+    try {
+        await Like.create({ board_id: board_id, userid: userid })
+        let one = await Like.findOne({ board_id, userid })
+        let all = await Like.findAll({ board_id })
+        if (one == null) {
+            check = false
+        } else {
+            check = true
+        }
+        result={
+            result:"OK",
+            count:all.length,
+            check
+        }
+    } catch (err) {
+        console.log(err)
+        result = {
+            result: 'Fail',
+            msg: '리스트 가져오기 실패'
+        }
     }
     res.json(result)
 }
+
+let del_Like = async (req, res) => {
+    let { board_id, userid } = req.body.data;
+    try {
+        await Like.destroy({ where:{board_id,userid} })
+        let one = await Like.findOne({ board_id, userid })
+        let all = await Like.findAll({ board_id })
+        if (one == null) {
+            check = false
+        } else {
+            check = true
+        }
+        result={
+            result:"OK",
+            count:all.length,
+            check
+        }
+    } catch (err) {
+        console.log(err)
+        result = {
+            result: 'Fail',
+            msg: '리스트 가져오기 실패'
+        }
+    }
+    res.json(result)
+}
+
 
 let get_write = (req, res) => {
     res.send('get_write')
@@ -260,30 +320,7 @@ let post_list = async (req, res) => {
 
 }
 
-let addLike = async (req, res) => {
-    let { idx, likeState } = req.body.addLikeData
-    try {
-        if (likeState == true) {
-            await Like.update({ likeStatus: 0 }, { where: { likeBoardIdx: idx } })
-        } else if (likeState == false) {
-            await Like.update({ likeStatus: 1 }, { where: { likeBoardIdx: idx } })
-        }
-        let likestate = await Like.findOne({ where: { likeBoardIdx: idx } })
 
-        let data = {
-            result: 'OK',
-            likestate
-        }
-        res.json(data)
-    } catch (err) {
-        console.log(err)
-        result = {
-            result: 'Fail',
-            msg: '리스트 가져오기 실패'
-        }
-        res.json(result)
-    }
-}
 
 let addComment = async (req, res) => {
     let { userid, content, board_id } = req.body;
@@ -305,8 +342,7 @@ let addComment = async (req, res) => {
 
 let get_comment = async (req, res) => {
     let { board_id } = req.body
-    console.log("aaaaaaaa",board_id);
-    let comment =[];
+    let comment = [];
     let data;
     try {
         let list = await Comment.findAll({
@@ -318,13 +354,13 @@ let get_comment = async (req, res) => {
         list.map(v => {
             comment.unshift(v.dataValues)
         })
-        data={
-            result:"OK",
+        data = {
+            result: "OK",
             comment
         }
     } catch (e) {
-        data={
-            result:"false",
+        data = {
+            result: "false",
             comment
         }
         console.log(e);
@@ -336,13 +372,13 @@ let delete_comment = async (req, res) => {
     let { id } = req.body
     let data;
     try {
-        let del_comment = await Comment.destroy({where: {id}})
-        data={
-            result:"OK"
+        let del_comment = await Comment.destroy({ where: { id } })
+        data = {
+            result: "OK"
         }
     } catch (e) {
-        data={
-            result:"false"
+        data = {
+            result: "false"
         }
         console.log(e);
     }
@@ -362,6 +398,7 @@ module.exports = {
     post_list,
     post_view,
     addLike,
+    del_Like,
     addComment,
     get_comment,
     delete_comment

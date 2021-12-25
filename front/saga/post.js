@@ -50,13 +50,13 @@ function* reqGetList() {
 }
 
 /* Likes 가져옴 */
-function* getLikes() {
-    const result = yield call(axios.get,`${url}/board/likes`)
-    const {data} = result
+function* getLikes(action){
+    const result = yield call(axios.post,`${url}/board/likes`,action.data)
+    const {data} = result;
     if(data.result=='OK'){
         yield put({
             type:'GET_LIKES_SUCCESS',
-            list:data.list
+            data
         })
     }else {
         yield put({
@@ -170,13 +170,12 @@ function* reqViewModify() {
 
 /* 좋아요 추가할 때 */
 function* addLikes(action) {
-    const result = yield call(axios.post,`${url}/board/addLike1`,{addLikeData:action.likeData})
+    const result = yield call(axios.post,`${url}/board/addLike`,action)
     const {data} = result
-
     if(data.result=='OK'){
         yield put({
            type:'ADD_LIKES_SUCCESS',
-           addLike:data.likestate
+           data
         })
     }else {
         yield put({
@@ -185,9 +184,26 @@ function* addLikes(action) {
         
     }
 }
+/*좋아요 삭제*/ 
+function* del_Likes(action) {
+    const result = yield call(axios.post,`${url}/board/del_Like`,action)
+    const {data} = result;
+    if(data.result=='OK'){
+        yield put({
+           type:'DELETE_LIKES_SUCCESS',
+           data
+        })
+    }else {
+        yield put({
+            type:'DELETE_LIKES_ERROR'
+        })
+        
+    }
+}
 
 function* reqAddLikes() {
     yield takeLatest('ADD_LIKES_REQUEST', addLikes)
+    yield takeLatest('DELETE_LIKES_REQUEST', del_Likes)
 }
 
 function* addComment(action) {
