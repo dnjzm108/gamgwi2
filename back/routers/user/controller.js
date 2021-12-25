@@ -73,6 +73,8 @@ let id_check = async (req,res) =>{
     let result = await User.findOne({
         where: {userid}
     });
+    console.log('skdyrldi');
+    console.log(result);
     if(result == null){
         check={
             Id_check:false

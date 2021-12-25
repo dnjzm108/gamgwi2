@@ -3,13 +3,15 @@ import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded'
 import CreateRoundedIcon from '@material-ui/icons/CreateRounded'
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded'
 import { useDispatch, useSelector } from "react-redux"
-import { AddLikes_REQUEST, PostDelete_REQUEST, PostModify_REQUEST } from "../../reducers/post"
+import { AddLikes_REQUEST, PostDelete_REQUEST, PostModify_REQUEST, GetLikes_REQUEST,Delete_LIKES_REQUEST } from "../../reducers/post"
 import Router from "next/router"
 import { useEffect, useState } from "react"
 import GoBack from "../common/GoBack"
 import WbSunnyRoundedIcon from '@material-ui/icons/WbSunnyRounded';
 import FilterDramaRoundedIcon from '@material-ui/icons/FilterDramaRounded';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/Ai'
+import Coment_containder from "../coment_Box/Coment_container"
 
 
 const ViewContent = (props) => {
@@ -22,10 +24,16 @@ const ViewContent = (props) => {
     }
 
     const userid = useSelector(state => state.user.user_info.userid)
-    const like = useSelector(state => state.post.like)
-    const addlike = useSelector(state => state.post.addLike)
-
+    const post = useSelector(state => state.post)
     const dispatch = useDispatch()
+
+    const info = {
+        board_id: post.viewIdx,
+        userid
+    }
+    useEffect(() => {
+        dispatch(GetLikes_REQUEST(info))
+    }, [])
 
     const handleModify = (data) => {
         dispatch(PostModify_REQUEST(data))
@@ -39,11 +47,24 @@ const ViewContent = (props) => {
         Router.push('/board/list')
     }
 
-    const [likeState, setLikeState] = useState(false)
-    const handleLikes = (idx) => {
-        setLikeState(!likeState)
-        const likeData = { idx, likeState }
-        dispatch(AddLikes_REQUEST(likeData))
+    // const [likeState, setLikeState] = useState(false)
+    // const handleLikes = (idx) => {
+    //     setLikeState(!likeState)
+    //     const likeData = { idx, likeState }
+    //     dispatch(AddLikes_REQUEST(likeData))
+    // }
+
+    const add_like = () => {
+        dispatch(AddLikes_REQUEST(info))
+    }
+    const del_like = () => {
+        dispatch(Delete_LIKES_REQUEST(info))
+    }
+    
+    if (post.like.count == null) {
+        return (
+            <>로딩중</>
+        )
     }
 
     return (
@@ -65,7 +86,7 @@ const ViewContent = (props) => {
                     {
                         contentData.content !== undefined &&
                         content.split('\n').map(line => {
-                            return (<span key={line}>{line}<br/></span>)
+                            return (<span key={line}>{line}<br /></span>)
                         })
                     }
                 </ContentWrap>
@@ -76,19 +97,32 @@ const ViewContent = (props) => {
                                 <FavoriteRoundedIcon />
                             </LikesWrap>
                         </li> */}
-                        <li></li>
+                        {/* <li></li> */}
                         {
-                            nickName === userid
+                            nickName !== userid
                                 ? <>
                                     <li onClick={() => { handleModify(contentData) }}><CreateRoundedIcon /></li>
                                     <li onClick={() => { handleDelete(id) }}><DeleteRoundedIcon /></li>
                                 </>
-                                : <></>
+                                : <>
+                                    {post.like.check ?
+                                        <li onClick={() => { del_like() }}>
+                                            <AiFillHeart size='30' />
+                                            {post.like.count}
+                                        </li>
+                                        :
+                                        <li onClick={() => { add_like() }}>
+                                            <AiOutlineHeart size='30' />
+                                            {post.like.count}
+                                        </li>
+                                    }
+                                </>
                         }
 
                     </ul>
                 </VeiwIcon>
             </ViewContentWrap>
+            <Coment_containder />
         </>
     )
 }
@@ -97,6 +131,10 @@ export default ViewContent
 const ViewContentWrap = Styled.div`
     width : 100%;
     height : 100%;
+    
+    @media only screen and (min-width:768px){
+        margin: 0 0 30px 0 ;
+    }
 `
 
 const TitleWrap = Styled.div`
@@ -146,7 +184,7 @@ const DateWrap = Styled.div`
 
 const VeiwIcon = Styled.div`
     width : 100%;
-    height : auto;
+    /* height : auto; */
 
     & > ul, & > ul > li {
         list-style : none;
@@ -157,6 +195,7 @@ const VeiwIcon = Styled.div`
         display : flex;
         height: auto;
         float: right;
+        flex-direction: row-reverse;
         text-align: center;
         margin-top: 10px;
     }
@@ -203,4 +242,15 @@ const WeatherPosition = Styled.span`
             font-size : 30px;
         }
     }
+`
+const LikeButton = Styled.button`
+ &{
+     padding: 8px;
+     background: #ffff;
+     border-radius: 10px;
+     box-sizing:border-box;
+ }
+ &:hover{
+     background: red;
+ }
 `

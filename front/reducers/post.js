@@ -1,5 +1,10 @@
 const initalState = {
     loading: false,
+    get_comment:[],
+    like:{
+        count:null,
+        my:false
+    }
 }
 
 const POST_INSERT_REQUEST = "POST_INSERT_REQUEST"
@@ -33,11 +38,52 @@ const ADD_LIKES_REQUEST = "ADD_LIKES_REQUEST"
 const ADD_LIKES_SUCCESS = "ADD_LIKES_SUCCESS"
 const ADD_LIKES_ERROR = "ADD_LIKES_ERROR"
 
+const DELETE_LIKES_REQUEST = "DELETE_LIKES_REQUEST"
+const DELETE_LIKES_SUCCESS = "DELETE_LIKES_SUCCESS"
+const DELETE_LIKES_ERROR = "DELETE_LIKES_ERROR"
+
 const POST_SEARCH_REQUEST = "POST_SEARCH_REQUEST"
 const POST_SEARCH_SUCCESS = "POST_SEARCH_SUCCESS"
 const POST_SEARCH_ERROR = "POST_SEARCH_ERROR"
 
+const COMMENT_REQUEST = "COMMENT_REQUEST"
+const COMMENT_SUCCESS = "COMMENT_SUCCESS"
+const COMMENT_ERROR = "COMMENT_ERROR"
+
+const GET_COMMENT_REQUEST = "GET_COMMENT_REQUEST"
+const GET_COMMENT_SUCCESS = "GET_COMMENT_SUCCESS"
+const GET_COMMENT_ERROR = "GET_COMMENT_ERROR"
+
+const DELETE_COMMENT_REQUEST = "DELETE_COMMENT_REQUEST"
+const DELETE_COMMENT_SUCCESS = "DELETE_COMMENT_SUCCESS"
+const DELETE_COMMENT_ERROR = "DELETE_COMMENT_ERROR"
+
+
 /* 입력 */
+
+
+
+/* 댓글 삭제하기*/ 
+export const Delete_Comment_REQUEST = data => {
+    return {
+        type: DELETE_COMMENT_REQUEST,
+        data
+    }
+}
+/* 댓글 가져오기*/ 
+export const Get_Comment_REQUEST = data => {
+    return {
+        type: GET_COMMENT_REQUEST,
+        data
+    }
+}
+/* 댓글 등록*/
+export const Comment_REQUEST = data => {
+    return {
+        type: COMMENT_REQUEST,
+        data
+    }
+}
 export const PostInsert_REQUEST = data => {
     return {
         type: POST_INSERT_REQUEST,
@@ -98,9 +144,10 @@ export const PostSearch_ERROR = () => {
 }
 
 /* 좋아요 누른 list 가져오기 */
-export const GetLikes_REQUEST = () => {
+export const GetLikes_REQUEST = (data) => {
     return {
-        type: GET_LIKES_REQUEST
+        type: GET_LIKES_REQUEST,
+        data
     }
 }
 export const GetLikes_SUCCESS = (list) => {
@@ -114,6 +161,12 @@ export const GetLikes_ERROR = () => {
         type: GET_LIKES_ERROR
     }
 }
+export const Delete_LIKES_REQUEST = data => {
+    return {
+        type: DELETE_LIKES_REQUEST,
+        data
+    }
+}
 
 /* 좋아요 누르기 */
 export const AddLikes_REQUEST = (likeData) => {
@@ -122,9 +175,9 @@ export const AddLikes_REQUEST = (likeData) => {
         likeData
     }
 }
-export const AddLikes_SUCCESS = (addLike) => {
+export const AddLikes_SUCCESS = () => {
     return {
-        type: ADD_LIKES_SUCCESS,
+        type: ADD_LIKES_SUCCESS
     }
 }
 export const AddLikes_ERROR = () => {
@@ -229,6 +282,60 @@ const postReducer = (state = initalState, action) => {
                 data: action.data,
                 loading: false,
             }
+
+            /* 댓글 등록*/ 
+        case COMMENT_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case COMMENT_SUCCESS:
+            return {
+                ...state,
+                loading: false
+            }
+        case COMMENT_ERROR:
+            return {
+                ...state,
+                loading: false
+            }
+            /*댓글 불러오기*/ 
+        case GET_COMMENT_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case GET_COMMENT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                get_comment:action.data.comment
+            }
+        case GET_COMMENT_ERROR:
+            return {
+                ...state,
+                loading: false
+            }
+
+            /* 댓글 삭제하기*/ 
+        case DELETE_COMMENT_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case DELETE_COMMENT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+            }
+        case DELETE_COMMENT_ERROR:
+            return {
+                ...state,
+                loading: false,
+            }
+
+
+
         case POST_INSERT_RESET:
             return {
                 ...state,
@@ -261,7 +368,12 @@ const postReducer = (state = initalState, action) => {
         case GET_LIKES_SUCCESS:
             return {
                 ...state,
-                list: action.list,
+                like:action.data,
+                loading: false
+            }
+        case GET_LIKES_ERROR:
+            return {
+                ...state,
                 loading: false
             }
 
@@ -274,10 +386,28 @@ const postReducer = (state = initalState, action) => {
         case ADD_LIKES_SUCCESS:
             return {
                 ...state,
-                addLike:action.addLike.likeStatus,
+                like:action.data,
                 loading: false
             }
         case ADD_LIKES_ERROR:
+            return {
+                ...state,   
+                loading: false
+            }
+
+            /*좋아요 삭제하기*/ 
+        case DELETE_LIKES_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case DELETE_LIKES_SUCCESS:
+            return {
+                ...state,
+                like:action.data,
+                loading: false
+            }
+        case DELETE_LIKES_ERROR:
             return {
                 ...state,   
                 loading: false
@@ -300,7 +430,6 @@ const postReducer = (state = initalState, action) => {
             return {
                 ...state,
                 view: action.view,
-                like: action.like,
                 loading: false,
             }
         case POST_VIEW_ERROR:
