@@ -1,5 +1,6 @@
 const initalState = {
     loading: false,
+    get_comment:[]
 }
 
 const POST_INSERT_REQUEST = "POST_INSERT_REQUEST"
@@ -37,7 +38,41 @@ const POST_SEARCH_REQUEST = "POST_SEARCH_REQUEST"
 const POST_SEARCH_SUCCESS = "POST_SEARCH_SUCCESS"
 const POST_SEARCH_ERROR = "POST_SEARCH_ERROR"
 
+const COMMENT_REQUEST = "COMMENT_REQUEST"
+const COMMENT_SUCCESS = "COMMENT_SUCCESS"
+const COMMENT_ERROR = "COMMENT_ERROR"
+
+const GET_COMMENT_REQUEST = "GET_COMMENT_REQUEST"
+const GET_COMMENT_SUCCESS = "GET_COMMENT_SUCCESS"
+const GET_COMMENT_ERROR = "GET_COMMENT_ERROR"
+
+const DELETE_COMMENT_REQUEST = "DELETE_COMMENT_REQUEST"
+const DELETE_COMMENT_SUCCESS = "DELETE_COMMENT_SUCCESS"
+const DELETE_COMMENT_ERROR = "DELETE_COMMENT_ERROR"
+
+
 /* 입력 */
+/* 댓글 삭제하기*/ 
+export const Delete_Comment_REQUEST = data => {
+    return {
+        type: DELETE_COMMENT_REQUEST,
+        data
+    }
+}
+/* 댓글 가져오기*/ 
+export const Get_Comment_REQUEST = data => {
+    return {
+        type: GET_COMMENT_REQUEST,
+        data
+    }
+}
+/* 댓글 등록*/
+export const Comment_REQUEST = data => {
+    return {
+        type: COMMENT_REQUEST,
+        data
+    }
+}
 export const PostInsert_REQUEST = data => {
     return {
         type: POST_INSERT_REQUEST,
@@ -229,6 +264,60 @@ const postReducer = (state = initalState, action) => {
                 data: action.data,
                 loading: false,
             }
+
+            /* 댓글 등록*/ 
+        case COMMENT_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case COMMENT_SUCCESS:
+            return {
+                ...state,
+                loading: false
+            }
+        case COMMENT_ERROR:
+            return {
+                ...state,
+                loading: false
+            }
+            /*댓글 불러오기*/ 
+        case GET_COMMENT_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case GET_COMMENT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                get_comment:action.data.comment
+            }
+        case GET_COMMENT_ERROR:
+            return {
+                ...state,
+                loading: false
+            }
+
+            /* 댓글 삭제하기*/ 
+        case DELETE_COMMENT_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case DELETE_COMMENT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+            }
+        case DELETE_COMMENT_ERROR:
+            return {
+                ...state,
+                loading: false,
+            }
+
+
+
         case POST_INSERT_RESET:
             return {
                 ...state,

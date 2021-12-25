@@ -190,6 +190,62 @@ function* reqAddLikes() {
     yield takeLatest('ADD_LIKES_REQUEST', addLikes)
 }
 
+function* addComment(action) {
+    const result = yield call(axios.post,`${url}/board/addcomment`,action.data)
+    const {data} = result
+
+    if(data.result=='OK'){
+        yield put({
+           type:'COMMENT_SUCCESS',
+           addLike:data.likestate
+        })
+    }else {
+        yield put({
+            type:'COMMENT_ERROR'
+        })
+        
+    }
+}
+
+function* getComment(action) {
+    const result = yield call(axios.post,`${url}/board/get_comment`,action.data)
+    const {data} = result
+    if(data.result=='OK'){
+        yield put({
+           type:'GET_COMMENT_SUCCESS',
+           data
+        })
+    }else {
+        yield put({
+            type:'GET_COMMENT_ERROR'
+        })
+        
+    }
+}
+
+function* delComment(action) {
+    const result = yield call(axios.post,`${url}/board/delete_comment`,action.data)
+    const {data} = result
+    if(data.result=='OK'){
+        yield put({
+           type:'DELETE_COMMENT_SUCCESS',
+           data
+        })
+    }else {
+        yield put({
+            type:'DELETE_COMMENT_ERROR'
+        })
+        
+    }
+}
+
+
+function* reqComment() {
+    yield takeLatest('COMMENT_REQUEST', addComment)
+    yield takeLatest('GET_COMMENT_REQUEST', getComment)
+    yield takeLatest('DELETE_COMMENT_REQUEST', delComment)
+}
+
 
 export default function* writeSaga() {
     yield all([
@@ -201,5 +257,6 @@ export default function* writeSaga() {
         fork(reqViewDelete),
         fork(reqViewModify),
         fork(reqAddLikes),
+        fork(reqComment),
     ])
 }

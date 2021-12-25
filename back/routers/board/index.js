@@ -21,5 +21,9 @@ router.get('/reply',controller.view_reply)
 
 router.post('/addLike',controller.addLike)
 
+router.post('/addComment',controller.addComment)
+router.post('/get_comment',controller.get_comment)
+router.post('/delete_comment',controller.delete_comment)
+
 
 module.exports = router;

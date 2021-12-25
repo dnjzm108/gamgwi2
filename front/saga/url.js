@@ -1,6 +1,6 @@
 //배포용 
 
-// export const url = 'https://api.hyejun.co.kr'
+//export const url = 'https://api.hyejun.co.kr'
 
 //테스트용(local back)
 

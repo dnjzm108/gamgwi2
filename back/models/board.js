@@ -98,6 +98,6 @@ module.exports = class Board extends Sequelize.Model{
        db.Board.hasMany(db.Comment,{foreignKey:'titleIdx',sourceKey:'id'}),
        db.Board.belongsTo(db.BackgroundImg,{foreignKey:'backgroundImgIdx',targetKey:'id'})
        db.Board.belongsTo(db.Weather,{foreignKey:'weatherIdx',targetKey:'id'}),
-       db.Board.hasMany(db.Like,{foreignKey:'likeBoardIdx',sourceKey:'id'})
+       db.Board.hasMany(db.Like,{foreignKey:'board_id',sourceKey:'id'})
    }
 }
