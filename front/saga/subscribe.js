@@ -20,7 +20,6 @@ function* getSubscribe(data){
             data : result.data.list
         })
     }else if(result.data.result == 'OK2'){
-        console.log(result.data.list)
         yield put ({
             type:'GET_SUBSCRIBE_SUCCESS2',
             data : result.data.list
@@ -87,7 +86,6 @@ function CancelSubscribeAPI(data){
 
 function* CancelSubscribe(data){
     const result = yield call(CancelSubscribeAPI,data)
-    console.log(result,'resultttt')
     if(result.data.result=='OK'){
         yield put({
             type:'CANCEL_SUBSCRIBE_SUCCESS',
@@ -104,11 +102,37 @@ function* reqCancelSubscribe(){
     yield takeLatest('CANCEL_SUBSCRIBE_REQUEST', CancelSubscribe)
 }
 
+
+function CancelPostAPI(data){
+    return axios.post(`${url}/board/cancel/post`,data)
+}
+
+function* CancelPost(data){
+    const result = yield call(CancelPostAPI,data)
+
+    if(result.data.result=='OK'){
+        yield put({
+            type:'CANCEL_POST_SUCCESS',
+            data:result.data.data
+        })
+    }else{
+        yield put ({
+            type:'CANCEL_POST_ERROR'
+        })
+    }
+}
+
+function* reqCancelPost(){
+    yield takeLatest('CANCEL_POST_REQUEST', CancelPost)
+}
+
+
 export default function* subscribeSaga(){
     yield all([
         fork(getSubscribeList),
         fork(reqAddFriend),
         fork(reqAllSubscribe),
-        fork(reqCancelSubscribe)
+        fork(reqCancelSubscribe),
+        fork(reqCancelPost)
     ])
 }

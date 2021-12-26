@@ -4,12 +4,13 @@ import Styled from 'styled-components'
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import FaceIcon from '@material-ui/icons/Face';
-import { GetSubscribe_REQUEST } from '../../reducers/subscribe'
+import { GetSubscribe_REQUEST, CancelSubscribe_Request} from '../../reducers/subscribe'
 
 const WriterContent = (props) => {
     const dispatch = useDispatch()
     const userid = useSelector(state => state.user.user_info.userid)
     const list = useSelector(state => state.subscribe.list)
+    const getfriend = useSelector(state => state.subscribe.friend)
 
     const data = [
         {
@@ -58,8 +59,17 @@ const WriterContent = (props) => {
         }else{
             setadd(false)
         }
-    },[])
+    },[getfriend])
 
+    const cancelFriendBtn = (ele) => {
+        let data = {
+            userid:ele.userid,
+            nickName:ele.writer_name
+        }
+        dispatch(CancelSubscribe_Request(data))
+        
+
+    }
 
     const writerList = list.map((ele)=>
         <React.Fragment key={ele.id}>
@@ -73,7 +83,7 @@ const WriterContent = (props) => {
                         ele.writer_name
                     }
                 </li>
-                <li>친구삭제</li>
+                <li onClick={()=>{cancelFriendBtn(ele)}}>친구삭제</li>
                 {/* <li>{ele.hit}</li> */}
             </ContentUl>
         </React.Fragment>

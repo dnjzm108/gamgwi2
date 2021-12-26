@@ -62,7 +62,7 @@ const ViewContent = (props) => {
     const del_like = () => {
         dispatch(Delete_LIKES_REQUEST(info))
     }
-    
+
     if (post.like.count == null) {
         return (
             <>로딩중</>
@@ -123,8 +123,8 @@ const ViewContent = (props) => {
                         {/* <li></li> */}
                         {
                             nickName == userid
-                                ?
-                                <>
+                                ? <>
+                                <li><AiOutlineHeart size='30' />{post.like.count}</li>
                                     <li onClick={() => { handleModify(contentData) }}><CreateRoundedIcon /></li>
                                     <li onClick={() => { handleDelete(id) }}><DeleteRoundedIcon /></li>
                                 </>

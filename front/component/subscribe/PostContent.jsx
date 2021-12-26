@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import Styled from 'styled-components'
 import { ContentUl, ContentMain, ContentBottom } from './WriterContent';
-import { GetSubscribe_REQUEST } from '../../reducers/subscribe'
+import { GetSubscribe_REQUEST,CancelPost_Request } from '../../reducers/subscribe'
 import { useDispatch,useSelector } from 'react-redux'
 
 const PostContent = (props) => {
     const dispatch = useDispatch()
     const userid = useSelector(state => state.user.user_info.userid)
     const list = useSelector(state => state.subscribe.list2)
-    console.log(list,'list')
+    const poststate = useSelector(state =>state.subscribe.post)
+
+    console.log(!poststate,'posettest')
+
     const data = [
         {
             title:'algmasdfffffffffffffl',
@@ -42,7 +45,15 @@ const PostContent = (props) => {
         }else{
             setadd(false)
         }
-    },[])
+    },[poststate])
+
+    const cancelPostBtn = (ele) => {
+        let data = {
+            id:ele.id,
+            userid
+        }
+        dispatch(CancelPost_Request(data))
+    }
 
     const postList = list.map((ele)=>
         <React.Fragment key={ele.id}>
@@ -58,7 +69,7 @@ const PostContent = (props) => {
                 </li>
                 <li>{ele.nickNAme}</li>
                 <li>{ele.hit}</li>
-                <li>글귀삭제</li>
+                <li onClick={()=>cancelPostBtn(ele)}>글귀삭제</li>
             </ContentUl>
         </React.Fragment>
     )

@@ -4,7 +4,8 @@ const subscribeState = {
     list:[],
     list2:[],
     subscribe:[],
-    friend:false
+    friend:false,
+    post:false
 }
 
 const GET_SUBSCRIBE_REQUEST = "GET_SUBSCRIBE_REQUEST";
@@ -23,6 +24,10 @@ const GET_ALL_SUBSCRIBE_ERROR = "GET_ALL_SUBSCRIBE_ERROR";
 const CANCEL_SUBSCRIBE_REQUEST = "CANCEL_SUBSCRIBE_REQUEST";
 const CANCEL_SUBSCRIBE_SUCCESS = "CANCEL_SUBSCRIBE_SUCCESS";
 const CANCEL_SUBSCRIBE_ERROR = "CANCEL_SUBSCRIBE_ERROR";
+
+const CANCEL_POST_REQUEST = "CANCEL_POST_REQUEST";
+const CANCEL_POST_SUCCESS = "CANCEL_POST_SUCCESS";
+const CANCEL_POST_ERROR = "CANCEL_POST_ERROR";
 
 
 
@@ -114,6 +119,27 @@ export const CancelSubscribe_Error = () => {
     }
 }
 
+export const CancelPost_Request = (data) => {
+    return {
+        type:CANCEL_POST_REQUEST,
+        data
+    }
+}
+
+export const CancelPost_Success = (data) => {
+
+    return {
+        type:CANCEL_POST_SUCCESS,
+        data:!data
+    }
+}
+
+export const CancelPost_Error = () => {
+    return {
+        type:CANCEL_POST_ERROR
+    }
+}
+
 
 
 const subscribeReducer = (state = subscribeState, action) => {
@@ -181,6 +207,20 @@ const subscribeReducer = (state = subscribeState, action) => {
                 friend:action.data
             }
         case CANCEL_SUBSCRIBE_ERROR:
+            return{
+                ...state
+            }
+        case CANCEL_POST_REQUEST:
+            return{
+                ...state,
+                data:action.data
+            }
+        case CANCEL_POST_SUCCESS:
+            return{
+                ...state,
+                post:true
+            }
+        case CANCEL_POST_ERROR:
             return{
                 ...state
             }

@@ -3,7 +3,7 @@ const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 
 const path = require('path')
-const { create } = require('../../models/weather')
+const { create, destroy } = require('../../models/weather')
 const { callbackify } = require('util')
 const { resourceLimits } = require('worker_threads')
 
@@ -129,8 +129,10 @@ let get_likes = async (req, res) => {
     let check;
     let result;
     try {
-        let one = await Like.findOne({ board_id, userid })
-        let all = await Like.findAll({ board_id })
+        let one = await Like.findOne({ where:{userid,board_id} })
+        console.log(userid);
+        let all = await Like.findAll({ where:{board_id} })
+        console.log('=========',one);
         if (one == null) {
             check = false
         } else {
@@ -151,9 +153,9 @@ let addLike = async (req, res) => {
     let check;
     let result;
     try {
-        await Like.create({ board_id: board_id, userid: userid })
-        let one = await Like.findOne({ board_id, userid })
-        let all = await Like.findAll({ board_id })
+        await Like.create({ board_id, userid })
+        let one = await Like.findOne({where:{ board_id, userid} })
+        let all = await Like.findAll({ where:{board_id} })
         if (one == null) {
             check = false
         } else {
@@ -178,8 +180,8 @@ let del_Like = async (req, res) => {
     let { board_id, userid } = req.body.data;
     try {
         await Like.destroy({ where:{board_id,userid} })
-        let one = await Like.findOne({ board_id, userid })
-        let all = await Like.findAll({ board_id })
+        let one = await Like.findOne({ where:{board_id, userid} })
+        let all = await Like.findAll({ where:{board_id} })
         if (one == null) {
             check = false
         } else {
@@ -442,16 +444,26 @@ let subscribe_post = async (req,res) => {
     try {
         let {data} =  req.body.data
         let boardId = await Like.findAll({where:{userid:data},attributes:['board_id']})
-        console.log(boardId[0].dataValues.board_id)
-        for(let i=0; i<boardId.length;i++){
-            let pushData = await Board.findAll({where:{id:boardId[i].dataValues.board_id},attributes:['id','title','hit','nickNAme','category']})
-            resultData.push(pushData[i].dataValues)
+        
+        console.log(boardId.length)
+        if(boardId.length==0){
+            data = {
+                result:'OK2',
+                list:[]
+            }
+        }else{
+            console.log(boardId[0].dataValues.board_id)
+            for(let i=0; i<boardId.length;i++){
+                let pushData = await Board.findAll({where:{id:boardId[i].dataValues.board_id},attributes:['id','title','hit','nickNAme','category']})
+                resultData.push(pushData[i].dataValues)
+            }
+            data = {
+                result:'OK2',
+                list:resultData
+            }
+
         }
-        console.log(resultData)
-        data = {
-            result:'OK2',
-            list:resultData
-        }
+
         res.json(data)
     }catch(err){
         data = {
@@ -478,7 +490,24 @@ let cancel_friend = async (req,res) => {
         }
     }
     res.json(data)
-    console.log(req.body,'jireiei')
+}
+
+let cancel_post = async (req,res) => {
+    let data
+    try{
+        let {id,userid} = req.body.data
+        await Like.destroy({where:{userid:userid,board_id:id}})
+        data = {
+            result:'OK',
+            data:false
+        }
+    }catch(err){
+        data = {
+            result:'Fail',
+        }
+
+    }
+    res.json(data)
 }
 
 module.exports = {
@@ -501,5 +530,6 @@ module.exports = {
     add_friend,
     subscribe_writer,
     subscribe_post,
-    cancel_friend
+    cancel_friend,
+    cancel_post
 }
