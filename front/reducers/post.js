@@ -196,15 +196,16 @@ export const PostView_IDX = (idx) => {
     }
 }
 
-export const PostView_REQUEST = (idx) => {
+export const PostView_REQUEST = (data) => {
     return {
         type: POST_VIEW_REQUEST,
-        idx,
+        data,
     }
 }
 export const PostView_SUCCESS = (data) => {
     return {
         type: POST_VIEW_SUCCESS,
+        data
     }
 }
 export const PostView_ERROR = () => {
@@ -423,13 +424,14 @@ const postReducer = (state = initalState, action) => {
         case POST_VIEW_REQUEST:
             return {
                 ...state,
-                idx: action.idx,
+                idx: action.data,
                 loading: true,
             }
         case POST_VIEW_SUCCESS:
             return {
                 ...state,
                 view: action.view,
+                friend:action.friend,
                 loading: false,
             }
         case POST_VIEW_ERROR:

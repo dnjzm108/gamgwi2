@@ -13,6 +13,7 @@ const Comment = require('./comment.js')
 const User = require('./user.js')
 const Like = require('./like.js')
 const BackgroundImg = require('./backgroundImg')
+const Subscribe = require('./subscribe')
 
 
 let sequelize;
@@ -28,6 +29,7 @@ db.User = User
 db.Board = Board
 db.Like = Like
 db.BackgroundImg = BackgroundImg
+db.Subscribe = Subscribe
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
@@ -38,6 +40,7 @@ Board.init(sequelize)
 Weather.init(sequelize)
 Like.init(sequelize)
 BackgroundImg.init(sequelize)
+Subscribe.init(sequelize)
 
 
 Object.keys(db).forEach(modelName => {

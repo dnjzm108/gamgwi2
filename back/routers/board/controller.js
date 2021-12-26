@@ -1,10 +1,11 @@
-const { Board, User, Comment, Like } = require('../../models')
+const { Board, User, Comment, Like, Subscribe } = require('../../models')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 
 const path = require('path')
 const { create } = require('../../models/weather')
 const { callbackify } = require('util')
+const { resourceLimits } = require('worker_threads')
 
 let view_reply = async (req, res) => {
     await Comment.create({ commenter_name: 'algml', category: '글귀', titleIdx: 1 })
@@ -13,17 +14,31 @@ let view_reply = async (req, res) => {
 }
 
 let post_view = async (req, res) => {
-    let { idx } = req.body
+    console.log(req.body)
+    let { viewIdx,userid } = req.body
     let result = {};
     try {
-        let view_hit = await Board.findOne({ where: { id: idx }, attributes: ['hit'] })
-        await Board.update({ hit: view_hit.dataValues.hit + 1 }, { where: { id: idx } })
-        let view = await Board.findOne({ where: { id: idx }, attributes: ['title', 'content', 'nickName', 'hit', 'id', 'likeIdx', 'date', 'weather'] })
-        // let like = await Like.findOne({where:{likeBoardIdx:view.dataValues.id}})
-        result = {
-            result: 'OK',
-            view: view.dataValues,
-            // like: like.dataValues
+        let view_hit = await Board.findOne({ where: { id: viewIdx }, attributes: ['hit'] })
+        await Board.update({ hit: view_hit.dataValues.hit + 1 }, { where: { id: viewIdx } })
+        let view = await Board.findOne({ where: { id: viewIdx }, attributes: ['title', 'content', 'nickName', 'hit', 'id', 'likeIdx', 'date', 'weather'] })
+        let friend = await Subscribe.findOne({where:{userid:userid,writer_name:view.dataValues.nickName}})
+        if(friend==null){
+            result = {
+                result: 'OK',
+                view: view.dataValues,
+                //like: like.dataValues
+                like:null,
+                friend:false
+            }
+        }else{
+            result = {
+                result: 'OK',
+                view: view.dataValues,
+                //like: like.dataValues
+                like:null,
+                friend:friend.dataValues.status
+            }
+
         }
 
     } catch (error) {
@@ -385,6 +400,87 @@ let delete_comment = async (req, res) => {
     res.json(data)
 }
 
+let add_friend = async (req,res) => {
+    let data
+    try{
+        let {userid,nickName} = req.body.data
+        let resultData = await Subscribe.create({writer_name:nickName,userid,status:true})
+        data = {
+            result:'OK',
+            data:resultData.dataValues.status
+        }
+    }catch(err){
+        data = {
+            result:'Fail',
+        }
+    }
+    res.json(data)
+}
+
+let subscribe_writer = async (req,res) => {
+    let data
+    let resultData = []
+    try{
+        let { data, state } = req.body.data
+        resultData = await Subscribe.findAll({where:{userid:data}})
+
+        data = {
+            result:'OK',
+            list:resultData
+        }
+        res.json(data)
+    }catch(err){
+        data = {
+            result:'Fail',
+        }
+    }
+}
+
+let subscribe_post = async (req,res) => {
+    let data
+    let resultData = []
+    try {
+        let {data} =  req.body.data
+        let boardId = await Like.findAll({where:{userid:data},attributes:['board_id']})
+        console.log(boardId[0].dataValues.board_id)
+        for(let i=0; i<boardId.length;i++){
+            let pushData = await Board.findAll({where:{id:boardId[i].dataValues.board_id},attributes:['id','title','hit','nickNAme','category']})
+            resultData.push(pushData[i].dataValues)
+        }
+        console.log(resultData)
+        data = {
+            result:'OK2',
+            list:resultData
+        }
+        res.json(data)
+    }catch(err){
+        data = {
+            result:'Fail',
+        }
+        res.json(data)
+    }
+}
+
+let cancel_friend = async (req,res) => {
+    let data
+    
+    try{
+        let {userid,nickName} = req.body.data
+        await Subscribe.destroy({where:{userid:userid,writer_name:nickName}})
+        data = {
+            result:'OK',
+            data:false
+        }
+
+    }catch(err){
+        data = {
+            result:'Fail',
+        }
+    }
+    res.json(data)
+    console.log(req.body,'jireiei')
+}
+
 module.exports = {
     view_reply,
     write,
@@ -401,5 +497,9 @@ module.exports = {
     del_Like,
     addComment,
     get_comment,
-    delete_comment
+    delete_comment,
+    add_friend,
+    subscribe_writer,
+    subscribe_post,
+    cancel_friend
 }

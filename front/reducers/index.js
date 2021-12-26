@@ -2,6 +2,7 @@ import { HYDRATE } from 'next-redux-wrapper'
 import { combineReducers } from "redux";
 import post from './post'
 import user from './user'
+import subscribe from './subscribe'
 import {persistReducer} from 'redux-persist'
 import storage from 'redux-persist/lib/storage';
 
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
     },
     post,
     user,
+    subscribe
 })
 
 export default persistReducer(persistConfig,rootReducer)

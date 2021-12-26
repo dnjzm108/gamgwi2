@@ -18,6 +18,10 @@ const Info = () => {
         Router.push('/user/login')
     }
 
+    const onSubscribe = () =>{
+        Router.push('/board/subscribe')
+    }
+
     return (
         <>
             <Head>
@@ -38,6 +42,7 @@ const Info = () => {
                     </div>
 
                     <LogoutBtn onClick={onLogout}>Logout</LogoutBtn>
+                    <LogoutBtn onClick={onSubscribe}>ILike..</LogoutBtn>
 
                 </UserInfoWrap>
             </WebLayout>

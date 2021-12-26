@@ -99,13 +99,14 @@ function* reqPost() {
 
 /* 글 view 가져옴 */
 function* getView(action) {
-    const result = yield call(axios.post,`${url}/board/view`,{idx:action.idx})
+    const result = yield call(axios.post,`${url}/board/view`,action.data)
     const { data } = result
     if (data.result === 'OK') {
         yield put({
             type: 'POST_VIEW_SUCCESS',
             view : data.view,
-            like: data.like
+            like: data.like,
+            friend:data.friend
         })
     } else {
         yield put({

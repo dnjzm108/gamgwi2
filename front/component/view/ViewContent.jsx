@@ -12,6 +12,7 @@ import FilterDramaRoundedIcon from '@material-ui/icons/FilterDramaRounded';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/Ai'
 import Coment_containder from "../coment_Box/Coment_container"
+import { AddFriend_REQUEST,CancelSubscribe_Request } from '../../reducers/subscribe'
 
 
 const ViewContent = (props) => {
@@ -25,6 +26,7 @@ const ViewContent = (props) => {
 
     const userid = useSelector(state => state.user.user_info.userid)
     const post = useSelector(state => state.post)
+    const friend = useSelector(state => state.post.friend)
     const dispatch = useDispatch()
 
     const info = {
@@ -67,6 +69,22 @@ const ViewContent = (props) => {
         )
     }
 
+    const addFriendBtn = () =>{
+        const friendData = {
+            userid,
+            nickName
+        }
+        dispatch(AddFriend_REQUEST(friendData))
+    }
+
+    const cancelFriendBtn = () => {
+        let data = {
+            userid,
+            nickName
+        }
+        dispatch(CancelSubscribe_Request(data))
+    }
+
     return (
 
         <>
@@ -80,6 +98,11 @@ const ViewContent = (props) => {
                 </TitleWrap>
                 <DateWrap>
                     <p>작성자 : {nickName}</p>
+                    {
+                        friend
+                        ? <p onClick={cancelFriendBtn} className="addFriendDiv">칭구칭구</p>
+                        :<p className="addFriendDiv" onClick={addFriendBtn}>친구추가</p>
+                    }
                     <p> {ymd} </p>
                 </DateWrap>
                 <ContentWrap>
@@ -99,8 +122,9 @@ const ViewContent = (props) => {
                         </li> */}
                         {/* <li></li> */}
                         {
-                            nickName !== userid
-                                ? <>
+                            nickName == userid
+                                ?
+                                <>
                                     <li onClick={() => { handleModify(contentData) }}><CreateRoundedIcon /></li>
                                     <li onClick={() => { handleDelete(id) }}><DeleteRoundedIcon /></li>
                                 </>

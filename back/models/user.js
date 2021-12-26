@@ -32,6 +32,7 @@ module.exports = class User extends Sequelize.Model{
     static associate(db){
         db.User.hasMany(db.Like,{foreignKey:'userid',sourceKey:'userid'})
         db.User.hasMany(db.Comment,{foreignKey:'commenter_name',sourceKey:'userid'})
+        db.User.hasMany(db.Subscribe,{foreignKey:'userid',sourceKey:'userid'})
     }
 
    

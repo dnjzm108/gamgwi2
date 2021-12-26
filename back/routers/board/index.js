@@ -26,5 +26,10 @@ router.post('/addComment',controller.addComment)
 router.post('/get_comment',controller.get_comment)
 router.post('/delete_comment',controller.delete_comment)
 
+router.post('/friend',controller.add_friend)
+router.post('/subscribe/writer',controller.subscribe_writer)
+router.post('/subscribe/post',controller.subscribe_post)
+router.post('/cancel',controller.cancel_friend)
+
 
 module.exports = router;
