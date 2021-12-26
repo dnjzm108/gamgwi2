@@ -114,8 +114,10 @@ let get_likes = async (req, res) => {
     let check;
     let result;
     try {
-        let one = await Like.findOne({ board_id, userid })
-        let all = await Like.findAll({ board_id })
+        let one = await Like.findOne({ where:{userid,board_id} })
+        console.log(userid);
+        let all = await Like.findAll({ where:{board_id} })
+        console.log('=========',one);
         if (one == null) {
             check = false
         } else {
@@ -136,9 +138,9 @@ let addLike = async (req, res) => {
     let check;
     let result;
     try {
-        await Like.create({ board_id: board_id, userid: userid })
-        let one = await Like.findOne({ board_id, userid })
-        let all = await Like.findAll({ board_id })
+        await Like.create({ board_id, userid })
+        let one = await Like.findOne({where:{ board_id, userid} })
+        let all = await Like.findAll({ where:{board_id} })
         if (one == null) {
             check = false
         } else {
@@ -163,8 +165,8 @@ let del_Like = async (req, res) => {
     let { board_id, userid } = req.body.data;
     try {
         await Like.destroy({ where:{board_id,userid} })
-        let one = await Like.findOne({ board_id, userid })
-        let all = await Like.findAll({ board_id })
+        let one = await Like.findOne({ where:{board_id, userid} })
+        let all = await Like.findAll({ where:{board_id} })
         if (one == null) {
             check = false
         } else {

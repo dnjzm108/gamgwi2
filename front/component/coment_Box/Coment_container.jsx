@@ -20,13 +20,14 @@ const Coment_container = () => {
         dispatch(Get_Comment_REQUEST(data))
     }, [])
 
-    const test = () => {
+    const add_comment = async() => {
         let info = {
             userid,
             content: content.value,
             board_id: post.viewIdx
         }
-        dispatch(Comment_REQUEST(info))
+       await dispatch(Comment_REQUEST(info))
+
         let data = {
             board_id: post.viewIdx
         }
@@ -48,7 +49,7 @@ const Coment_container = () => {
         <>
             <Wrap>
                 <Text_box >
-                    <input type="text" {...content} /> <button onClick={test}>댓글</button>
+                    <input type="text" {...content} /> <button onClick={add_comment}>댓글</button>
                 </Text_box>
 
                 {comment.map((v,k) => {
