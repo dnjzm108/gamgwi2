@@ -4,4 +4,4 @@
 
 //테스트용(local back)
 
- export const url = 'http://localhost:3500'
+ export const url = 'http://localhost:3600'
